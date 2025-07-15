@@ -47,16 +47,39 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "brand_information_DKCzLp": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        },
+        "link_list_b4k8bU": {
+          "type": "link_list",
+          "settings": {
+            "heading": "About Us",
+            "menu": "footer"
+          }
+        },
         "link_list_jVfV6j": {
           "type": "link_list",
           "settings": {
             "heading": "Quick links",
-            "menu": "footer"
+            "menu": "footer-shop"
+          }
+        },
+        "text_y6bbWg": {
+          "type": "text",
+          "settings": {
+            "heading": "Your Friendly Neighborhood Surf Shop",
+            "subtext": "<p>BGS is, was and always will be about bringing amazing people together! Although many of us are a long way from home, we can get together to share stoke, stories, travel tips, secret spots, cold beer and of course, world class coffee.<br/><br/>Featuring: SharpEye Surfboards, Pyzel Surfboards, T.Patterson, VANS, RipCurl, FCS, Futures and CatchSurf.</p>"
           }
         }
       },
       "block_order": [
-        "link_list_jVfV6j"
+        "brand_information_DKCzLp",
+        "link_list_b4k8bU",
+        "link_list_jVfV6j",
+        "text_y6bbWg"
       ],
       "settings": {
         "color_scheme": "scheme-2",
