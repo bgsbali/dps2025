@@ -15,18 +15,19 @@
         "slide_tTTwya": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/I72_Standard_003.jpg",
             "image_overlay_opacity": 0,
-            "heading": "Image slide",
+            "heading": "SharpEye Surfboards",
             "heading_size": "h1",
-            "subheading": "Tell your brand's story through images",
-            "button_label": "Button label",
-            "link": "",
-            "button_style_secondary": false,
+            "subheading": "Now available at BGS Bali. Shop stock or custom now!",
+            "button_label": "SHOP NOW",
+            "link": "shopify://collections/sharpeye-surfboards",
+            "button_style_secondary": true,
             "show_text_box": true,
             "box_align": "middle-center",
             "text_alignment": "center",
             "text_alignment_mobile": "center",
-            "color_scheme": ""
+            "color_scheme": "scheme-2"
           }
         },
         "slide_TwWwxx": {
