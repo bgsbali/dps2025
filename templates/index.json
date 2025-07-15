@@ -104,6 +104,7 @@
         "column_UyGLWQ",
         "column_zqE6dR"
       ],
+      "custom_css": [],
       "name": "t:sections.multicolumn.presets.name",
       "settings": {
         "title": "",
@@ -118,7 +119,7 @@
         "color_scheme": "scheme-4",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
-        "padding_top": 40,
+        "padding_top": 52,
         "padding_bottom": 12
       }
     },
