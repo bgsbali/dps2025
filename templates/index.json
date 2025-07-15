@@ -75,7 +75,7 @@
             "title": "",
             "text": "",
             "link_label": "SHOP",
-            "link": ""
+            "link": "shopify://collections/bali-surfboards"
           }
         },
         "column_UyGLWQ": {
@@ -182,7 +182,7 @@
         "description_style": "body",
         "columns_desktop": 4,
         "enable_desktop_slider": false,
-        "full_width": true,
+        "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
         "color_scheme": "",
