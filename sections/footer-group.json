@@ -47,12 +47,6 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "brand_information_DKCzLp": {
-          "type": "brand_information",
-          "settings": {
-            "show_social": true
-          }
-        },
         "link_list_b4k8bU": {
           "type": "link_list",
           "settings": {
@@ -76,14 +70,13 @@
         }
       },
       "block_order": [
-        "brand_information_DKCzLp",
         "link_list_b4k8bU",
         "link_list_jVfV6j",
         "text_y6bbWg"
       ],
       "settings": {
         "color_scheme": "scheme-2",
-        "newsletter_enable": false,
+        "newsletter_enable": true,
         "newsletter_heading": "",
         "enable_follow_on_shop": true,
         "show_social": true,
