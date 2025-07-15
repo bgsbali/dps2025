@@ -33,18 +33,19 @@
         "slide_TwWwxx": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Copy_of_UC2A9289.jpg",
             "image_overlay_opacity": 0,
-            "heading": "Image slide",
+            "heading": "PYZEL Surfboards",
             "heading_size": "h1",
-            "subheading": "Tell your brand's story through images",
-            "button_label": "Button label",
-            "link": "",
-            "button_style_secondary": false,
+            "subheading": "Start Your Custom Build Now!",
+            "button_label": "CUSTOM NOW",
+            "link": "shopify://products/custom-surfboard",
+            "button_style_secondary": true,
             "show_text_box": true,
             "box_align": "middle-center",
             "text_alignment": "center",
             "text_alignment_mobile": "center",
-            "color_scheme": ""
+            "color_scheme": "scheme-2"
           }
         }
       },
