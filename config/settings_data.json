@@ -445,5 +445,10 @@
         }
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".slideshow__text.banner__box.content-container.content-container--full-width-mobile.color-scheme-2.gradient.slideshow__text--center.slideshow__text-mobile--center {background: #1111119c;}"
+    ]
   }
 }
