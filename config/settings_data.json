@@ -450,7 +450,8 @@
     "custom_css": [
       ".slideshow__text.banner__box.content-container.content-container--full-width-mobile.color-scheme-2.gradient.slideshow__text--center.slideshow__text-mobile--center {background: #1111119c;}",
       "div#ImageWithText--template--18844619800772__image_with_text_TkWEza,div#ImageWithText--template--18844619800772__image_with_text_FjTHU9 {background: #ffc65b;}",
-      ".multicolumn-card__info {text-align: center; font-weight: 500;}"
+      ".multicolumn-card__info {text-align: center; font-weight: 500;}",
+      "/* Custom Surfboard */button#ProductSubmitButton-template--18844620193988__main {background: #111; font-weight: 600; text-transform: uppercase; font-size: 20px;}"
     ]
   }
 }
