@@ -453,7 +453,7 @@
       ".multicolumn-card__info {text-align: center; font-weight: 500;}",
       "/* Custom Surfboard */button#ProductSubmitButton-template--18844620193988__main {background: #111; font-weight: 600; text-transform: uppercase; font-size: 20px;}",
       ".bgs_help {font-size: 10px; font-style: italic; padding: 10px 0;}",
-      ".gpo-label .label-content {font-size: 20px !important; font-weight: 600 !important; padding-top: 5px !important;}",
+      ".gpo-label .label-content {font-size: 20px !important; font-weight: 600 !important; padding: 5px 0 0 0 !important;}",
       ".gpo-ov-wrapper.horizontal {padding-top: 10px;}"
     ]
   }
