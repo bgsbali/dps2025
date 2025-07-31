@@ -451,9 +451,10 @@
       ".slideshow__text.banner__box.content-container.content-container--full-width-mobile.color-scheme-2.gradient.slideshow__text--center.slideshow__text-mobile--center {background: #1111119c;}",
       "div#ImageWithText--template--18844619800772__image_with_text_TkWEza,div#ImageWithText--template--18844619800772__image_with_text_FjTHU9 {background: #ffc65b;}",
       ".multicolumn-card__info {text-align: center; font-weight: 500;}",
-      "/* Custom Surfboard */button#ProductSubmitButton-template--18844620193988__main {background: #111; font-weight: 600; text-transform: uppercase; font-size: 20px;}",
+      " /* Custom Surfboard */button#ProductSubmitButton-template--18844620193988__main {background: #111; font-weight: 600; text-transform: uppercase; font-size: 20px;}",
       ".bgs_help {font-size: 10px; font-style: italic; padding: 10px 0;}",
-      ".gpo-label .label-content {font-size: 20px !important; font-weight: 600 !important; padding: 5px 0 0 0 !important;}"
+      ".gpo-label .label-content {font-size: 20px !important; font-weight: 600 !important; padding: 5px 0 0 0 !important;}",
+      "@media (max-width: 1024px) {span.mobile-facets__open {color: #111 !important; font-weight: 600; }}"
     ]
   }
 }
