@@ -537,7 +537,10 @@
   "shopify": {
     "checkout": {
       "delivery_options": {
-        "free_total_label": "0.00"
+        "free_total_label": "Free"
+      },
+      "order_summary": {
+        "free_shipping_total_label": "0.00"
       }
     }
   }
