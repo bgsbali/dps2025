@@ -455,7 +455,10 @@
       ".bgs_help {font-size: 10px; font-style: italic; padding: 10px 0;}",
       ".gpo-label .label-content {font-size: 20px !important; font-weight: 600 !important; padding: 5px 0 0 0 !important;}",
       "@media (max-width: 1024px) {span.mobile-facets__open {color: #111 !important; font-weight: 600; }}",
-      ".facets-container.scroll-trigger.animate--fade-in {font-weight: 600; text-transform: uppercase;}"
+      ".facets-container.scroll-trigger.animate--fade-in {font-weight: 600; text-transform: uppercase;}",
+      ".iia-details-container {background: #eee;}",
+      ".iia-list-itemSpecificity: (0,1,0) {border: 1px solid #999;}",
+      ".iia-footer {background: #fff;}"
     ]
   }
 }
