@@ -458,7 +458,8 @@
       ".facets-container.scroll-trigger.animate--fade-in {font-weight: 600; text-transform: uppercase;}",
       ".iia-details-container {background: #eee;}",
       ".iia-list-itemSpecificity: (0,1,0) {border: 1px solid #999;}",
-      ".iia-footer {background: #fff;}"
+      ".iia-footer {background: #fff;}",
+      ".iia-list-item {padding: 7px; border-top: 1px solid #565656; border-right: 1px solid #565656; border-left: 1px solid #565656;}"
     ]
   }
 }
