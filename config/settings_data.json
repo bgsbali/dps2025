@@ -461,7 +461,7 @@
       ".iia-footer {background: #fff; padding-top: 20px;}",
       ".iia-list-item {padding: 7px; border-bottom: 1px solid #565656; border-right: 1px solid #565656; border-left: 1px solid #565656;}",
       "cart-remove-button .button:not([disabled]) {color: #111;}",
-      "a {color: #111 !important;}"
+      "#MainContent a {color: #111 !important;}"
     ]
   }
 }
