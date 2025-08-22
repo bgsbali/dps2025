@@ -39,7 +39,7 @@
     "header": {
       "type": "header",
       "custom_css": [
-        "@media screen and (min-width: 1024px) {.header {display: flex; align-items: center; } .header__inline-menu {margin: 0 auto; /* ini yang bikin center */ } .mega-menu__list {display: grid; gap: 1.8rem 4rem; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none;}.mega-menu__content {max-width: 800px; margin: 0 auto 0;}}"
+        "@media screen and (min-width: 1024px) {.header {display: flex; align-items: center; } .header__inline-menu {margin: 0 auto; /* ini yang bikin center */ } .mega-menu__list {display: grid; gap: 1.8rem 4rem; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; } .mega-menu__content {max-width: 800px; margin: 0 auto 0; } header-menu li a {font-weight: 600 !important; font-size: 15px; letter-spacing: 1px; }"
       ],
       "settings": {
         "logo_position": "middle-left",
