@@ -463,8 +463,7 @@
       "cart-remove-button .button:not([disabled]) {color: #111;}",
       "#MainContent a {color: #111 !important;}",
       "#MainContent a.button {color: #fff !important;}",
-      "#MainContent .cart-item a.button {color: #111 !important;}",
-      ".mega-menu__list {display: grid; gap: 1.8rem 4rem; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none;}"
+      "#MainContent .cart-item a.button {color: #111 !important;}"
     ]
   }
 }
