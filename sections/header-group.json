@@ -38,7 +38,7 @@
     "header": {
       "type": "header",
       "custom_css": [
-        "@media screen and (min-width: 1024px) {.header__inline-menu {position: absolute; left: 50%; transform: translateX(-50%); }}"
+        "@media screen and (min-width: 1024px) {.header__inline-menu {justify-self: center; /* center di grid parent */ }}"
       ],
       "settings": {
         "logo_position": "middle-left",
