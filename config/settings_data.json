@@ -463,7 +463,8 @@
       "cart-remove-button .button:not([disabled]) {color: #111;}",
       "#MainContent a {color: #111 !important;}",
       "#MainContent a.button {color: #fff !important;}",
-      "#MainContent .cart-item a.button {color: #111 !important;}"
+      "#MainContent .cart-item a.button {color: #111 !important;}",
+      "@media screen and (min-width: 1024px) {a#HeaderMenu-back-to-main-site {background: #ffc03d; border-radius: 20px; margin-right: 30px;}}"
     ]
   }
 }
