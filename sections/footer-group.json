@@ -25,21 +25,21 @@
           "type": "link_list",
           "settings": {
             "heading": "About Us",
-            "menu": "footer"
+            "menu": "about-us"
           }
         },
         "link_list_jVfV6j": {
           "type": "link_list",
           "settings": {
             "heading": "Customer Service",
-            "menu": "footer-shop"
+            "menu": "customer-service"
           }
         },
         "link_list_abwAiG": {
           "type": "link_list",
           "settings": {
             "heading": "Visit Store",
-            "menu": "footer"
+            "menu": "visit-store"
           }
         }
       },
