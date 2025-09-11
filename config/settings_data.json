@@ -464,7 +464,7 @@
       "#MainContent a {color: #111 !important;}",
       "#MainContent a.button {color: #fff !important;}",
       "#MainContent .cart-item a.button {color: #111 !important;}",
-      "@media screen and (min-width: 1024px) {.mega-menu__content {max-width: 70vw; margin: 0 auto 0;}}"
+      "@media screen and (min-width: 1024px) {.mega-menu__content {max-width: 60vw; margin: 0 auto 0; }}"
     ]
   }
 }
