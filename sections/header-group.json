@@ -39,7 +39,7 @@
     "header": {
       "type": "header",
       "custom_css": [
-        "@media screen and (min-width: 1024px) {.header {display: flex; align-items: center; } .header__inline-menu {margin: 0 auto; } .mega-menu__list {display: grid; gap: 1.8rem 4rem; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; } /* #MegaMenu-Content-3 .mega-menu__list {grid-template-columns: repeat(4, minmax(0, 1fr)); } */ .header__inline-menu li {font-weight: 600 !important; font-size: 15px; letter-spacing: 1px; } .header__inline-menu ul.list-unstyled li a {font-weight: 500 !important; } .header__heading-logo {width: 100px; }}"
+        "@media screen and (min-width: 1024px) {.header {display: flex; align-items: center; } .header__inline-menu {margin: 0 auto; } .mega-menu__list {display: grid; gap: 1.8rem 4rem; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; } #MegaMenu-Content-3 .mega-menu__list {grid-template-columns: repeat(4, minmax(0, 1fr)); } .header__inline-menu li {font-weight: 600 !important; font-size: 15px; letter-spacing: 1px; } .header__inline-menu ul.list-unstyled li a {font-weight: 500 !important; } .header__heading-logo {width: 100px; }}"
       ],
       "settings": {
         "logo_position": "middle-left",
