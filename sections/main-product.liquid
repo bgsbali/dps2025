@@ -673,6 +673,11 @@
     </div>
 
     {% render 'product-media-modal', variant_images: variant_images %}
+                {% if product.type == "T-Shirts" and product.vendor == "BGS DryGoods" %}
+  <div class="bgs_tshirtbanner">
+    <img src="https://cdn.shopify.com/s/files/1/1233/5938/files/BGS_Bali_Tees_Size_Chart.jpg?v=1757549679" width="100%" />
+  </div>
+{%  endif %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
     {%- for block in popups -%}
@@ -719,12 +724,6 @@
         assign seo_media = product.featured_media
       endif
     -%}
-                {% if product.type == "T-Shirts" and product.vendor == "BGS DryGoods" %}
-  <div class="bgs_tshirtbanner">
-    <img src="https://cdn.shopify.com/s/files/1/1233/5938/files/BGS_Bali_Tees_Size_Chart.jpg?v=1757549679" width="100%" />
-  </div>
-{%  endif %}
-
     <script type="application/ld+json">
       {{ product | structured_data }}
     </script>
