@@ -651,13 +651,6 @@
                       </div>
                     </aside>
                   {%- endif -%}
-                                      {% if product.type == "T-Shirts" and product.vendor == "BGS DryGoods" %}
-            <div class="bgs_tshirtbanner">
-              <img src="https://cdn.shopify.com/s/files/1/1233/5938/files/BGS_Bali_Tees_Size_Chart.jpg?v=1757549679" width="100%" />
-            </div>
-          {%  endif %}
-
-          
                   {{ 'component-card.css' | asset_url | stylesheet_tag }}
                   {{ 'component-complementary-products.css' | asset_url | stylesheet_tag }}
                   {%- if block.settings.enable_quick_add -%}
@@ -665,6 +658,12 @@
                     <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
                   {%- endif -%}
                 </product-recommendations>
+          {% if product.type == "T-Shirts" and product.vendor == "BGS DryGoods" %}
+            <div class="bgs_tshirtbanner">
+              <img src="https://cdn.shopify.com/s/files/1/1233/5938/files/BGS_Bali_Tees_Size_Chart.jpg?v=1757549679" width="100%" />
+            </div>
+          {%  endif %}
+
               {%- when 'icon-with-text' -%}
                 {% render 'icon-with-text', block: block %}
             {%- endcase -%}
