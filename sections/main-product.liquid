@@ -671,6 +671,15 @@
   </div>
 {%  endif %}
 
+                            {% if product.type == "Crop Tee" and product.vendor == "BGS DryGoods" %}
+  <div class="bgs_tshirtbanner">
+    <img src="https://cdn.shopify.com/s/files/1/1233/5938/files/BGS_Crop_Tee_Size_Chart_2025.jpg?v=1757648339" width="100%" />
+  </div>
+{%  endif %}
+
+
+
+
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
             {{ 'products.product.view_full_details' | t }}
             {{- 'icon-arrow.svg' | inline_asset_content -}}
