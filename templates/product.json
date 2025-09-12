@@ -31,10 +31,6 @@
           "type": "price",
           "settings": {}
         },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -61,6 +57,10 @@
             "show_gift_card_recipient": true
           }
         },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
         "share": {
           "type": "share",
           "settings": {
@@ -73,12 +73,12 @@
         "title",
         "product-rating",
         "price",
-        "description",
         "variant_picker",
         "globo_product_option_app_block_6EnVe7",
         "globo_color_swatch_product_swatches_detail_JxWceF",
         "quantity_selector",
         "buy_buttons",
+        "description",
         "share"
       ],
       "settings": {
