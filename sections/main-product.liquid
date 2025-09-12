@@ -666,9 +666,7 @@
             {{ 'products.product.view_full_details' | t }}
             {{- 'icon-arrow.svg' | inline_asset_content -}}
           </a>
-        </section>
-      </div>
-    </div>
+
 
                 {%  if product.type == "T-Shirts" %}
                   <div class="bgs_tshirtbanner">
@@ -676,6 +674,10 @@
                   </div>
 
                 {%  endif %}
+                
+        </section>
+      </div>
+    </div>
     {% render 'product-media-modal', variant_images: variant_images %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
