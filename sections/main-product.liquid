@@ -509,13 +509,6 @@
                     </p>
                   </div>
                 {%- endif -%}
-                                {%  if product.type == "T-Shirts" %}
-                  <div class="bgs_tshirtbanner">
-                    <img src="https://cdn.shopify.com/s/files/1/1233/5938/files/BGS_Bali_Tees_Size_Chart.jpg?v=1757549679" />
-                  </div>
-
-                {%  endif %}
-
               {%- when 'complementary' -%}
                 <product-recommendations
                   class="complementary-products quick-add-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}"
@@ -677,6 +670,12 @@
       </div>
     </div>
 
+                {%  if product.type == "T-Shirts" %}
+                  <div class="bgs_tshirtbanner">
+                    <img src="https://cdn.shopify.com/s/files/1/1233/5938/files/BGS_Bali_Tees_Size_Chart.jpg?v=1757549679" width="100%" />
+                  </div>
+
+                {%  endif %}
     {% render 'product-media-modal', variant_images: variant_images %}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
