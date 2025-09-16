@@ -45,10 +45,10 @@
       ],
       "name": "t:sections.image-banner.presets.name",
       "settings": {
-        "image": "shopify://shop_images/IMG_7216_photo.jpg",
+        "image": "shopify://shop_images/IMG_7219_photo.jpg",
         "image_overlay_opacity": 0,
         "image_height": "medium",
-        "image_behavior": "fixed",
+        "image_behavior": "none",
         "desktop_content_position": "bottom-left",
         "desktop_content_alignment": "left",
         "show_text_box": true,
