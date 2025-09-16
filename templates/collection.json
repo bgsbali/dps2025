@@ -9,8 +9,58 @@
  */
 {
   "sections": {
+    "image_banner_gMfQiY": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_dRVnzR": {
+          "type": "heading",
+          "settings": {
+            "heading": "BGS Sale – Everyday Deals",
+            "heading_size": "h2"
+          }
+        },
+        "text_GCHWFy": {
+          "type": "text",
+          "settings": {
+            "text": "<em>Surf, skate, and streetwear at special prices. Fresh picks updated regularly.</em>",
+            "text_style": "body"
+          }
+        },
+        "buttons_xaEqMi": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Browse Sale Items",
+            "button_link_1": "#sale-items",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_dRVnzR",
+        "text_GCHWFy",
+        "buttons_xaEqMi"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/DSCF7986.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
     "banner": {
       "type": "main-collection-banner",
+      "disabled": true,
       "custom_css": [
         "@media screen and (min-width: 750px) {.collection-hero__image-container {min-height: 35rem; }}"
       ],
@@ -42,6 +92,7 @@
     }
   },
   "order": [
+    "image_banner_gMfQiY",
     "banner",
     "product-grid"
   ]
