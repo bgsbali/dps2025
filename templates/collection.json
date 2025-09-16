@@ -29,7 +29,7 @@
         "buttons_xaEqMi": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Browse Sale Items",
+            "button_label_1": "",
             "button_link_1": "#sale-items",
             "button_style_secondary_1": false,
             "button_label_2": "",
@@ -52,7 +52,7 @@
         "desktop_content_position": "bottom-left",
         "desktop_content_alignment": "left",
         "show_text_box": true,
-        "color_scheme": "scheme-4",
+        "color_scheme": "scheme-5",
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "center",
         "show_text_below": true
