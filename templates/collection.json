@@ -43,6 +43,7 @@
         "text_GCHWFy",
         "buttons_xaEqMi"
       ],
+      "disabled": true,
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "image": "shopify://shop_images/IMG_7219_photo.jpg",
@@ -60,7 +61,6 @@
     },
     "banner": {
       "type": "main-collection-banner",
-      "disabled": true,
       "custom_css": [
         "@media screen and (min-width: 750px) {.collection-hero__image-container {min-height: 35rem; }}"
       ],
