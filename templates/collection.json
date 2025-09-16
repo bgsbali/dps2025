@@ -48,7 +48,7 @@
         "image": "shopify://shop_images/IMG_7216_photo.jpg",
         "image_overlay_opacity": 0,
         "image_height": "medium",
-        "image_behavior": "ambient",
+        "image_behavior": "fixed",
         "desktop_content_position": "bottom-left",
         "desktop_content_alignment": "left",
         "show_text_box": true,
