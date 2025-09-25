@@ -46,6 +46,47 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
+    "1758787678a7ecb756": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_041cf33_jNzpH8": {
+          "type": "ai_gen_block_041cf33",
+          "settings": {
+            "text_alignment": "center",
+            "columns_mobile": "1",
+            "section_padding_top": 36,
+            "section_padding_bottom": 36,
+            "icon_size": 120,
+            "icon_border_radius": 10,
+            "icon_background_color": "#ffffff",
+            "icon_color": "#ffffff",
+            "icon_spacing": 8,
+            "heading_size": 20,
+            "heading_color": "#1f1f21",
+            "heading_spacing": 12,
+            "subheading_size": 14,
+            "subheading_color": "#6a6a6a",
+            "column_1_icon": "shopify://shop_images/worldwide-shipping_6630268b-77f7-4cfd-879b-0e82b1ed4626.png",
+            "column_1_heading": "Worldwide Shipping",
+            "column_1_subheading": "Delivered straight to your door",
+            "column_2_icon": "shopify://shop_images/customer-support.png",
+            "column_2_heading": "Customer Support",
+            "column_2_subheading": "Help from our Bali-based team",
+            "column_3_icon": "shopify://shop_images/return.png",
+            "column_3_heading": "Easy Returns",
+            "column_3_subheading": "Hassle-free return policy",
+            "column_4_icon": "shopify://shop_images/secure.png",
+            "column_4_heading": "Secure Checkout",
+            "column_4_subheading": "Safe and encrypted process"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_041cf33_jNzpH8"
+      ],
+      "settings": {}
+    },
     "multicolumn_hKzkGC": {
       "type": "multicolumn",
       "blocks": {
@@ -271,6 +312,7 @@
   },
   "order": [
     "slideshow_KB7Gyn",
+    "1758787678a7ecb756",
     "multicolumn_hKzkGC",
     "image_with_text_TkWEza",
     "featured_collection_3Mwak9",
