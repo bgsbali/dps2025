@@ -24,9 +24,9 @@
             "link": "shopify://collections/bali-surfboards",
             "button_style_secondary": true,
             "show_text_box": true,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
+            "box_align": "bottom-left",
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
             "color_scheme": "scheme-2"
           }
         },
