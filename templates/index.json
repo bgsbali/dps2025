@@ -12,24 +12,6 @@
     "slideshow_KB7Gyn": {
       "type": "slideshow",
       "blocks": {
-        "slide_tTTwya": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/I72_Standard_003.jpg",
-            "image_overlay_opacity": 0,
-            "heading": "SharpEye Surfboards",
-            "heading_size": "h1",
-            "subheading": "Now available at BGS Bali. Shop stock or custom now!",
-            "button_label": "SHOP NOW",
-            "link": "shopify://collections/sharpeye-surfboards",
-            "button_style_secondary": true,
-            "show_text_box": true,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": "scheme-2"
-          }
-        },
         "slide_TwWwxx": {
           "type": "slide",
           "settings": {
@@ -47,11 +29,29 @@
             "text_alignment_mobile": "center",
             "color_scheme": "scheme-2"
           }
+        },
+        "slide_tTTwya": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/I72_Standard_003.jpg",
+            "image_overlay_opacity": 0,
+            "heading": "SharpEye Surfboards",
+            "heading_size": "h1",
+            "subheading": "Now available at BGS Bali. Shop stock or custom now!",
+            "button_label": "SHOP NOW",
+            "link": "shopify://collections/sharpeye-surfboards",
+            "button_style_secondary": true,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-2"
+          }
         }
       },
       "block_order": [
-        "slide_tTTwya",
-        "slide_TwWwxx"
+        "slide_TwWwxx",
+        "slide_tTTwya"
       ],
       "name": "t:sections.slideshow.presets.name",
       "settings": {
@@ -59,7 +59,7 @@
         "slide_height": "medium",
         "slider_visual": "counter",
         "auto_rotate": false,
-        "change_slides_speed": 5,
+        "change_slides_speed": 3,
         "image_behavior": "none",
         "show_text_below": true,
         "accessibility_info": "Slideshow about our brand"
