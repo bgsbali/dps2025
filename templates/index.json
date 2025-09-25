@@ -17,10 +17,10 @@
           "settings": {
             "image": "shopify://shop_images/Copy_of_UC2A9289.jpg",
             "image_overlay_opacity": 0,
-            "heading": "Surfboards for Every Wave",
+            "heading": "Surfboards",
             "heading_size": "h1",
             "subheading": "Find the right board to match your style and conditions.",
-            "button_label": "Shop Surfboards",
+            "button_label": "Browse Products",
             "link": "shopify://collections/bali-surfboards",
             "button_style_secondary": true,
             "show_text_box": true,
