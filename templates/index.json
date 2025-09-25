@@ -46,6 +46,37 @@
         "accessibility_info": "Slideshow about our brand"
       }
     },
+    "rich_text_dhrALh": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_rQBKDi": {
+          "type": "heading",
+          "settings": {
+            "heading": "Shop with Confidence",
+            "heading_size": "h2"
+          }
+        },
+        "text_zfX4yr": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>Trusted by surfers and skaters worldwide. From Bali to your doorstep, we make online shopping easy, secure, and hassle-free.</em></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_rQBKDi",
+        "text_zfX4yr"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
     "1758787678a7ecb756": {
       "type": "_blocks",
       "blocks": {
@@ -54,7 +85,7 @@
           "settings": {
             "text_alignment": "center",
             "columns_mobile": "1",
-            "section_padding_top": 36,
+            "section_padding_top": 20,
             "section_padding_bottom": 36,
             "icon_size": 120,
             "icon_border_radius": 10,
@@ -315,6 +346,7 @@
   },
   "order": [
     "slideshow_KB7Gyn",
+    "rich_text_dhrALh",
     "1758787678a7ecb756",
     "multicolumn_hKzkGC",
     "image_with_text_TkWEza",
