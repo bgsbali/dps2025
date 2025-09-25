@@ -85,6 +85,9 @@
       "block_order": [
         "ai_gen_block_041cf33_jNzpH8"
       ],
+      "custom_css": [
+        ".ai-icon-columns-container-auu5xl1u0tkhjtkteqaigenblock041cf33jnzph8 {max-width: 1200px;}"
+      ],
       "settings": {}
     },
     "multicolumn_hKzkGC": {
