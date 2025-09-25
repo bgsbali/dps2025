@@ -15,12 +15,12 @@
         "slide_TwWwxx": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Copy_of_UC2A9289.jpg",
+            "image": "shopify://shop_images/IMG_5887_photo.jpg",
             "image_overlay_opacity": 0,
-            "heading": "Surfboards",
+            "heading": "BGS Online Shop",
             "heading_size": "h1",
-            "subheading": "Find the right board to match your style and conditions.",
-            "button_label": "Browse Products",
+            "subheading": "Surfboards, gear, skate, and merch, all in one place.",
+            "button_label": "Start Shopping",
             "link": "shopify://collections/bali-surfboards",
             "button_style_secondary": true,
             "show_text_box": true,
