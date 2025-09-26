@@ -153,7 +153,34 @@
               "
             >
               {% assign skip_card_product_styles = false %}
+              {% assign selected_size = request.params['filter.p.option.size'] %}
               {%- for product in collection.products -%}
+  {% assign show_product = false %}
+
+  {%- if selected_size -%}
+    {%- for variant in product.variants -%}
+      {%- if variant.available and variant.option1 == selected_size -%}
+        {% assign show_product = true %}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- else -%}
+    {% assign show_product = true %}
+  {%- endif -%}
+
+  {% if show_product %}
+    {% assign lazy_load = false %}
+    {%- if forloop.index > 2 -%}
+      {%- assign lazy_load = true -%}
+    {%- endif -%}
+    <li class="grid__item ...">
+      {% render 'card-product', card_product: product, ... %}
+    </li>
+    {%- assign skip_card_product_styles = true -%}
+  {% endif %}
+{%- endfor -%}
+
+
+              {% comment %} {%- for product in collection.products -%}
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
@@ -179,7 +206,7 @@
                   %}
                 </li>
                 {%- assign skip_card_product_styles = true -%}
-              {%- endfor -%}
+              {%- endfor -%} {% endcomment %}
             </ul>
 
             {%- if paginate.pages > 1 -%}
