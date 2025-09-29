@@ -168,6 +168,7 @@
     visible_index dipakai supaya lazy_load & animation-order dihitung atas item yg tampil saja
   {%- endcomment -%}
   {% assign visible_index = 0 %}
+  <!-- DEBUG raw_selected_size='{{ raw_selected_size }}' | selected_size='{{ selected_size }}' -->
 
   {%- for product in collection.products -%}
     {% assign show_product = false %}
