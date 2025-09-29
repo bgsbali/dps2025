@@ -157,71 +157,72 @@
 >
   {% assign skip_card_product_styles = false %}
 
-  {%- comment -%}
-    ambil dan normalisasi nilai filter dari URL
-    contoh URL: ?filter.v.option.size=10.5+%2F+44
-  {%- endcomment -%}
-  {% assign raw_selected_size = request.params['filter.v.option.size'] %}
-  {% assign selected_size = raw_selected_size | replace: '+', ' ' | replace: '%2F', '/' | strip %}
-
-  {%- comment -%}
-    visible_index dipakai supaya lazy_load & animation-order dihitung atas item yg tampil saja
-  {%- endcomment -%}
-  {% assign visible_index = 0 %}
-  <!-- DEBUG raw_selected_size='{{ raw_selected_size }}' | selected_size='{{ selected_size }}' -->
-
   {%- for product in collection.products -%}
-    {% assign show_product = false %}
-
-    {%- if selected_size != blank -%}
-      {%- for variant in product.variants -%}
-        {%- if variant.available -%}
-          {% assign v1 = variant.option1 | default: '' %}
-          {% assign v2 = variant.option2 | default: '' %}
-          {% assign v3 = variant.option3 | default: '' %}
-          {% if v1 == selected_size or v2 == selected_size or v3 == selected_size %}
-            {% assign show_product = true %}
-            {% break %}
-          {% endif %}
-        {%- endif -%}
-      {%- endfor -%}
-    {%- else -%}
-      {% assign show_product = true %}
+    {% assign lazy_load = false %}
+    {%- if forloop.index > 2 -%}
+      {%- assign lazy_load = true -%}
     {%- endif -%}
 
-    {% if show_product %}
-      {% assign visible_index = visible_index | plus: 1 %}
+    <li
+      class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      {% if settings.animations_reveal_on_scroll %}
+        data-cascade
+        style="--animation-order: {{ forloop.index }};"
+      {% endif %}
+      data-variants='{{ product.variants | json | escape }}'
+      data-product-title="{{ product.title | escape }}"
+    >
+      {% render 'card-product',
+        card_product: product,
+        media_aspect_ratio: section.settings.image_ratio,
+        image_shape: section.settings.image_shape,
+        show_secondary_image: section.settings.show_secondary_image,
+        show_vendor: section.settings.show_vendor,
+        show_rating: section.settings.show_rating,
+        lazy_load: lazy_load,
+        skip_styles: skip_card_product_styles,
+        quick_add: section.settings.quick_add,
+        section_id: section.id
+      %}
+    </li>
 
-      {% assign lazy_load = false %}
-      {%- if visible_index > 2 -%}
-        {%- assign lazy_load = true -%}
-      {%- endif -%}
-
-      <li
-        class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-        {% if settings.animations_reveal_on_scroll %}
-          data-cascade
-          style="--animation-order: {{ visible_index }};"
-        {% endif %}
-      >
-        {% render 'card-product',
-          card_product: product,
-          media_aspect_ratio: section.settings.image_ratio,
-          image_shape: section.settings.image_shape,
-          show_secondary_image: section.settings.show_secondary_image,
-          show_vendor: section.settings.show_vendor,
-          show_rating: section.settings.show_rating,
-          lazy_load: lazy_load,
-          skip_styles: skip_card_product_styles,
-          quick_add: section.settings.quick_add,
-          section_id: section.id
-        %}
-      </li>
-
-      {%- assign skip_card_product_styles = true -%}
-    {% endif %}
+    {%- assign skip_card_product_styles = true -%}
   {%- endfor -%}
 </ul>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedSize = urlParams.get("filter.v.option.size");
+  if (!selectedSize) {
+    console.log("[DEBUG] Tidak ada filter.v.option.size di URL");
+    return;
+  }
+
+  // decode param jadi string normal
+  const decodedSize = decodeURIComponent(selectedSize).replace(/\+/g, " ").trim();
+  console.log("[DEBUG] raw selectedSize =", selectedSize);
+  console.log("[DEBUG] decodedSize =", decodedSize);
+
+  document.querySelectorAll("#product-grid .grid__item").forEach(item => {
+    const title = item.getAttribute("data-product-title");
+    const variants = JSON.parse(item.getAttribute("data-variants"));
+    console.log("[DEBUG] Cek produk:", title, variants);
+
+    const match = variants.find(v =>
+      (v.option1 === decodedSize || v.option2 === decodedSize || v.option3 === decodedSize) && v.available
+    );
+
+    if (!match) {
+      console.log("[DEBUG] HIDE produk:", title, "karena tidak ada varian tersedia untuk", decodedSize);
+      item.style.display = "none";
+    } else {
+      console.log("[DEBUG] KEEP produk:", title, "ada varian cocok", decodedSize);
+    }
+  });
+});
+</script>
+
 
 
             {% comment %} <ul
