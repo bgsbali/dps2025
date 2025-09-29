@@ -145,7 +145,6 @@
             <div class="loading-overlay gradient"></div>
 
 
-
 <ul
   id="product-grid"
   data-id="{{ section.id }}"
@@ -191,7 +190,7 @@
 </ul>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+function applyVariantFilter() {
   const urlParams = new URLSearchParams(window.location.search);
   const selectedSize = urlParams.get("filter.v.option.size");
   if (!selectedSize) {
@@ -199,10 +198,8 @@ document.addEventListener("DOMContentLoaded", function() {
     return;
   }
 
-  // decode param jadi string normal
   const decodedSize = decodeURIComponent(selectedSize).replace(/\+/g, " ").trim();
-  console.log("[DEBUG] raw selectedSize =", selectedSize);
-  console.log("[DEBUG] decodedSize =", decodedSize);
+  console.log("[DEBUG] applyVariantFilter | raw =", selectedSize, "| decoded =", decodedSize);
 
   document.querySelectorAll("#product-grid .grid__item").forEach(item => {
     const title = item.getAttribute("data-product-title");
@@ -214,13 +211,31 @@ document.addEventListener("DOMContentLoaded", function() {
     );
 
     if (!match) {
-      console.log("[DEBUG] HIDE produk:", title, "karena tidak ada varian tersedia untuk", decodedSize);
+      console.log("[DEBUG] HIDE:", title, "→ tidak ada varian tersedia untuk", decodedSize);
       item.style.display = "none";
     } else {
-      console.log("[DEBUG] KEEP produk:", title, "ada varian cocok", decodedSize);
+      console.log("[DEBUG] KEEP:", title, "→ ada varian tersedia untuk", decodedSize);
+      item.style.display = "";
     }
   });
-});
+}
+
+// initial run
+document.addEventListener("DOMContentLoaded", applyVariantFilter);
+
+// re-run filter setiap kali grid diupdate oleh facets.js (AJAX)
+const gridContainer = document.getElementById("ProductGridContainer");
+if (gridContainer) {
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === "childList") {
+        console.log("[DEBUG] Grid updated, reapplying filter...");
+        applyVariantFilter();
+      }
+    }
+  });
+  observer.observe(gridContainer, { childList: true, subtree: true });
+}
 </script>
 
 
