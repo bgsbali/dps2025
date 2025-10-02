@@ -191,104 +191,93 @@
 
 <script>
 (function() {
-  // safe decode: handle '+' sebagai spasi dan proteksi decodeURIComponent error
+  // normalisasi sederhana tapi kuat: aman untuk perbandingan
+  function normalizeBasic(s) {
+    if (!s && s !== 0) return '';
+    s = String(s);
+
+    // NBSP -> space
+    s = s.replace(/\u00A0/g, ' ');
+
+    // replace '+' left in some encodings (just in case)
+    s = s.replace(/\+/g, ' ');
+
+    // decimal comma to dot (10,5 -> 10.5)
+    s = s.replace(/(\d),(\d)/g, '$1.$2');
+
+    // normalize slashes/backslashes -> /
+    s = s.replace(/[\\\/]+/g, '/');
+
+    // normalize various dashes -> hyphen
+    s = s.replace(/[\u2010-\u2015\u2212]+/g, '-');
+
+    // normalize spacing around '/' and '-'
+    s = s.replace(/\s*\/\s*/g, ' / ');
+    s = s.replace(/\s*-\s*/g, ' - ');
+
+    // remove other punctuation except alnum, dot, slash, hyphen and spaces
+    s = s.replace(/[^0-9a-zA-Z.\-\/\s]/g, '');
+
+    // collapse whitespace, trim and lowercase
+    s = s.replace(/\s+/g, ' ').trim().toLowerCase();
+
+    return s;
+  }
+
   function safeDecodeParam(val) {
-    if (!val) return '';
+    if (!val && val !== '') return '';
     try {
-      return decodeURIComponent(val.replace(/\+/g, '%20'));
+      return decodeURIComponent(val);
     } catch (e) {
+      // fallback: replace common sequences and return raw
       try {
-        return decodeURIComponent(val);
+        return decodeURIComponent(val.replace(/\+/g, '%20'));
       } catch (e2) {
-        return val.replace(/\+/g, ' ');
+        return String(val).replace(/\+/g, ' ');
       }
     }
   }
 
-  // normalize ukuran untuk perbandingan:
-  // - decode html entities (simple)
-  // - ubah NBSP -> space
-  // - ubah koma desimal jadi titik jika ada
-  // - normalisasikan slashes/backslashes -> '/'
-  // - normalisasikan dash types -> '-'
-  // - beri spasi konsisten di sekitar '/' dan '-'
-  // - hapus karakter non-alfanumerik (kecuali . / - dan spasi)
-  // - collapse whitespace, lowercase, trim
-  function normalizeSize(str) {
-    if (str === null || str === undefined) return '';
-    str = String(str);
-
-    // decode simple HTML entities using textarea trick
-    try {
-      var ta = document.createElement('textarea');
-      ta.innerHTML = str;
-      str = ta.value;
-    } catch (e) {}
-
-    // NBSP -> normal space
-    str = str.replace(/\u00A0/g, ' ');
-
-    // turn commas between digits into decimal dot (e.g., "10,5" -> "10.5")
-    str = str.replace(/(\d),(\d)/g, '$1.$2');
-
-    // normalize slashes and backslashes to single '/'
-    str = str.replace(/[\\\/]+/g, '/');
-
-    // normalize various dash characters to hyphen
-    str = str.replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212]+/g, '-');
-
-    // ensure consistent spacing around '/' and '-'
-    str = str.replace(/\s*\/\s*/g, ' / ');
-    str = str.replace(/\s*-\s*/g, ' - ');
-
-    // remove other punctuation except letters, numbers, dot, slash, hyphen and spaces
-    str = str.replace(/[^0-9A-Za-z.\-\/\s]/g, '');
-
-    // collapse multiple spaces and trim
-    str = str.replace(/\s+/g, ' ').trim().toLowerCase();
-
-    return str;
-  }
-
   function applyVariantFilter() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var raw = urlParams.get('filter.v.option.size');
+    const urlParams = new URLSearchParams(window.location.search);
+    const raw = urlParams.get('filter.v.option.size');
     if (!raw) return;
 
-    var decoded = safeDecodeParam(raw).trim();
-    var normalizedFilter = normalizeSize(decoded);
+    const decoded = safeDecodeParam(raw).trim();
+    const normalizedFilter = normalizeBasic(decoded);
 
-    document.querySelectorAll('#product-grid .grid__item').forEach(function(item) {
-      var variantsJson = item.getAttribute('data-variants') || '[]';
-      var variants;
+    // iterate visible grid items
+    document.querySelectorAll('#product-grid .grid__item').forEach(item => {
+      const variantsJson = item.getAttribute('data-variants') || '[]';
+      let variants;
       try { variants = JSON.parse(variantsJson); } catch (e) { variants = []; }
 
-      var keep = variants.some(function(v) {
-        var o1 = normalizeSize(v.option1 || '');
-        var o2 = normalizeSize(v.option2 || '');
-        var o3 = normalizeSize(v.option3 || '');
-        return v.available && (o1 === normalizedFilter || o2 === normalizedFilter || o3 === normalizedFilter);
+      const keep = variants.some(v => {
+        const o1 = normalizeBasic(v.option1 || '');
+        const o2 = normalizeBasic(v.option2 || '');
+        const o3 = normalizeBasic(v.option3 || '');
+        return (v.available === true || v.available === 'true') && (
+          o1 === normalizedFilter || o2 === normalizedFilter || o3 === normalizedFilter
+        );
       });
 
       item.style.display = keep ? '' : 'none';
     });
   }
 
-  // run on initial load
+  // initial run on page load
   document.addEventListener('DOMContentLoaded', applyVariantFilter);
 
-  // re-run after AJAX updates from facets.js (observe product grid container)
-  var gridContainer = document.getElementById('ProductGridContainer');
+  // re-run after AJAX updates from facets.js
+  const gridContainer = document.getElementById('ProductGridContainer');
   if (gridContainer) {
-    var observer = new MutationObserver(function() {
+    const observer = new MutationObserver((mutations) => {
       applyVariantFilter();
     });
     observer.observe(gridContainer, { childList: true, subtree: true });
   }
 })();
 </script>
-
-
 
 
 
