@@ -188,22 +188,34 @@
     {%- assign skip_card_product_styles = true -%}
   {%- endfor -%}
 </ul>
-
 <script>
 function normalizeSize(s) {
   if (!s && s !== 0) return '';
-  s = String(s);
+  s = String(s).toLowerCase().trim();
 
+  // standardisasi simbol
   s = s.replace(/\u00A0/g, ' '); // nbsp
-  s = s.replace(/\+/g, ' ');     // plus
-  s = s.replace(/(\d),(\d)/g, '$1.$2'); // decimal comma
-  s = s.replace(/[\\\/]+/g, '/');       // slashes
-  s = s.replace(/[\u2010-\u2015\u2212]+/g, '-'); // dashes
-  s = s.replace(/\s*\/\s*/g, ' / ').replace(/\s*-\s*/g, ' - '); // spacing
-  s = s.replace(/[^0-9a-zA-Z.\-\/\s]/g, ''); // strip others
-  s = s.replace(/\s+/g, ' ').trim().toLowerCase();
+  s = s.replace(/\+/g, ' ');
+  s = s.replace(/(\d),(\d)/g, '$1.$2');
+  s = s.replace(/[\\\/]+/g, '/');
+  s = s.replace(/[\u2010-\u2015\u2212]+/g, '-');
+  s = s.replace(/\s*\/\s*/g, ' / ').replace(/\s*-\s*/g, ' - ');
+  s = s.replace(/[^0-9a-z.\-\/\s]/g, '');
+  s = s.replace(/\s+/g, ' ').trim();
 
-  return s;
+  // alias mapping untuk size teks
+  const aliases = {
+    's': 'small',
+    'm': 'medium',
+    'l': 'large',
+    'xl': 'extra large',
+    'xxl': '2xl',
+    '2xl': '2xl',
+    'xxxl': '3xl',
+    '3xl': '3xl'
+  };
+
+  return aliases[s] || s;
 }
 
 function isAvailable(val) {
@@ -267,7 +279,6 @@ if (gridContainer) {
   observer.observe(gridContainer, { childList: true, subtree: true });
 }
 </script>
-
 
 
 
