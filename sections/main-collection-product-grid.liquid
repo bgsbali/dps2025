@@ -190,53 +190,106 @@
 </ul>
 
 <script>
-function applyVariantFilter() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const selectedSize = urlParams.get("filter.v.option.size");
-  if (!selectedSize) {
-    console.log("[DEBUG] Tidak ada filter.v.option.size di URL");
-    return;
-  }
-
-  const decodedSize = decodeURIComponent(selectedSize).replace(/\+/g, " ").trim();
-  console.log("[DEBUG] applyVariantFilter | raw =", selectedSize, "| decoded =", decodedSize);
-
-  document.querySelectorAll("#product-grid .grid__item").forEach(item => {
-    const title = item.getAttribute("data-product-title");
-    const variants = JSON.parse(item.getAttribute("data-variants"));
-    console.log("[DEBUG] Cek produk:", title, variants);
-
-    const match = variants.find(v =>
-      (v.option1 === decodedSize || v.option2 === decodedSize || v.option3 === decodedSize) && v.available
-    );
-
-    if (!match) {
-      console.log("[DEBUG] HIDE:", title, "→ tidak ada varian tersedia untuk", decodedSize);
-      item.style.display = "none";
-    } else {
-      console.log("[DEBUG] KEEP:", title, "→ ada varian tersedia untuk", decodedSize);
-      item.style.display = "";
-    }
-  });
-}
-
-// initial run
-document.addEventListener("DOMContentLoaded", applyVariantFilter);
-
-// re-run filter setiap kali grid diupdate oleh facets.js (AJAX)
-const gridContainer = document.getElementById("ProductGridContainer");
-if (gridContainer) {
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "childList") {
-        console.log("[DEBUG] Grid updated, reapplying filter...");
-        applyVariantFilter();
+(function() {
+  // safe decode: handle '+' sebagai spasi dan proteksi decodeURIComponent error
+  function safeDecodeParam(val) {
+    if (!val) return '';
+    try {
+      return decodeURIComponent(val.replace(/\+/g, '%20'));
+    } catch (e) {
+      try {
+        return decodeURIComponent(val);
+      } catch (e2) {
+        return val.replace(/\+/g, ' ');
       }
     }
-  });
-  observer.observe(gridContainer, { childList: true, subtree: true });
-}
+  }
+
+  // normalize ukuran untuk perbandingan:
+  // - decode html entities (simple)
+  // - ubah NBSP -> space
+  // - ubah koma desimal jadi titik jika ada
+  // - normalisasikan slashes/backslashes -> '/'
+  // - normalisasikan dash types -> '-'
+  // - beri spasi konsisten di sekitar '/' dan '-'
+  // - hapus karakter non-alfanumerik (kecuali . / - dan spasi)
+  // - collapse whitespace, lowercase, trim
+  function normalizeSize(str) {
+    if (str === null || str === undefined) return '';
+    str = String(str);
+
+    // decode simple HTML entities using textarea trick
+    try {
+      var ta = document.createElement('textarea');
+      ta.innerHTML = str;
+      str = ta.value;
+    } catch (e) {}
+
+    // NBSP -> normal space
+    str = str.replace(/\u00A0/g, ' ');
+
+    // turn commas between digits into decimal dot (e.g., "10,5" -> "10.5")
+    str = str.replace(/(\d),(\d)/g, '$1.$2');
+
+    // normalize slashes and backslashes to single '/'
+    str = str.replace(/[\\\/]+/g, '/');
+
+    // normalize various dash characters to hyphen
+    str = str.replace(/[\u2010\u2011\u2012\u2013\u2014\u2015\u2212]+/g, '-');
+
+    // ensure consistent spacing around '/' and '-'
+    str = str.replace(/\s*\/\s*/g, ' / ');
+    str = str.replace(/\s*-\s*/g, ' - ');
+
+    // remove other punctuation except letters, numbers, dot, slash, hyphen and spaces
+    str = str.replace(/[^0-9A-Za-z.\-\/\s]/g, '');
+
+    // collapse multiple spaces and trim
+    str = str.replace(/\s+/g, ' ').trim().toLowerCase();
+
+    return str;
+  }
+
+  function applyVariantFilter() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var raw = urlParams.get('filter.v.option.size');
+    if (!raw) return;
+
+    var decoded = safeDecodeParam(raw).trim();
+    var normalizedFilter = normalizeSize(decoded);
+
+    document.querySelectorAll('#product-grid .grid__item').forEach(function(item) {
+      var variantsJson = item.getAttribute('data-variants') || '[]';
+      var variants;
+      try { variants = JSON.parse(variantsJson); } catch (e) { variants = []; }
+
+      var keep = variants.some(function(v) {
+        var o1 = normalizeSize(v.option1 || '');
+        var o2 = normalizeSize(v.option2 || '');
+        var o3 = normalizeSize(v.option3 || '');
+        return v.available && (o1 === normalizedFilter || o2 === normalizedFilter || o3 === normalizedFilter);
+      });
+
+      item.style.display = keep ? '' : 'none';
+    });
+  }
+
+  // run on initial load
+  document.addEventListener('DOMContentLoaded', applyVariantFilter);
+
+  // re-run after AJAX updates from facets.js (observe product grid container)
+  var gridContainer = document.getElementById('ProductGridContainer');
+  if (gridContainer) {
+    var observer = new MutationObserver(function() {
+      applyVariantFilter();
+    });
+    observer.observe(gridContainer, { childList: true, subtree: true });
+  }
+})();
 </script>
+
+
+
 
 
 
