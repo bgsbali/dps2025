@@ -188,13 +188,14 @@
     {%- assign skip_card_product_styles = true -%}
   {%- endfor -%}
 </ul>
+
 <script>
 function normalizeSize(s) {
   if (!s && s !== 0) return '';
   s = String(s).toLowerCase().trim();
 
-  // standardisasi simbol
-  s = s.replace(/\u00A0/g, ' '); // nbsp
+  // basic normalizations
+  s = s.replace(/\u00A0/g, ' ');
   s = s.replace(/\+/g, ' ');
   s = s.replace(/(\d),(\d)/g, '$1.$2');
   s = s.replace(/[\\\/]+/g, '/');
@@ -203,19 +204,33 @@ function normalizeSize(s) {
   s = s.replace(/[^0-9a-z.\-\/\s]/g, '');
   s = s.replace(/\s+/g, ' ').trim();
 
-  // alias mapping untuk size teks
-  const aliases = {
-    's': 'small',
-    'm': 'medium',
-    'l': 'large',
-    'xl': 'extra large',
-    'xxl': '2xl',
-    '2xl': '2xl',
-    'xxxl': '3xl',
-    '3xl': '3xl'
-  };
+  return s;
+}
 
-  return aliases[s] || s;
+// mapping alias: canonical -> [possible variants]
+const aliasGroups = {
+  'small': ['s', 'small', 'x-small', 'extra small'],
+  'medium': ['m', 'medium'],
+  'large': ['l', 'large'],
+  'extra large': ['xl', 'x-large', 'extra large'],
+  '2xl': ['xxl', '2xl'],
+  '3xl': ['xxxl', '3xl']
+};
+
+function isEquivalentSize(val, filter) {
+  const normVal = normalizeSize(val);
+  const normFilter = normalizeSize(filter);
+
+  if (normVal === normFilter) return true;
+
+  // cek dalam aliasGroups
+  for (let key in aliasGroups) {
+    const group = aliasGroups[key].map(normalizeSize);
+    if (group.includes(normVal) && group.includes(normFilter)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function isAvailable(val) {
@@ -243,12 +258,11 @@ function applyVariantFilter() {
 
     let keep = false;
     variants.forEach(v => {
-      const o1 = normalizeSize(v.option1 || '');
-      const o2 = normalizeSize(v.option2 || '');
-      const o3 = normalizeSize(v.option3 || '');
-      const match = (o1 === normalizedFilter || o2 === normalizedFilter || o3 === normalizedFilter);
+      const match = (isEquivalentSize(v.option1, normalizedFilter) ||
+                     isEquivalentSize(v.option2, normalizedFilter) ||
+                     isEquivalentSize(v.option3, normalizedFilter));
 
-      console.log("[DEBUG] Varian check:", title, "| o1:", o1, "| o2:", o2, "| o3:", o3, "| available:", v.available);
+      console.log("[DEBUG] Varian check:", title, "| o1:", v.option1, "| o2:", v.option2, "| o3:", v.option3, "| available:", v.available, "| match:", match);
 
       if (match && isAvailable(v.available)) {
         keep = true;
@@ -279,8 +293,6 @@ if (gridContainer) {
   observer.observe(gridContainer, { childList: true, subtree: true });
 }
 </script>
-
-
 
 
             {% comment %} <ul
