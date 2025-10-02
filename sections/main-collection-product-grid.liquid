@@ -190,94 +190,97 @@
 </ul>
 
 <script>
-(function() {
-  // normalisasi sederhana tapi kuat: aman untuk perbandingan
-  function normalizeBasic(s) {
-    if (!s && s !== 0) return '';
-    s = String(s);
+function normalizeSize(s) {
+  if (!s && s !== 0) return '';
+  s = String(s);
 
-    // NBSP -> space
-    s = s.replace(/\u00A0/g, ' ');
+  // NBSP -> space
+  s = s.replace(/\u00A0/g, ' ');
 
-    // replace '+' left in some encodings (just in case)
-    s = s.replace(/\+/g, ' ');
+  // replace '+' leftover
+  s = s.replace(/\+/g, ' ');
 
-    // decimal comma to dot (10,5 -> 10.5)
-    s = s.replace(/(\d),(\d)/g, '$1.$2');
+  // decimal comma to dot
+  s = s.replace(/(\d),(\d)/g, '$1.$2');
 
-    // normalize slashes/backslashes -> /
-    s = s.replace(/[\\\/]+/g, '/');
+  // normalize slashes/backslashes
+  s = s.replace(/[\\\/]+/g, '/');
 
-    // normalize various dashes -> hyphen
-    s = s.replace(/[\u2010-\u2015\u2212]+/g, '-');
+  // normalize various dashes
+  s = s.replace(/[\u2010-\u2015\u2212]+/g, '-');
 
-    // normalize spacing around '/' and '-'
-    s = s.replace(/\s*\/\s*/g, ' / ');
-    s = s.replace(/\s*-\s*/g, ' - ');
+  // spacing around '/' and '-'
+  s = s.replace(/\s*\/\s*/g, ' / ');
+  s = s.replace(/\s*-\s*/g, ' - ');
 
-    // remove other punctuation except alnum, dot, slash, hyphen and spaces
-    s = s.replace(/[^0-9a-zA-Z.\-\/\s]/g, '');
+  // remove other junk
+  s = s.replace(/[^0-9a-zA-Z.\-\/\s]/g, '');
 
-    // collapse whitespace, trim and lowercase
-    s = s.replace(/\s+/g, ' ').trim().toLowerCase();
+  // collapse, trim, lowercase
+  s = s.replace(/\s+/g, ' ').trim().toLowerCase();
 
-    return s;
+  return s;
+}
+
+function applyVariantFilter() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const selectedSize = urlParams.get("filter.v.option.size");
+  if (!selectedSize) {
+    console.log("[DEBUG] Tidak ada filter.v.option.size di URL");
+    return;
   }
 
-  function safeDecodeParam(val) {
-    if (!val && val !== '') return '';
-    try {
-      return decodeURIComponent(val);
-    } catch (e) {
-      // fallback: replace common sequences and return raw
-      try {
-        return decodeURIComponent(val.replace(/\+/g, '%20'));
-      } catch (e2) {
-        return String(val).replace(/\+/g, ' ');
+  const decodedSize = decodeURIComponent(selectedSize).replace(/\+/g, " ").trim();
+  const normalizedFilter = normalizeSize(decodedSize);
+
+  console.log("[DEBUG] raw param =", selectedSize);
+  console.log("[DEBUG] decoded =", decodedSize);
+  console.log("[DEBUG] normalizedFilter =", normalizedFilter);
+
+  document.querySelectorAll("#product-grid .grid__item").forEach(item => {
+    const title = item.getAttribute("data-product-title");
+    const variants = JSON.parse(item.getAttribute("data-variants") || "[]");
+    console.log("[DEBUG] Cek produk:", title, variants);
+
+    const match = variants.find(v => {
+      const o1 = normalizeSize(v.option1 || '');
+      const o2 = normalizeSize(v.option2 || '');
+      const o3 = normalizeSize(v.option3 || '');
+      const isMatch = (o1 === normalizedFilter || o2 === normalizedFilter || o3 === normalizedFilter);
+      if (isMatch) {
+        console.log("[DEBUG]   varian match:", {o1, o2, o3, available: v.available});
+      }
+      return v.available && isMatch;
+    });
+
+    if (!match) {
+      console.log("[DEBUG] HIDE:", title, "→ tidak ada varian tersedia untuk", normalizedFilter);
+      item.style.display = "none";
+    } else {
+      console.log("[DEBUG] KEEP:", title, "→ ada varian tersedia untuk", normalizedFilter);
+      item.style.display = "";
+    }
+  });
+}
+
+// initial run
+document.addEventListener("DOMContentLoaded", applyVariantFilter);
+
+// re-run filter setiap kali grid diupdate oleh facets.js (AJAX)
+const gridContainer = document.getElementById("ProductGridContainer");
+if (gridContainer) {
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === "childList") {
+        console.log("[DEBUG] Grid updated, reapplying filter...");
+        applyVariantFilter();
       }
     }
-  }
-
-  function applyVariantFilter() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const raw = urlParams.get('filter.v.option.size');
-    if (!raw) return;
-
-    const decoded = safeDecodeParam(raw).trim();
-    const normalizedFilter = normalizeBasic(decoded);
-
-    // iterate visible grid items
-    document.querySelectorAll('#product-grid .grid__item').forEach(item => {
-      const variantsJson = item.getAttribute('data-variants') || '[]';
-      let variants;
-      try { variants = JSON.parse(variantsJson); } catch (e) { variants = []; }
-
-      const keep = variants.some(v => {
-        const o1 = normalizeBasic(v.option1 || '');
-        const o2 = normalizeBasic(v.option2 || '');
-        const o3 = normalizeBasic(v.option3 || '');
-        return (v.available === true || v.available === 'true') && (
-          o1 === normalizedFilter || o2 === normalizedFilter || o3 === normalizedFilter
-        );
-      });
-
-      item.style.display = keep ? '' : 'none';
-    });
-  }
-
-  // initial run on page load
-  document.addEventListener('DOMContentLoaded', applyVariantFilter);
-
-  // re-run after AJAX updates from facets.js
-  const gridContainer = document.getElementById('ProductGridContainer');
-  if (gridContainer) {
-    const observer = new MutationObserver((mutations) => {
-      applyVariantFilter();
-    });
-    observer.observe(gridContainer, { childList: true, subtree: true });
-  }
-})();
+  });
+  observer.observe(gridContainer, { childList: true, subtree: true });
+}
 </script>
+
 
 
 
