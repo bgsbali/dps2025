@@ -177,7 +177,7 @@
         "ai_gen_block_5967989_TjKYWE"
       ],
       "custom_css": [
-        ".ai-clickable-image-wrapper-am2s4v0t0d0v1nwqruaigenblock5967989tjkywe:hover {transform: none !important;}"
+        ".ai-clickable-image-wrapper-am2s4v0t0d0v1nwqruaigenblock5967989tjkywe:hover {transform: none !important; box-shadow: none !important;}"
       ],
       "settings": {}
     }
