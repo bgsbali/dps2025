@@ -166,9 +166,9 @@
             "link_url": "",
             "open_in_new_tab": false,
             "background_color": "#eeeeee",
-            "padding": 20,
-            "border_radius": 8,
-            "image_border_radius": 4
+            "padding": 0,
+            "border_radius": 0,
+            "image_border_radius": 0
           },
           "blocks": {}
         }
