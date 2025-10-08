@@ -181,6 +181,94 @@
         ".ai-clickable-image-wrapper-am2s4v0t0d0v1nwqruaigenblock5967989tjkywe {max-width: 65vw; margin: 0 auto 0; padding-bottom: 80px;}"
       ],
       "settings": {}
+    },
+    "rich_text_3dUN3V": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_EPPgNk": {
+          "type": "heading",
+          "settings": {
+            "heading": "Featured Products",
+            "heading_size": "h2"
+          }
+        },
+        "text_tUwTwW": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Top picks from Bali’s favorite surf shop.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_EPPgNk",
+        "text_tUwTwW"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "1759909014fd12f8ec": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_0f37820_TP374x": {
+          "type": "ai_gen_block_0f37820",
+          "settings": {
+            "background_color": "#ffffff",
+            "section_padding_top": 60,
+            "section_padding_bottom": 60,
+            "row_gap": 60,
+            "column_gap": 60,
+            "content_padding": 40,
+            "image_height": 400,
+            "image_border_radius": 8,
+            "text_color": "#1f1f21",
+            "heading_size": 36,
+            "heading_margin": 16,
+            "tagline_color": "#666666",
+            "tagline_size": 16,
+            "button_bg_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_hover_bg_color": "#333333",
+            "button_hover_text_color": "#ffffff",
+            "button_font_size": 14,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 28,
+            "button_border_radius": 4,
+            "button_margin": 24,
+            "mobile_gap": 32,
+            "mobile_content_padding": 20,
+            "mobile_image_height": 280,
+            "mobile_heading_size": 28,
+            "mobile_tagline_size": 14,
+            "brand_1_name": "Pyzel Surfboards",
+            "brand_1_tagline": "Performance surfboards crafted by world-class shapers",
+            "brand_1_image": "shopify://shop_images/Copy-of-UC2A9289.webp",
+            "brand_1_button_text": "Browse Pyzel Collection",
+            "brand_1_button_link": "",
+            "brand_2_name": "SharpEye Surfboards",
+            "brand_2_tagline": "Innovative designs for progressive surfing",
+            "brand_2_image": "shopify://shop_images/rio_waida.webp",
+            "brand_2_button_text": "Browse SharpEye Collection",
+            "brand_2_button_link": "",
+            "brand_3_name": "Rip Curl Collection",
+            "brand_3_tagline": "Premium surf apparel and accessories",
+            "brand_3_image": "shopify://shop_images/bgs-ripcurl.webp",
+            "brand_3_button_text": "Browse Rip Curl Collection",
+            "brand_3_button_link": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_0f37820_TP374x"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -188,6 +276,8 @@
     "rich_text_dhrALh",
     "1758787678a7ecb756",
     "rich_text_aKEqRN",
-    "1759906329c800eb23"
+    "1759906329c800eb23",
+    "rich_text_3dUN3V",
+    "1759909014fd12f8ec"
   ]
 }
