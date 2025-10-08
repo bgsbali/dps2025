@@ -314,6 +314,59 @@
         "{background: #111;}"
       ],
       "settings": {}
+    },
+    "175991139559aee632": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f287647_MRtb9T": {
+          "type": "ai_gen_block_f287647",
+          "settings": {
+            "background_color": "#ffffff",
+            "section_padding_top": 80,
+            "section_padding_bottom": 60,
+            "grid_gap": 60,
+            "content_gap": 40,
+            "image_border_radius": 8,
+            "content_padding": 20,
+            "text_color": "#1f1f21",
+            "brand_name_size": 36,
+            "tagline_color": "#666666",
+            "tagline_size": 18,
+            "text_spacing": 16,
+            "button_spacing": 24,
+            "button_background": "#eeeeee",
+            "button_text_color": "#ffffff",
+            "button_hover_background": "#eeeeee",
+            "button_hover_text_color": "#ffffff",
+            "button_text_size": 16,
+            "button_padding_vertical": 14,
+            "button_padding_horizontal": 28,
+            "button_border_radius": 4,
+            "mobile_gap": 24,
+            "mobile_content_padding": 20,
+            "brand_1_name": "VANS Shoes",
+            "brand_1_tagline": "Legendary style. Laid-back soul. Always Off The Wall.",
+            "brand_1_image": "shopify://shop_images/vans-homepage.webp",
+            "brand_1_button_text": "Browse Vans Collection",
+            "brand_1_button_link": "shopify://collections/vans-off-the-wall",
+            "brand_2_name": "CHPO Sunglasses",
+            "brand_2_tagline": "Recycled. Vegan. Anti-hate. CHPO is where style meets purpose.",
+            "brand_2_image": "shopify://shop_images/chpo.webp",
+            "brand_2_button_text": "Browse CHPO Collection",
+            "brand_2_button_link": "shopify://collections/chpo-sunglasses",
+            "brand_3_name": "Skateboards",
+            "brand_3_tagline": "Quality Skateboards for Bali Streets & Bowls.",
+            "brand_3_image": "shopify://shop_images/skate-homepage.webp",
+            "brand_3_button_text": "Browse Skate Collection",
+            "brand_3_button_link": "shopify://collections/skateboard-collection"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f287647_MRtb9T"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -324,6 +377,7 @@
     "1759906329c800eb23",
     "rich_text_3dUN3V",
     "1759909014fd12f8ec",
-    "1759909822f007530c"
+    "1759909822f007530c",
+    "175991139559aee632"
   ]
 }
