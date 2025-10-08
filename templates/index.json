@@ -232,7 +232,7 @@
             "heading_margin": 16,
             "tagline_color": "#666666",
             "tagline_size": 16,
-            "button_bg_color": "#000000",
+            "button_bg_color": "#eeeeee",
             "button_text_color": "#ffffff",
             "button_hover_bg_color": "#333333",
             "button_hover_text_color": "#ffffff",
@@ -250,17 +250,17 @@
             "brand_1_tagline": "Performance surfboards crafted by world-class shapers",
             "brand_1_image": "shopify://shop_images/Copy-of-UC2A9289.webp",
             "brand_1_button_text": "Browse Pyzel Collection",
-            "brand_1_button_link": "",
+            "brand_1_button_link": "shopify://collections/pyzel-surfboards-bali",
             "brand_2_name": "SharpEye Surfboards",
             "brand_2_tagline": "Innovative designs for progressive surfing",
             "brand_2_image": "shopify://shop_images/rio_waida.webp",
             "brand_2_button_text": "Browse SharpEye Collection",
-            "brand_2_button_link": "",
+            "brand_2_button_link": "shopify://collections/sharpeye-surfboards",
             "brand_3_name": "Rip Curl Collection",
             "brand_3_tagline": "Premium surf apparel and accessories",
             "brand_3_image": "shopify://shop_images/bgs-ripcurl.webp",
             "brand_3_button_text": "Browse Rip Curl Collection",
-            "brand_3_button_link": ""
+            "brand_3_button_link": "shopify://collections/rip-curl"
           },
           "blocks": {}
         }
