@@ -86,7 +86,7 @@
             "text_alignment": "center",
             "columns_mobile": "1",
             "section_padding_top": 20,
-            "section_padding_bottom": 36,
+            "section_padding_bottom": 100,
             "icon_size": 120,
             "icon_border_radius": 10,
             "icon_background_color": "#ffffff",
@@ -142,6 +142,9 @@
         "heading_GabBr9",
         "text_qAWEfA"
       ],
+      "custom_css": [
+        ".content-container {background: #eee;}"
+      ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
@@ -155,36 +158,23 @@
     "1759906329c800eb23": {
       "type": "_blocks",
       "blocks": {
-        "ai_gen_block_bb0722f_wnEQhK": {
-          "type": "ai_gen_block_bb0722f",
+        "ai_gen_block_5967989_TjKYWE": {
+          "type": "ai_gen_block_5967989",
           "settings": {
             "image_url": "https://bgsbali.com/wp-content/uploads/2025/08/bgs_maps-1.webp",
-            "image_alt": "BGS Bali Maps",
-            "image_link": "",
-            "image_fit": "contain",
-            "image_position": "center center",
-            "image_height": 500,
-            "mobile_height": 300,
-            "border_radius": 0,
-            "show_overlay": false,
-            "overlay_opacity": 30,
-            "heading": "",
-            "text": "",
-            "button_text": "",
-            "button_link": "",
-            "text_color": "#ffffff",
-            "heading_size": 32,
-            "text_size": 16,
-            "button_color": "#1f1f21",
-            "button_hover_color": "#000000",
-            "button_text_color": "#ffffff",
-            "button_border_radius": 0
+            "alt_text": "BGS Bali Map",
+            "link_url": "",
+            "open_in_new_tab": false,
+            "background_color": "#eeeeee",
+            "padding": 20,
+            "border_radius": 8,
+            "image_border_radius": 4
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "ai_gen_block_bb0722f_wnEQhK"
+        "ai_gen_block_5967989_TjKYWE"
       ],
       "settings": {}
     }
