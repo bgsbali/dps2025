@@ -121,41 +121,79 @@
       ],
       "settings": {}
     },
-    "featured_collection_rmA9jE": {
-      "type": "featured-collection",
-      "disabled": true,
-      "name": "t:sections.featured-collection.presets.name",
+    "rich_text_aKEqRN": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_GabBr9": {
+          "type": "heading",
+          "settings": {
+            "heading": "Find Your Wave. Find Your BGS.",
+            "heading_size": "h2"
+          }
+        },
+        "text_qAWEfA": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Visit our top surf shops in Bali for epic gear, great coffee, and even better stories.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_GabBr9",
+        "text_qAWEfA"
+      ],
+      "name": "t:sections.rich-text.presets.name",
       "settings": {
-        "collection": "surfboards",
-        "products_to_show": 8,
-        "title": "Featured Products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 3,
-        "enable_desktop_slider": true,
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "solid",
+        "desktop_content_position": "center",
+        "content_alignment": "center",
         "color_scheme": "",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": true,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
       }
+    },
+    "1759906329c800eb23": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_bb0722f_wnEQhK": {
+          "type": "ai_gen_block_bb0722f",
+          "settings": {
+            "image_url": "https://bgsbali.com/wp-content/uploads/2025/08/bgs_maps-1.webp",
+            "image_alt": "BGS Bali Maps",
+            "image_link": "",
+            "image_fit": "contain",
+            "image_position": "center center",
+            "image_height": 500,
+            "mobile_height": 300,
+            "border_radius": 0,
+            "show_overlay": false,
+            "overlay_opacity": 30,
+            "heading": "",
+            "text": "",
+            "button_text": "",
+            "button_link": "",
+            "text_color": "#ffffff",
+            "heading_size": 32,
+            "text_size": 16,
+            "button_color": "#1f1f21",
+            "button_hover_color": "#000000",
+            "button_text_color": "#ffffff",
+            "button_border_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_bb0722f_wnEQhK"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "slideshow_KB7Gyn",
     "rich_text_dhrALh",
     "1758787678a7ecb756",
-    "featured_collection_rmA9jE"
+    "rich_text_aKEqRN",
+    "1759906329c800eb23"
   ]
 }
