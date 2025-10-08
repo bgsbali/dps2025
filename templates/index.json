@@ -143,7 +143,7 @@
         "text_qAWEfA"
       ],
       "custom_css": [
-        ".content-container {background: #eee;}"
+        ".content-container {background: #eee; padding-top: 80px;}"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
@@ -178,7 +178,7 @@
       ],
       "custom_css": [
         ".ai-clickable-image-wrapper-am2s4v0t0d0v1nwqruaigenblock5967989tjkywe:hover {transform: none !important; box-shadow: none !important;}",
-        ".ai-clickable-image-wrapper-am2s4v0t0d0v1nwqruaigenblock5967989tjkywe {max-width: 65vw; margin: 0 auto 0;}"
+        ".ai-clickable-image-wrapper-am2s4v0t0d0v1nwqruaigenblock5967989tjkywe {max-width: 65vw; margin: 0 auto 0; padding-bottom: 80px;}"
       ],
       "settings": {}
     }
