@@ -97,16 +97,16 @@
             "heading_spacing": 12,
             "subheading_size": 14,
             "subheading_color": "#6a6a6a",
-            "column_1_icon": "shopify://shop_images/worldwide-shipping_6630268b-77f7-4cfd-879b-0e82b1ed4626.png",
+            "column_1_icon": "shopify://shop_images/Worldwide_Shipping.svg",
             "column_1_heading": "Worldwide Shipping",
             "column_1_subheading": "Delivered straight to your door",
-            "column_2_icon": "shopify://shop_images/customer-support.png",
+            "column_2_icon": "shopify://shop_images/Customer_Support.svg",
             "column_2_heading": "Customer Support",
             "column_2_subheading": "Help from our Bali-based team",
-            "column_3_icon": "shopify://shop_images/return.png",
+            "column_3_icon": "shopify://shop_images/easy_returns.svg",
             "column_3_heading": "Easy Returns",
             "column_3_subheading": "Hassle-free return policy",
-            "column_4_icon": "shopify://shop_images/secure.png",
+            "column_4_icon": "shopify://shop_images/secure_checkout.svg",
             "column_4_heading": "Secure Checkout",
             "column_4_subheading": "Safe and encrypted process"
           },
@@ -150,239 +150,12 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
-    },
-    "multicolumn_hKzkGC": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_R4nfkM": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/surfboardscolumn.jpg",
-            "title": "",
-            "text": "",
-            "link_label": "SHOP",
-            "link": "shopify://collections/bali-surfboards"
-          }
-        },
-        "column_UyGLWQ": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/finscolumn.jpg",
-            "title": "",
-            "text": "",
-            "link_label": "SHOP",
-            "link": "shopify://collections/surf-fins-bali"
-          }
-        },
-        "column_zqE6dR": {
-          "type": "column",
-          "settings": {
-            "image": "shopify://shop_images/essentialscolumn.jpg",
-            "title": "",
-            "text": "",
-            "link_label": "SHOP",
-            "link": "shopify://collections/surf-essentials"
-          }
-        }
-      },
-      "block_order": [
-        "column_R4nfkM",
-        "column_UyGLWQ",
-        "column_zqE6dR"
-      ],
-      "custom_css": [],
-      "name": "t:sections.multicolumn.presets.name",
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 52,
-        "padding_bottom": 12
-      }
-    },
-    "image_with_text_TkWEza": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_p3DeHm": {
-          "type": "heading",
-          "settings": {
-            "heading": "BGS x Vans Indonesia",
-            "heading_size": "h1"
-          }
-        },
-        "text_XHLAyd": {
-          "type": "text",
-          "settings": {
-            "text": "<p>BGS is now an Authorized Dealer of Vans Indonesia. Shop original Vans collection here!</p>",
-            "text_style": "body"
-          }
-        },
-        "button_mt9gFM": {
-          "type": "button",
-          "settings": {
-            "button_label": "SHOP",
-            "button_link": "shopify://collections/vans-off-the-wall",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_p3DeHm",
-        "text_XHLAyd",
-        "button_mt9gFM"
-      ],
-      "name": "t:sections.image-with-text.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/bghome-_new.jpg",
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "featured_collection_3Mwak9": {
-      "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.name",
-      "settings": {
-        "collection": "vans-off-the-wall",
-        "products_to_show": 4,
-        "title": "",
-        "heading_size": "h1",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "image_with_text_FjTHU9": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_dQVNXP": {
-          "type": "heading",
-          "settings": {
-            "heading": "Rip Curl",
-            "heading_size": "h1"
-          }
-        },
-        "text_bWiRGN": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We're having the biggest Clearance Sale of Rip Curl! From tee to bikini, everything on sale!</p>",
-            "text_style": "body"
-          }
-        },
-        "button_pirHyf": {
-          "type": "button",
-          "settings": {
-            "button_label": "SHOP HERE",
-            "button_link": "shopify://collections/rip-curl",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading_dQVNXP",
-        "text_bWiRGN",
-        "button_pirHyf"
-      ],
-      "name": "t:sections.image-with-text.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/WhatsApp_Image_2023-07-25_at_13.52.36_2.jpg",
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "collage_Yhf64f": {
-      "type": "collage",
-      "blocks": {
-        "image_3eb8F6": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/SIGNAGE.jpg"
-          }
-        },
-        "image_xktQ8t": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/BGS_Canggu_-_Surf_Shop_-_Coffee_Bar_-_Night.webp"
-          }
-        },
-        "image_fTFwM8": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/ripcurk.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "image_3eb8F6",
-        "image_xktQ8t",
-        "image_fTFwM8"
-      ],
-      "name": "t:sections.collage.presets.name",
-      "settings": {
-        "heading": "BGS EVERYWHERE!",
-        "heading_size": "h2",
-        "desktop_layout": "right",
-        "mobile_layout": "column",
-        "card_styles": "product-card-wrapper",
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
     }
   },
   "order": [
     "slideshow_KB7Gyn",
     "rich_text_dhrALh",
     "1758787678a7ecb756",
-    "featured_collection_rmA9jE",
-    "multicolumn_hKzkGC",
-    "image_with_text_TkWEza",
-    "featured_collection_3Mwak9",
-    "image_with_text_FjTHU9",
-    "collage_Yhf64f"
+    "featured_collection_rmA9jE"
   ]
 }
