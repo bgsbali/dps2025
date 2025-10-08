@@ -1,6 +1,601 @@
+{% doc %}
+  @prompt
+    Create a two-column section for a surfboard customization promo.
+    The left column contains:
+    
+    A large bold headline: “Need Custom Surfboards In Bali?”
+    
+    A short description below: “Let’s build your dream board! Handcrafted for your style, skill, and favorite waves.”
+    
+    A call-to-action button with yellow background (#FFC533) and black text saying “Start Your Custom Order”.
+    
+    The right column contains:
+    
+    An embedded YouTube video using this URL: https://www.youtube.com/watch?v=TkL4zEWKQY0.
+    
+    The video should be responsive and maintain a 16:9 aspect ratio.
+    
+    Design details:
+    
+    Background color or texture: dark asphalt-like (black/charcoal textured look).
+    
+    Text color: white.
+    
+    Font: bold, modern sans-serif for headline; lighter for body text.
+    
+    Align both columns vertically centered.
+    
+    On mobile, the layout should stack with text appearing above the video.
+    
+    Maintain padding and spacing to make the layout clean and premium.
+    
+    Section purpose: promote custom surfboard orders in Bali with a video and clear call-to-action.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-surfboard-promo-{{ ai_gen_id }} {
+    background: {{ block.settings.background_color }};
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-surfboard-promo-{{ ai_gen_id }}::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.03) 2px,
+        rgba(255, 255, 255, 0.03) 4px
+      );
+    pointer-events: none;
+  }
+
+  .ai-surfboard-promo-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ai-surfboard-promo-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ block.settings.column_gap }}px;
+    align-items: center;
+    min-height: 500px;
+  }
+
+  .ai-surfboard-promo-content-{{ ai_gen_id }} {
+    padding: 40px;
+  }
+
+  .ai-surfboard-promo-headline-{{ ai_gen_id }} {
+    font-family: {{ block.settings.headline_font.family }}, {{ block.settings.headline_font.fallback_families }};
+    font-weight: {{ block.settings.headline_font.weight }};
+    font-size: {{ block.settings.headline_size }}px;
+    line-height: 1.1;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 {{ block.settings.text_spacing }}px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .ai-surfboard-promo-description-{{ ai_gen_id }} {
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+    font-size: {{ block.settings.description_size }}px;
+    line-height: 1.5;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 {{ block.settings.button_spacing }}px;
+    opacity: 0.9;
+  }
+
+  .ai-surfboard-promo-button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: 600;
+    font-size: {{ block.settings.button_text_size }}px;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-surfboard-promo-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    color: {{ block.settings.button_hover_text_color }};
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .ai-surfboard-promo-video-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+  }
+
+  .ai-surfboard-promo-video-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    border-radius: {{ block.settings.video_border_radius }}px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .ai-surfboard-promo-video-wrapper-{{ ai_gen_id }} iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .ai-surfboard-promo-video-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: {{ block.settings.video_border_radius }}px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-surfboard-promo-video-placeholder-{{ ai_gen_id }} svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.6;
+  }
+
+  @media screen and (max-width: 990px) {
+    .ai-surfboard-promo-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      text-align: center;
+    }
+
+    .ai-surfboard-promo-content-{{ ai_gen_id }} {
+      padding: 20px;
+      order: {{ block.settings.mobile_content_order }};
+    }
+
+    .ai-surfboard-promo-video-{{ ai_gen_id }} {
+      order: {{ block.settings.mobile_video_order }};
+      min-height: 300px;
+    }
+
+    .ai-surfboard-promo-headline-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.headline_size }}px * 0.8);
+    }
+
+    .ai-surfboard-promo-description-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.description_size }}px * 0.9);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-surfboard-promo-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.7 }}px 0 {{ block.settings.section_padding_bottom | times: 0.7 }}px;
+    }
+
+    .ai-surfboard-promo-container-{{ ai_gen_id }} {
+      padding: 0 15px;
+    }
+
+    .ai-surfboard-promo-content-{{ ai_gen_id }} {
+      padding: 15px;
+    }
+
+    .ai-surfboard-promo-headline-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.headline_size }}px * 0.7);
+    }
+
+    .ai-surfboard-promo-description-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.description_size }}px * 0.85);
+    }
+
+    .ai-surfboard-promo-button-{{ ai_gen_id }} {
+      padding: {{ block.settings.button_padding_vertical | times: 0.8 }}px {{ block.settings.button_padding_horizontal | times: 0.8 }}px;
+      font-size: calc({{ block.settings.button_text_size }}px * 0.9);
+    }
+
+    .ai-surfboard-promo-video-{{ ai_gen_id }} {
+      min-height: 250px;
+    }
+  }
+{% endstyle %}
+
+<surfboard-promo-{{ ai_gen_id }} class="ai-surfboard-promo-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-surfboard-promo-container-{{ ai_gen_id }}">
+    <div class="ai-surfboard-promo-grid-{{ ai_gen_id }}">
+      <div class="ai-surfboard-promo-content-{{ ai_gen_id }}">
+        {% if block.settings.headline != blank %}
+          <h2 class="ai-surfboard-promo-headline-{{ ai_gen_id }}">
+            {{ block.settings.headline }}
+          </h2>
+        {% endif %}
+
+        {% if block.settings.description != blank %}
+          <div class="ai-surfboard-promo-description-{{ ai_gen_id }}">
+            {{ block.settings.description }}
+          </div>
+        {% endif %}
+
+        {% if block.settings.button_text != blank %}
+          <a 
+            href="{{ block.settings.button_link | default: '#' }}"
+            class="ai-surfboard-promo-button-{{ ai_gen_id }}"
+          >
+            {{ block.settings.button_text }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="ai-surfboard-promo-video-{{ ai_gen_id }}">
+        {% if block.settings.youtube_url != blank %}
+          <div class="ai-surfboard-promo-video-wrapper-{{ ai_gen_id }}">
+            <iframe
+              src="https://www.youtube.com/embed/{{ block.settings.youtube_url | split: 'v=' | last | split: '&' | first | split: '/' | last }}?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1"
+              title="Surfboard Customization Video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+        {% else %}
+          <div class="ai-surfboard-promo-video-placeholder-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</surfboard-promo-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SurfboardPromo{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupVideoLazyLoading();
+      }
+
+      setupVideoLazyLoading() {
+        const iframe = this.querySelector('iframe');
+        if (!iframe) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const src = iframe.getAttribute('src');
+              if (src && !src.includes('autoplay=1')) {
+                iframe.setAttribute('src', src);
+              }
+              observer.unobserve(iframe);
+            }
+          });
+        }, {
+          rootMargin: '50px'
+        });
+
+        observer.observe(iframe);
+      }
+    }
+
+    customElements.define('surfboard-promo-{{ ai_gen_id }}', SurfboardPromo{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Surfboard promo",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Need Custom Surfboards In Bali?"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Let's build your dream board! Handcrafted for your style, skill, and favorite waves."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Start Your Custom Order"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "youtube_url",
+      "label": "YouTube URL",
+      "default": "https://www.youtube.com/watch?v=TkL4zEWKQY0",
+      "info": "Paste the full YouTube URL"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#FFC533"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button hover background",
+      "default": "#FFD700"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Button hover text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "headline_font",
+      "label": "Headline font",
+      "default": "fjalla_one_n4"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "maven_pro_n4"
+    },
+    {
+      "type": "range",
+      "id": "headline_size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Headline size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Button text size",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 1000,
+      "max": 1600,
+      "step": 50,
+      "unit": "px",
+      "label": "Container width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Column gap",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "text_spacing",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Text spacing",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "button_spacing",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Button spacing",
+      "default": 35
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "video_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Video border radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_order",
+      "label": "Content order on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "First"
+        },
+        {
+          "value": "2",
+          "label": "Second"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "mobile_video_order",
+      "label": "Video order on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "First"
+        },
+        {
+          "value": "2",
+          "label": "Second"
+        }
+      ],
+      "default": "2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Surfboard promo"
+    }
+  ]
+}
 {% endschema %}
