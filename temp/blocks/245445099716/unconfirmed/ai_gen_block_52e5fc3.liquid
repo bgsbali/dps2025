@@ -1,6 +1,301 @@
+{% doc %}
+  @prompt
+    product rating star that connected to shopify item product backend database
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-rating-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-product-rating-container-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.spacing }}px;
+    justify-content: {{ block.settings.alignment }};
+  }
+
+  .ai-product-rating-stars-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.star_spacing }}px;
+  }
+
+  .ai-product-rating-star-{{ ai_gen_id }} {
+    position: relative;
+    width: {{ block.settings.star_size }}px;
+    height: {{ block.settings.star_size }}px;
+    display: inline-block;
+  }
+
+  .ai-product-rating-star-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .ai-product-rating-star-empty-{{ ai_gen_id }} {
+    fill: {{ block.settings.empty_star_color }};
+  }
+
+  .ai-product-rating-star-filled-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    fill: {{ block.settings.filled_star_color }};
+  }
+
+  .ai-product-rating-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    color: {{ block.settings.text_color }};
+    white-space: nowrap;
+  }
+
+  .ai-product-rating-count-{{ ai_gen_id }} {
+    font-size: {{ block.settings.count_size }}px;
+    color: {{ block.settings.count_color }};
+  }
+
+  .ai-product-rating-empty-state-{{ ai_gen_id }} {
+    padding: 20px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-rating-star-{{ ai_gen_id }} {
+      width: {{ block.settings.star_size | times: 0.8 }}px;
+      height: {{ block.settings.star_size | times: 0.8 }}px;
+    }
+
+    .ai-product-rating-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size | times: 0.9 }}px;
+    }
+
+    .ai-product-rating-count-{{ ai_gen_id }} {
+      font-size: {{ block.settings.count_size | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<product-rating-{{ ai_gen_id }} class="ai-product-rating-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% liquid
+    assign rating_value = product.metafields.reviews.rating.value
+    assign rating_count = product.metafields.reviews.rating_count
+
+    if rating_value == blank
+      assign rating_value = 0
+    endif
+
+    if rating_count == blank
+      assign rating_count = 0
+    endif
+
+    assign rating_decimal = rating_value
+    assign rating_whole = rating_value | floor
+    assign rating_remainder = rating_value | minus: rating_whole
+    assign next_star_index = rating_whole | plus: 1
+  %}
+
+  {% if block.settings.show_if_no_reviews == false and rating_count == 0 %}
+  {% else %}
+    <div class="ai-product-rating-container-{{ ai_gen_id }}">
+      <div class="ai-product-rating-stars-{{ ai_gen_id }}" role="img" aria-label="Rated {{ rating_decimal }} out of 5 stars">
+        {% for i in (1..5) %}
+          <span class="ai-product-rating-star-{{ ai_gen_id }}">
+            <svg class="ai-product-rating-star-empty-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            {% if i <= rating_whole %}
+              <svg class="ai-product-rating-star-filled-{{ ai_gen_id }}" style="width: 100%;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            {% elsif i == next_star_index and rating_remainder > 0 %}
+              {% assign fill_percentage = rating_remainder | times: 100 %}
+              <svg class="ai-product-rating-star-filled-{{ ai_gen_id }}" style="width: {{ fill_percentage }}%;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            {% endif %}
+          </span>
+        {% endfor %}
+      </div>
+
+      {% if block.settings.show_rating_value %}
+        <span class="ai-product-rating-text-{{ ai_gen_id }}">
+          {{ rating_decimal }}
+        </span>
+      {% endif %}
+
+      {% if block.settings.show_review_count and rating_count > 0 %}
+        <span class="ai-product-rating-count-{{ ai_gen_id }}">
+          ({{ rating_count }})
+        </span>
+      {% endif %}
+    </div>
+
+    {% if rating_count == 0 and block.settings.show_if_no_reviews %}
+      <div class="ai-product-rating-empty-state-{{ ai_gen_id }}">
+        {{ block.settings.no_reviews_text }}
+      </div>
+    {% endif %}
+  {% endif %}
+</product-rating-{{ ai_gen_id }}>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Product rating stars",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Display"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_if_no_reviews",
+      "label": "Show when no reviews",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "no_reviews_text",
+      "label": "No reviews text",
+      "default": "No reviews yet"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating_value",
+      "label": "Show rating number",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_review_count",
+      "label": "Show review count",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "header",
+      "content": "Stars"
+    },
+    {
+      "type": "range",
+      "id": "star_size",
+      "min": 12,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Star size",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "star_spacing",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Star spacing",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "filled_star_color",
+      "label": "Filled star color",
+      "default": "#FFD700"
+    },
+    {
+      "type": "color",
+      "id": "empty_star_color",
+      "label": "Empty star color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "range",
+      "id": "spacing",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Spacing",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Rating number size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Rating number color",
+      "default": "#1f1f21"
+    },
+    {
+      "type": "range",
+      "id": "count_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Review count size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "count_color",
+      "label": "Review count color",
+      "default": "#6a6a6a"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product rating stars"
+    }
+  ]
+}
 {% endschema %}
