@@ -3611,6 +3611,6 @@ details-disclosure > details {
     background: #FFC03D !important;
 }  
 
-.bgs_customsurfboardbutton a{
+#MainContent .bgs_customsurfboardbutton a{
   color: #fff !important;
 }
