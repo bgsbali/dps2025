@@ -3610,3 +3610,7 @@ details-disclosure > details {
 .product-form__buttons .iia-list-item {
     background: #FFC03D !important;
 }  
+
+.bgs_customsurfboardbutton a{
+  color: #fff;
+}
