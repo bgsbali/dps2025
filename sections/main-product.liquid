@@ -665,6 +665,12 @@
             {%- endcase -%}
 
           {%- endfor -%}
+                                      {% if product.type == "Surfboard" %}
+  <div class="bgs_customsurfboardbutton">
+
+    <a href="/product/surf/custom-surfboards/" class="shopify-payment-button__button shopify-payment-button__button--unbranded">Custom your board</a>
+  </div>
+{%  endif %}
                             {% if product.type == "T-Shirts" and product.vendor == "BGS DryGoods" %}
   <div class="bgs_tshirtbanner">
     <img src="https://cdn.shopify.com/s/files/1/1233/5938/files/BGS_Tees_Size_Chart_2025.jpg?v=1757646323" width="100%" />
