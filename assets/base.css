@@ -3626,3 +3626,11 @@ span.iia-icon.iia-store-icon.iia-clickable {
 .iia-header-container {
     padding-bottom: 10px;
 }
+
+p.product__text.inline-richtext.caption-with-letter-spacing {
+    background: #222;
+    padding: 10px;
+    color: #fff;
+    margin-bottom: 10px;
+    width: fit-content;
+}
