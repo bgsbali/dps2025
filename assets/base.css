@@ -3613,5 +3613,8 @@ details-disclosure > details {
 
 #MainContent .bgs_customsurfboardbutton a{
   color: #333 !important;
+}
+
+#MainContent .bgs_customsurfboardbutton{
   text-align: center;
 }
