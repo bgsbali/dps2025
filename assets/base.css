@@ -3612,5 +3612,6 @@ details-disclosure > details {
 }  
 
 #MainContent .bgs_customsurfboardbutton a{
-  color: #fff !important;
+  color: #333 !important;
+  text-align: center;
 }
