@@ -3622,3 +3622,7 @@ details-disclosure > details {
 span.iia-icon.iia-store-icon.iia-clickable {
     display: none !important;
 }
+
+.iia-header-container {
+    padding-bottom: 10px;
+}
