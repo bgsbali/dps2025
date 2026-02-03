@@ -476,7 +476,12 @@
   <div class="bgs_customsurfboardbutton">
     <a href="https://bgsbali.com/product/surf/custom-surfboards/">or Custom Your Board</a>
   </div>
+
+
 {%  endif %}
+  {% if product.type == 'Surfboard' %}
+  <input type="hidden" name="attributes[has_surfboard]" value="yes">
+{% endif %}
 
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
