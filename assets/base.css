@@ -3634,3 +3634,9 @@ p.product__text.inline-richtext.caption-with-letter-spacing {
     margin-bottom: 10px;
     width: fit-content;
 }
+
+.quick-add button {
+    background: #222;
+    padding: 10px !important;
+    font-size: 10px;
+}
