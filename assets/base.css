@@ -3645,3 +3645,7 @@ aside.product__accordion.accordion {
     background: #eee;
     padding: 0 20px;
 }
+
+.quick-add-modal .product-form__buttons button {
+    background: #222;
+}
