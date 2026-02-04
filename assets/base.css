@@ -3649,3 +3649,7 @@ aside.product__accordion.accordion {
 .quick-add-modal .product-form__buttons button {
     background: #222;
 }
+
+h2.related-products__heading.inline-richtext.h2 {
+    border-bottom: 2px solid #444;
+}
