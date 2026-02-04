@@ -3640,3 +3640,8 @@ p.product__text.inline-richtext.caption-with-letter-spacing {
     padding: 10px !important;
     font-size: 10px;
 }
+
+aside.product__accordion.accordion {
+    background: #eee;
+    padding: 0 20px;
+}
