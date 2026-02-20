@@ -261,14 +261,15 @@
       <div class="ai-surfboard-promo-video-{{ ai_gen_id }}">
         {% if block.settings.youtube_url != blank %}
           <div class="ai-surfboard-promo-video-wrapper-{{ ai_gen_id }}">
-            <iframe
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/TkL4zEWKQY0?si=4o1Wf1MZs-ca2fRu&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            {% comment %} <iframe
               src="https://www.youtube.com/embed/{{ block.settings.youtube_url | split: 'v=' | last | split: '&' | first | split: '/' | last }}?rel=0&modestbranding=1&autohide=1&showinfo=0&controls=1"
               title="Surfboard Customization Video"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
               loading="lazy"
-            ></iframe>
+            ></iframe> {% endcomment %}
           </div>
         {% else %}
           <div class="ai-surfboard-promo-video-placeholder-{{ ai_gen_id }}"></div>
