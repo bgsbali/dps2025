@@ -543,8 +543,8 @@
         "free_shipping_total_label": "0.00",
         "free_total_label": "0.00",
         "pickup_unavailable_banner_title": {
-          "one": "Click small icon on right side & type Bali on Postal Code field or",
-          "other": "Click small icon on right side & type Bali on Postal Code field or"
+          "one": "Click <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 14 14\" focusable=\"false\" aria-hidden=\"true\"><path stroke-linejoin=\"round\" d=\"m7.875 11.697 4.003-8.578c.296-.635-.362-1.293-.997-.997L2.303 6.125c-.453.212-.35.884.146.949l3.385.446a.75.75 0 0 1 .646.646l.446 3.385c.065.495.737.599.949.146\"></path></svg> small icon on right side & type Bali on Postal Code field or",
+          "other": "Click <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 14 14\" focusable=\"false\" aria-hidden=\"true\"><path stroke-linejoin=\"round\" d=\"m7.875 11.697 4.003-8.578c.296-.635-.362-1.293-.997-.997L2.303 6.125c-.453.212-.35.884.146.949l3.385.446a.75.75 0 0 1 .646.646l.446 3.385c.065.495.737.599.949.146\"></path></svg> small icon on right side & type Bali on Postal Code field or"
         }
       },
       "shipping": {
