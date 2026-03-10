@@ -3653,3 +3653,8 @@ aside.product__accordion.accordion {
 h2.related-products__heading.inline-richtext.h2 {
     border-bottom: 2px solid #444;
 }
+
+a#HeaderMenu-sale {
+    background: #FFC03D;
+    border-radius: 10px;
+}
