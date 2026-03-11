@@ -193,6 +193,11 @@
           "button_vertical_position": "lowest",
           "greeting_message": "Questions about boards, orders, or shipping? Send us a message.\n\nOnline daily 09:00 AM – 09:00 PM (GMT+8)"
         }
+      },
+      "3806441006706226736": {
+        "type": "shopify://apps/air-reviews-1/blocks/app-embed/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
