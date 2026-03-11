@@ -186,7 +186,7 @@
         "settings": {
           "button_color": "#ffc533",
           "secondary_color": "#000000",
-          "ternary_color": "#6a6a6a",
+          "ternary_color": "#ffc533",
           "button_icon": "team",
           "button_text": "live_chat",
           "button_horizontal_position": "bottom_left",
