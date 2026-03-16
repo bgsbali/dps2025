@@ -17,15 +17,14 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "YOUR FRIENDLY NEIGHBORHOOD SURF SHOP!",
-            "link": ""
+            "text": "BGS Bali Operational Update for Nyepi and Eid Holidays (March 18–22, 2026)",
+            "link": "https://bgsbali.com/bgs-bali-operational-update-for-nyepi-and-eid-holidays-march-18-22-2026/"
           }
         }
       },
       "block_order": [
         "announcement-bar-0"
       ],
-      "disabled": true,
       "settings": {
         "auto_rotate": false,
         "change_slides_speed": 5,
