@@ -434,7 +434,33 @@
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
-    "sameAs": [
+    {% assign sameAs = '' %}
+
+{% assign socials = 
+  settings.social_twitter_link | append: '|' |
+  append: settings.social_facebook_link | append: '|' |
+  append: settings.social_pinterest_link | append: '|' |
+  append: settings.social_instagram_link | append: '|' |
+  append: settings.social_tiktok_link | append: '|' |
+  append: settings.social_tumblr_link | append: '|' |
+  append: settings.social_snapchat_link | append: '|' |
+  append: settings.social_youtube_link | append: '|' |
+  append: settings.social_vimeo_link
+%}
+
+{% assign social_array = socials | split: '|' %}
+
+{% for link in social_array %}
+  {% if link != blank %}
+    {% unless sameAs == '' %}
+      {% assign sameAs = sameAs | append: ',' %}
+    {% endunless %}
+    {% assign sameAs = sameAs | append: '"' | append: link | append: '"' %}
+  {% endif %}
+{% endfor %}
+
+"sameAs": [{{ sameAs }}],
+    {% comment %} "sameAs": [
       {{ settings.social_twitter_link | json }},
       {{ settings.social_facebook_link | json }},
       {{ settings.social_pinterest_link | json }},
@@ -444,7 +470,7 @@
       {{ settings.social_snapchat_link | json }},
       {{ settings.social_youtube_link | json }},
       {{ settings.social_vimeo_link | json }}
-    ],
+    ], {% endcomment %}
     "url": {{ request.origin | append: page.url | json }}
   }
 </script>
