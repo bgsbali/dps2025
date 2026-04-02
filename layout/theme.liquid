@@ -333,7 +333,7 @@
       "image": "{{ product.featured_image | image_url: width: 800 }}",
       "offers": {
         "@type": "Offer",
-        "price": "{{ product.price | money_without_currency }}",
+        "price": "{{ product.price | divided_by: 100.0 }}",
         "priceCurrency": "IDR",
         "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
       }
