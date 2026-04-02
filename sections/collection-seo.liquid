@@ -1,0 +1,40 @@
+{% schema %}
+{
+  "name": "Collection SEO Content",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": "Text Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection SEO Content"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="collection-seo">
+  {% for block in section.blocks %}
+    <div class="seo-block">
+      {% if block.settings.heading != blank %}
+        <h2>{{ block.settings.heading }}</h2>
+      {% endif %}
+      <div>{{ block.settings.text }}</div>
+    </div>
+  {% endfor %}
+</div>
