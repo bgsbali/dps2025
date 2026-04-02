@@ -309,6 +309,41 @@
        });
       });
     </script>
+
+{% if template.name == 'collection' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "{{ collection.title | escape }}",
+  "url": "{{ shop.url }}{{ collection.url }}"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {% for product in collection.products limit:12 %}
+    {
+      "@type": "Product",
+      "name": "{{ product.title | escape }}",
+      "url": "{{ shop.url }}{{ product.url }}",
+      "image": "{{ product.featured_image | image_url: width: 800 }}",
+      "offers": {
+        "@type": "Offer",
+        "price": "{{ product.price | money_without_currency }}",
+        "priceCurrency": "IDR",
+        "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+      }
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+
 </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
