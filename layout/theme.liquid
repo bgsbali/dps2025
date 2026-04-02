@@ -330,7 +330,7 @@
       "@type": "Product",
       "name": "{{ product.title | escape }}",
       "url": "{{ shop.url }}{{ product.url }}",
-      "image": "{{ product.featured_image | image_url: width: 800 }}",
+      "image": "https:{{ product.featured_image | image_url: width: 800 }}",
       "offers": {
         "@type": "Offer",
         "price": "{{ product.price | divided_by: 100.0 }}",
