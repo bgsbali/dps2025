@@ -328,9 +328,11 @@
     {% for product in collection.products limit:12 %}
     {
       "@type": "Product",
+      "position": {{ forloop.index }},
       "name": "{{ product.title | escape }}",
       "url": "{{ shop.url }}{{ product.url }}",
       "image": "https:{{ product.featured_image | image_url: width: 800 }}",
+      "description": {{ product.description | strip_html | truncate: 120 | json }},
       "offers": {
         "@type": "Offer",
         "price": "{{ product.price | divided_by: 100.0 }}",
