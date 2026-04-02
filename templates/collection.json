@@ -92,6 +92,18 @@
     },
     "seo_content": {
       "type": "collection-seo",
+      "blocks": {
+        "text_block_zUNTGC": {
+          "type": "text_block",
+          "settings": {
+            "heading": "",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_block_zUNTGC"
+      ],
       "settings": {}
     }
   },
