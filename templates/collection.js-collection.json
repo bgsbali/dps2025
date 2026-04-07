@@ -93,6 +93,13 @@
     "seo_content": {
       "type": "collection-seo",
       "blocks": {
+        "text_block_DyFabB": {
+          "type": "text_block",
+          "settings": {
+            "heading": "",
+            "text": "<p>JS Industries is one of the leading high-performance surfboard brands trusted by professional surfers worldwide. Models like Xero and Monsta are designed for speed, control, and responsiveness in powerful waves, making them ideal for Bali’s reef breaks. At BGS Bali, all JS Industries surfboards are original and selected to match local conditions. Explore our <a href=\"/collections/bali-surfboards\" title=\"/collections/bali-surfboards\">surfboards in Bali</a> or request a <a href=\"https://bgsbali.com/product/surf/custom-surfboards\" title=\"https://bgsbali.com/product/surf/custom-surfboards\">custom surfboard in Bali</a>. JS Industries delivers precision performance for serious surfers.</p>"
+          }
+        },
         "text_block_zUNTGC": {
           "type": "text_block",
           "settings": {
@@ -102,6 +109,7 @@
         }
       },
       "block_order": [
+        "text_block_DyFabB",
         "text_block_zUNTGC"
       ],
       "settings": {}
