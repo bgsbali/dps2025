@@ -93,16 +93,16 @@
     "seo_content": {
       "type": "collection-seo",
       "blocks": {
-        "text_block_zUNTGC": {
+        "text_block_MyJFRM": {
           "type": "text_block",
           "settings": {
             "heading": "",
-            "text": ""
+            "text": "<p>Sharpeye is one of the leading high-performance surfboard brands used by professional surfers worldwide. Models like Inferno 72 and #77 are designed for speed, responsiveness, and control in powerful waves, making them ideal for Bali’s reef breaks. At BGS Bali, all Sharpeye surfboards are original and carefully selected to match local wave conditions. Whether you are upgrading your shortboard or looking for a custom shape, explore our <a href=\"/collections/bali-surfboards\" title=\"/collections/bali-surfboards\">surfboards in Bali</a> or request a <a href=\"https://bgsbali.com/product/surf/custom-surfboards/\" title=\"https://bgsbali.com/product/surf/custom-surfboards/\">custom surfboard in Bali</a>. Sharpeye offers precision performance for serious surfers.</p>"
           }
         }
       },
       "block_order": [
-        "text_block_zUNTGC"
+        "text_block_MyJFRM"
       ],
       "settings": {}
     }
