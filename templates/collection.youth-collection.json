@@ -1,0 +1,116 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_banner_gMfQiY": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_dRVnzR": {
+          "type": "heading",
+          "settings": {
+            "heading": "BGS Sale – Everyday Deals",
+            "heading_size": "h2"
+          }
+        },
+        "text_GCHWFy": {
+          "type": "text",
+          "settings": {
+            "text": "<em>Surf, skate, and streetwear at special prices. Fresh picks updated regularly.</em>",
+            "text_style": "body"
+          }
+        },
+        "buttons_xaEqMi": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "",
+            "button_link_1": "#sale-items",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_dRVnzR",
+        "text_GCHWFy",
+        "buttons_xaEqMi"
+      ],
+      "disabled": true,
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/IMG_7219_photo.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": true,
+        "color_scheme": "scheme-2",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "custom_css": [
+        "@media screen and (min-width: 750px) {.collection-hero__image-container {min-height: 35rem; }}"
+      ],
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "color_scheme": "scheme-2"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 24,
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    },
+    "seo_content": {
+      "type": "collection-seo",
+      "blocks": {
+        "text_block_zUNTGC": {
+          "type": "text_block",
+          "settings": {
+            "heading": "",
+            "text": "<p>BGS Bali is a surf shop in Bali focused on high-performance surf products, curated gear, and everyday lifestyle essentials. We provide a wide selection of surfboards in Bali, including shortboards, midlengths, and performance models designed for Bali’s reef breaks and consistent waves. Our range also includes essential surf gear such as fins, leashes, traction pads, boardbags, and accessories selected for durability and real surf conditions.<br/><br/>Beyond surfboards, BGS Bali offers complete surf supply and lifestyle products to support your daily routine in and out of the water. Explore our collection of <a href=\"/collections/bali-surfboards\" title=\"/collections/bali-surfboards\">surfboards in Bali</a>, browse essential <a href=\"/collections/surf-suits\" title=\"/collections/surf-suits\">surf supplies</a>, or discover premium <a href=\"/products/coffee-bean\" title=\"/products/coffee-bean\">coffee beans in Bali</a>. From performance surfing to daily lifestyle, BGS Bali connects boards, gear, coffee, and culture in one place.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_block_zUNTGC"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "image_banner_gMfQiY",
+    "banner",
+    "product-grid",
+    "seo_content"
+  ]
+}
