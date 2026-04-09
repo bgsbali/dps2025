@@ -23,10 +23,6 @@
           "type": "title",
           "settings": {}
         },
-        "air_product_reviews_app_summary_block_fdMLEw": {
-          "type": "shopify://apps/air-product-reviews/blocks/app-summary-block/c4e1e9ca-4d46-4e76-bc39-7e42417cb327",
-          "settings": {}
-        },
         "product-rating": {
           "type": "rating",
           "settings": {}
@@ -82,7 +78,6 @@
       "block_order": [
         "vendor",
         "title",
-        "air_product_reviews_app_summary_block_fdMLEw",
         "product-rating",
         "price",
         "variant_picker",
@@ -99,7 +94,7 @@
         "media_size": "medium",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "gallery_layout": "thumbnail",
+        "gallery_layout": "thumbnail_slider",
         "mobile_thumbnails": "hide",
         "media_position": "left",
         "image_zoom": "lightbox",
