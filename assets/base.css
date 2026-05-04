@@ -3665,3 +3665,9 @@ a#HeaderMenu-sale {
 .collection-seo {
   margin-bottom: 100px;
 }
+
+/* Custom Surfboard Color Picker */
+
+.gpo-element .gpo-input[data-field-name="custom-spray-color-new"] {
+  display: none;
+}
