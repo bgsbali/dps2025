@@ -1330,3 +1330,36 @@ class CartPerformance {
     );
   }
 }
+
+// Custom Surfboard Color Picker
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const globoField = document.querySelector(
+    'input[data-field-name="custom-spray-color-new"]'
+  );
+
+  const container = globoField.closest('.gpo-element');
+
+  const pickerHTML = `
+    <div class="custom-color-ui">
+      <label class="gpo-label">
+        <span class="label-content">Custom Spray Color</span>
+      </label>
+      <input type="color" class="customColorPicker" value="#ff0000">
+    </div>
+  `;
+
+  container.insertAdjacentHTML("beforeend", pickerHTML);
+
+  const picker = container.querySelector('.customColorPicker');
+
+  picker.addEventListener("input", function (e) {
+    const color = e.target.value;
+
+    globoField.value = color;
+    globoField.dispatchEvent(new Event("change", { bubbles: true }));
+    globoField.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+
+});
