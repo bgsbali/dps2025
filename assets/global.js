@@ -1333,33 +1333,61 @@ class CartPerformance {
 
 // Custom Surfboard Color Picker
 
-document.addEventListener("DOMContentLoaded", function () {
+(function () {
 
-  const globoField = document.querySelector(
-    'input[data-field-name="custom-spray-color-new"]'
-  );
+  function initColorPicker() {
+    const globoField = document.querySelector(
+      'input[data-field-name="custom-spray-color-new"]'
+    );
 
-  const container = globoField.closest('.gpo-element');
+    if (!globoField) return;
 
-  const pickerHTML = `
-    <div class="custom-color-ui">
+    // cegah inject dobel
+    if (globoField.dataset.colorReady === "true") return;
+
+    const container = globoField.closest('.gpo-element');
+    if (!container) return;
+
+    // tandai sudah diproses
+    globoField.dataset.colorReady = "true";
+
+    // sembunyikan input asli
+    globoField.style.display = "none";
+
+    // inject UI
+    const wrapper = document.createElement("div");
+    wrapper.className = "custom-color-ui";
+
+    wrapper.innerHTML = `
       <label class="gpo-label">
         <span class="label-content">Custom Spray Color</span>
       </label>
       <input type="color" class="customColorPicker" value="#ff0000">
-    </div>
-  `;
+    `;
 
-  container.insertAdjacentHTML("beforeend", pickerHTML);
+    container.appendChild(wrapper);
 
-  const picker = container.querySelector('.customColorPicker');
+    const picker = wrapper.querySelector(".customColorPicker");
 
-  picker.addEventListener("input", function (e) {
-    const color = e.target.value;
+    picker.addEventListener("input", function (e) {
+      const color = e.target.value;
 
-    globoField.value = color;
-    globoField.dispatchEvent(new Event("change", { bubbles: true }));
-    globoField.dispatchEvent(new Event("input", { bubbles: true }));
+      globoField.value = color;
+      globoField.setAttribute("value", color);
+
+      globoField.dispatchEvent(new Event("input", { bubbles: true }));
+      globoField.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+  }
+
+  // observer untuk nunggu Globo render
+  const observer = new MutationObserver(function () {
+    initColorPicker();
   });
 
-});
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
