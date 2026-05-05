@@ -1368,7 +1368,6 @@ class CartPerformance {
 
     { name: "124C", hex: "#EAAA00" },
 
-    // tambahan untuk mendekati 100
     { name: "165C", hex: "#FF671F" }, { name: "1665C", hex: "#FF3C00" },
     { name: "172C", hex: "#FA4616" }, { name: "1795C", hex: "#D22630" },
     { name: "185C", hex: "#E4002B" }, { name: "186C", hex: "#C8102E" },
@@ -1430,8 +1429,10 @@ class CartPerformance {
       }
     });
 
-    pickr.on('save', (color) => {
+    pickr.on('change', (color) => {
       const hex = color.toHEXA().toString();
+
+      pickr.setColor(hex);
 
       const pantone = pantoneMap.find(
         p => p.hex.toLowerCase() === hex.toLowerCase()
@@ -1447,7 +1448,9 @@ class CartPerformance {
       if (label) {
         label.textContent = `Pantone ${pantone.name}`;
       }
+    });
 
+    pickr.on('save', () => {
       pickr.hide();
     });
   }
