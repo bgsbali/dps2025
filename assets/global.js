@@ -1332,86 +1332,40 @@ class CartPerformance {
 }
 
 // Custom Surfboard Color Picker
+
 (function () {
 
-  const pantoneMap = [
-  // YELLOW
-  { name: "100C", hex: "#F6EB61" }, { name: "101C", hex: "#F7EA48" },
-  { name: "102C", hex: "#FCE300" }, { name: "103C", hex: "#C5A900" },
-  { name: "104C", hex: "#AF9800" }, { name: "105C", hex: "#897A27" },
-  { name: "106C", hex: "#F9E547" }, { name: "107C", hex: "#F9E814" },
-  { name: "108C", hex: "#FFD100" }, { name: "109C", hex: "#FFD100" },
-  { name: "110C", hex: "#DAAA00" }, { name: "111C", hex: "#AA8A00" },
+  // SAMPLE Dulux dataset (expand sesuai kebutuhan)
+  const duluxColors = [
+    { name: "Natural White", hex: "#F4F1EA" },
+    { name: "Lexicon Quarter", hex: "#F7F7F2" },
+    { name: "Vivid White", hex: "#F6F6F3" },
+    { name: "Dieskau", hex: "#D9D2C1" },
+    { name: "Tranquil Retreat", hex: "#C7C2B8" },
+    { name: "Hog Bristle", hex: "#D8D2C4" },
+    { name: "Timeless Grey", hex: "#B8B5AE" },
+    { name: "Grey Pebble", hex: "#A9A39A" },
+    { name: "Domino", hex: "#4A4A4A" },
+    { name: "Monument", hex: "#2F2F2F" },
 
-  // ORANGE
-  { name: "120C", hex: "#FFCD00" }, { name: "121C", hex: "#FDD26E" },
-  { name: "122C", hex: "#F5C400" }, { name: "123C", hex: "#FFC72C" },
-  { name: "124C", hex: "#EAAA00" }, { name: "125C", hex: "#B58500" },
-  { name: "130C", hex: "#F2A900" }, { name: "131C", hex: "#CC8A00" },
-  { name: "132C", hex: "#A07400" },
+    { name: "Blue Metal", hex: "#5B6E7F" },
+    { name: "Diesel Blue", hex: "#3E5A72" },
+    { name: "Deep Ocean", hex: "#2C4A63" },
 
-  // RED
-  { name: "176C", hex: "#FFB3AB" }, { name: "177C", hex: "#FF8674" },
-  { name: "178C", hex: "#FF5C5C" }, { name: "179C", hex: "#E03C31" },
-  { name: "180C", hex: "#BE3A34" }, { name: "181C", hex: "#6C1D45" },
-  { name: "185C", hex: "#E4002B" }, { name: "186C", hex: "#C8102E" },
-  { name: "187C", hex: "#A6192E" }, { name: "188C", hex: "#76232F" },
+    { name: "Olive Grove", hex: "#6B6F4E" },
+    { name: "Eucalyptus Leaf", hex: "#7E8C6F" },
+    { name: "Soft Fern", hex: "#A5B49C" },
 
-  // PINK / MAGENTA
-  { name: "189C", hex: "#F5B6CD" }, { name: "190C", hex: "#F59BBB" },
-  { name: "191C", hex: "#EF426F" }, { name: "192C", hex: "#E40046" },
-  { name: "193C", hex: "#BF0D3E" },
+    { name: "Burnt Clay", hex: "#A65E3B" },
+    { name: "Terracotta", hex: "#C46A4A" },
 
-  // BLUE
-  { name: "290C", hex: "#B9D9EB" }, { name: "291C", hex: "#9BCBEB" },
-  { name: "292C", hex: "#6DCFF6" }, { name: "293C", hex: "#003DA5" },
-  { name: "294C", hex: "#002F87" }, { name: "295C", hex: "#003A5D" },
-  { name: "296C", hex: "#00263A" },
-  { name: "300C", hex: "#005EB8" }, { name: "301C", hex: "#003A8F" },
-  { name: "302C", hex: "#003A5D" }, { name: "303C", hex: "#002F6C" },
-  { name: "304C", hex: "#00A3E0" }, { name: "305C", hex: "#00B5E2" },
+    { name: "Sunset Glow", hex: "#E79A5C" },
+    { name: "Golden Field", hex: "#E6C16A" },
 
-  // GREEN
-  { name: "337C", hex: "#8FD694" }, { name: "338C", hex: "#6CC24A" },
-  { name: "339C", hex: "#00A94F" }, { name: "340C", hex: "#009639" },
-  { name: "341C", hex: "#007A33" }, { name: "342C", hex: "#005A2B" },
-  { name: "347C", hex: "#009A44" }, { name: "348C", hex: "#00843D" },
-  { name: "349C", hex: "#046A38" }, { name: "350C", hex: "#2C5234" },
-
-  // PURPLE
-  { name: "258C", hex: "#8F5DA5" }, { name: "259C", hex: "#6D2077" },
-  { name: "260C", hex: "#5B2C6F" }, { name: "261C", hex: "#512A44" },
-  { name: "262C", hex: "#4E2A84" },
-
-  // GRAY
-  { name: "Cool Gray 1C", hex: "#D9D9D6" },
-  { name: "Cool Gray 2C", hex: "#D0D0CE" },
-  { name: "Cool Gray 3C", hex: "#C8C9C7" },
-  { name: "Cool Gray 4C", hex: "#BBBCBC" },
-  { name: "Cool Gray 5C", hex: "#B1B3B3" },
-  { name: "Cool Gray 6C", hex: "#A7A8AA" },
-  { name: "Cool Gray 7C", hex: "#97999B" },
-  { name: "Cool Gray 8C", hex: "#888B8D" },
-  { name: "Cool Gray 9C", hex: "#75787B" },
-  { name: "Cool Gray 10C", hex: "#63666A" },
-  { name: "Cool Gray 11C", hex: "#53565A" },
-
-  // WARM GRAY
-  { name: "Warm Gray 1C", hex: "#E6E2DD" },
-  { name: "Warm Gray 2C", hex: "#DDD6D1" },
-  { name: "Warm Gray 3C", hex: "#D0C8C2" },
-  { name: "Warm Gray 4C", hex: "#C4BCB7" },
-  { name: "Warm Gray 5C", hex: "#BCB8B1" },
-  { name: "Warm Gray 6C", hex: "#AFA9A0" },
-  { name: "Warm Gray 7C", hex: "#A09998" },
-  { name: "Warm Gray 8C", hex: "#8C857B" },
-  { name: "Warm Gray 9C", hex: "#8B8580" },
-  { name: "Warm Gray 10C", hex: "#7C756E" },
-
-  // BLACK
-  { name: "Black C", hex: "#2D2926" },
-  { name: "Black 6C", hex: "#101820" }
-];
+    { name: "Charcoal", hex: "#3B3B3B" },
+    { name: "Dark Ash", hex: "#555555" },
+    { name: "Steel Grey", hex: "#6E6E6E" }
+  ];
 
   function init() {
     const globoField = document.querySelector(
@@ -1432,19 +1386,19 @@ class CartPerformance {
       <label class="gpo-label">
         <span class="label-content">Custom Spray Color</span>
       </label>
-      <div id="pantone-picker"></div>
-      <div class="pantone-label" style="margin-top:6px;font-size:12px;color:#666;"></div>
+      <div id="dulux-picker"></div>
+      <div class="dulux-label" style="margin-top:6px;font-size:12px;color:#666;"></div>
     `;
 
     container.appendChild(wrapper);
 
-    const label = wrapper.querySelector(".pantone-label");
+    const label = wrapper.querySelector(".dulux-label");
 
     const pickr = Pickr.create({
-      el: '#pantone-picker',
+      el: '#dulux-picker',
       theme: 'nano',
-      default: pantoneMap[0].hex,
-      swatches: pantoneMap.map(p => p.hex),
+      default: duluxColors[0].hex,
+      swatches: duluxColors.map(c => c.hex),
       components: {
         preview: true,
         opacity: false,
@@ -1457,15 +1411,13 @@ class CartPerformance {
       }
     });
 
-    // styling setelah Pickr siap
     pickr.on('init', (instance) => {
       const swatches = instance.getRoot().app.querySelector('.pcr-swatches');
-
       if (swatches) {
         swatches.style.display = 'grid';
         swatches.style.gridTemplateColumns = 'repeat(6, 1fr)';
         swatches.style.gap = '6px';
-        swatches.style.maxHeight = '300px';
+        swatches.style.maxHeight = '320px';
         swatches.style.overflowY = 'auto';
       }
     });
@@ -1473,19 +1425,19 @@ class CartPerformance {
     pickr.on('change', (color) => {
       const hex = color.toHEXA().toString();
 
-      const pantone = pantoneMap.find(
-        p => p.hex.toLowerCase() === hex.toLowerCase()
+      const dulux = duluxColors.find(
+        c => c.hex.toLowerCase() === hex.toLowerCase()
       );
 
-      if (!pantone) return;
+      if (!dulux) return;
 
-      globoField.value = pantone.hex;
+      globoField.value = dulux.name;
 
       globoField.dispatchEvent(new Event("input", { bubbles: true }));
       globoField.dispatchEvent(new Event("change", { bubbles: true }));
 
       if (label) {
-        label.textContent = `Pantone ${pantone.name}`;
+        label.textContent = `Dulux: ${dulux.name}`;
       }
     });
 
