@@ -1344,42 +1344,6 @@ class CartPerformance {
     { name: "124C", hex: "#EAAA00" }
   ];
 
-  function hexToRgb(hex) {
-    const bigint = parseInt(hex.replace("#", ""), 16);
-    return {
-      r: (bigint >> 16) & 255,
-      g: (bigint >> 8) & 255,
-      b: bigint & 255
-    };
-  }
-
-  function colorDistance(c1, c2) {
-    return Math.sqrt(
-      Math.pow(c1.r - c2.r, 2) +
-      Math.pow(c1.g - c2.g, 2) +
-      Math.pow(c1.b - c2.b, 2)
-    );
-  }
-
-  function getClosestPantone(hex) {
-    const inputColor = hexToRgb(hex);
-
-    let closest = null;
-    let minDistance = Infinity;
-
-    pantoneMap.forEach(p => {
-      const dist = colorDistance(inputColor, hexToRgb(p.hex));
-      if (dist < minDistance) {
-        minDistance = dist;
-        closest = p;
-      }
-    });
-
-    if (minDistance > 100) return null;
-
-    return closest;
-  }
-
   function init() {
     const globoField = document.querySelector(
       'input[data-field-name="custom-spray-color-new"]'
@@ -1401,36 +1365,49 @@ class CartPerformance {
       <label class="gpo-label">
         <span class="label-content">Custom Spray Color</span>
       </label>
-      <input type="color" class="customColorPicker" value="#C1A7B4">
+      <div id="pantone-picker"></div>
       <div class="pantone-label" style="margin-top:6px;font-size:12px;color:#666;"></div>
     `;
 
     container.appendChild(wrapper);
 
-    const picker = wrapper.querySelector(".customColorPicker");
     const label = wrapper.querySelector(".pantone-label");
 
-    picker.addEventListener("input", function (e) {
-      const selectedHex = e.target.value;
-      const closestPantone = getClosestPantone(selectedHex);
-
-      if (!closestPantone) {
-        if (label) label.textContent = "No Pantone match";
-        return;
+    const pickr = Pickr.create({
+      el: '#pantone-picker',
+      theme: 'nano',
+      default: pantoneMap[0].hex,
+      swatches: pantoneMap.map(p => p.hex),
+      components: {
+        preview: true,
+        opacity: false,
+        hue: false,
+        interaction: {
+          input: false,
+          save: true
+        }
       }
+    });
 
-      picker.value = closestPantone.hex;
+    pickr.on('save', (color) => {
+      const hex = color.toHEXA().toString();
 
-      globoField.value = closestPantone.hex;
-      globoField.setAttribute("value", closestPantone.hex);
+      const pantone = pantoneMap.find(p => p.hex.toLowerCase() === hex.toLowerCase());
+
+      if (!pantone) return;
+
+      globoField.value = pantone.hex;
 
       globoField.dispatchEvent(new Event("input", { bubbles: true }));
       globoField.dispatchEvent(new Event("change", { bubbles: true }));
 
       if (label) {
-        label.textContent = `Pantone ${closestPantone.name}`;
+        label.textContent = `Pantone ${pantone.name}`;
       }
+
+      pickr.hide();
     });
+
   }
 
   const observer = new MutationObserver(function () {
