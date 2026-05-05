@@ -3671,3 +3671,21 @@ a#HeaderMenu-sale {
 .gpo-element .gpo-input[data-field-name="custom-spray-color-new"] {
   display: none;
 }
+
+.pcr-app .pcr-swatches {
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.pcr-app .pcr-swatches::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pcr-app .pcr-swatches::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
