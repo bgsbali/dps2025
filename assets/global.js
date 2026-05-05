@@ -1414,10 +1414,16 @@ class CartPerformance {
     });
 
     // HAPUS AREA KOSONG (ini yang fix utama)
-    setTimeout(() => {
-      const palette = document.querySelector('.pcr-color-palette');
-      if (palette) palette.remove();
-    }, 200);
+setTimeout(() => {
+  const swatches = document.querySelector('.pcr-swatches');
+  if (swatches) {
+    swatches.style.display = 'grid';
+    swatches.style.gridTemplateColumns = 'repeat(6, 1fr)';
+    swatches.style.gap = '6px';
+    swatches.style.maxHeight = '260px';
+    swatches.style.overflowY = 'auto';
+  }
+}, 200);
 
     pickr.on('change', (color) => {
       const hex = color.toHEXA().toString();
