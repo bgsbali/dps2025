@@ -3690,6 +3690,8 @@ a#HeaderMenu-sale {
   border-radius: 4px;
 }
 
+.pcr-selection ,
 .pcr-app .pcr-color-palette {
   display: none !important;
 }
+
