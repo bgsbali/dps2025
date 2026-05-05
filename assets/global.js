@@ -1353,6 +1353,7 @@ class CartPerformance {
 
     { name: "4003C", hex: "#C1A7B4" }, { name: "7542C", hex: "#A7A8AA" },
     { name: "7642C", hex: "#7E3A3E" }, { name: "5763C", hex: "#5C6F2E" },
+
     { name: "Cool Gray 1C", hex: "#D9D9D6" },
     { name: "Cool Gray 2C", hex: "#D0D0CE" },
     { name: "Cool Gray 3C", hex: "#C8C9C7" },
@@ -1363,7 +1364,27 @@ class CartPerformance {
     { name: "Cool Gray 8C", hex: "#888B8D" },
     { name: "Cool Gray 9C", hex: "#75787B" },
     { name: "Cool Gray 10C", hex: "#63666A" },
-    { name: "Cool Gray 11C", hex: "#53565A" }
+    { name: "Cool Gray 11C", hex: "#53565A" },
+
+    { name: "124C", hex: "#EAAA00" },
+
+    // tambahan untuk mendekati 100
+    { name: "165C", hex: "#FF671F" }, { name: "1665C", hex: "#FF3C00" },
+    { name: "172C", hex: "#FA4616" }, { name: "1795C", hex: "#D22630" },
+    { name: "185C", hex: "#E4002B" }, { name: "186C", hex: "#C8102E" },
+
+    { name: "347C", hex: "#009A44" }, { name: "348C", hex: "#00843D" },
+    { name: "349C", hex: "#046A38" }, { name: "350C", hex: "#2C5234" },
+
+    { name: "Process Blue C", hex: "#0085CA" },
+    { name: "286C", hex: "#0033A0" },
+    { name: "287C", hex: "#003087" },
+
+    { name: "Black C", hex: "#2D2926" },
+    { name: "Black 6C", hex: "#101820" },
+    { name: "Warm Gray 1C", hex: "#E6E2DD" },
+    { name: "Warm Gray 5C", hex: "#BCB8B1" },
+    { name: "Warm Gray 9C", hex: "#8B8580" }
   ];
 
   function init() {
@@ -1408,15 +1429,6 @@ class CartPerformance {
         }
       }
     });
-
-    // buat swatch scrollable
-    setTimeout(() => {
-      const swatch = document.querySelector('.pcr-swatches');
-      if (swatch) {
-        swatch.style.maxHeight = '200px';
-        swatch.style.overflowY = 'auto';
-      }
-    }, 300);
 
     pickr.on('save', (color) => {
       const hex = color.toHEXA().toString();
