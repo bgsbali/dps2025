@@ -3689,3 +3689,7 @@ a#HeaderMenu-sale {
   background: #ccc;
   border-radius: 4px;
 }
+
+.pcr-app .pcr-color-palette {
+  display: none !important;
+}
