@@ -3676,22 +3676,7 @@ a#HeaderMenu-sale {
   display: grid !important;
   grid-template-columns: repeat(6, 1fr);
   gap: 6px;
-  max-height: 300px;
+  max-height: 320px;
   overflow-y: auto;
   padding-right: 4px;
 }
-
-.pcr-app .pcr-swatches::-webkit-scrollbar {
-  width: 6px;
-}
-
-.pcr-app .pcr-swatches::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 4px;
-}
-
-.pcr-selection ,
-.pcr-app .pcr-color-palette {
-  display: none !important;
-}
-
