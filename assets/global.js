@@ -1375,6 +1375,8 @@ class CartPerformance {
       }
     });
 
+    if (minDistance > 100) return null;
+
     return closest;
   }
 
@@ -1412,6 +1414,13 @@ class CartPerformance {
       const selectedHex = e.target.value;
       const closestPantone = getClosestPantone(selectedHex);
 
+      if (!closestPantone) {
+        if (label) label.textContent = "No Pantone match";
+        return;
+      }
+
+      picker.value = closestPantone.hex;
+
       globoField.value = closestPantone.hex;
       globoField.setAttribute("value", closestPantone.hex);
 
@@ -1419,7 +1428,7 @@ class CartPerformance {
       globoField.dispatchEvent(new Event("change", { bubbles: true }));
 
       if (label) {
-        label.textContent = `Mapped to ${closestPantone.name}`;
+        label.textContent = `Pantone ${closestPantone.name}`;
       }
     });
   }
@@ -1434,4 +1443,3 @@ class CartPerformance {
   });
 
 })();
-
