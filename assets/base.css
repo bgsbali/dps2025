@@ -3672,11 +3672,3 @@ a#HeaderMenu-sale {
   display: none;
 }
 
-.pcr-app .pcr-swatches {
-  display: grid !important;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 6px;
-  max-height: 320px;
-  overflow-y: auto;
-  padding-right: 4px;
-}
