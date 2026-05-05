@@ -1332,7 +1332,6 @@ class CartPerformance {
 }
 
 // Custom Surfboard Color Picker
-
 (function () {
 
   const pantoneMap = [
@@ -1413,17 +1412,18 @@ class CartPerformance {
       }
     });
 
-    // HAPUS AREA KOSONG (ini yang fix utama)
-setTimeout(() => {
-  const swatches = document.querySelector('.pcr-swatches');
-  if (swatches) {
-    swatches.style.display = 'grid';
-    swatches.style.gridTemplateColumns = 'repeat(6, 1fr)';
-    swatches.style.gap = '6px';
-    swatches.style.maxHeight = '260px';
-    swatches.style.overflowY = 'auto';
-  }
-}, 200);
+    // styling setelah Pickr siap
+    pickr.on('init', (instance) => {
+      const swatches = instance.getRoot().app.querySelector('.pcr-swatches');
+
+      if (swatches) {
+        swatches.style.display = 'grid';
+        swatches.style.gridTemplateColumns = 'repeat(6, 1fr)';
+        swatches.style.gap = '6px';
+        swatches.style.maxHeight = '300px';
+        swatches.style.overflowY = 'auto';
+      }
+    });
 
     pickr.on('change', (color) => {
       const hex = color.toHEXA().toString();
