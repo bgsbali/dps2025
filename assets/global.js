@@ -1408,23 +1408,7 @@ const duluxColors = [
 ];
 
 
-// EXTEND SAMPAI ±100 (tanpa ubah warna asli)
-(function () {
-  const base = [...duluxColors];
-  let i = 0;
 
-  while (duluxColors.length < 100) {
-    const c = base[i % base.length];
-
-    duluxColors.push({
-      name: c.name + " " + Math.floor(i / base.length + 1),
-      code: c.code + "-" + Math.floor(i / base.length + 1),
-      hex: c.hex
-    });
-
-    i++;
-  }
-})();
 
   function init() {
     const globoField = document.querySelector(
