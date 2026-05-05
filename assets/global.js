@@ -1430,7 +1430,7 @@ const duluxColors = [
       const swatches = instance.getRoot().app.querySelector('.pcr-swatches');
       if (swatches) {
         swatches.style.display = 'grid';
-        swatches.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        swatches.style.gridTemplateColumns = 'repeat(8, 1fr)';
         swatches.style.gap = '6px';
         swatches.style.maxHeight = '450px';
         swatches.style.overflowY = 'auto';
