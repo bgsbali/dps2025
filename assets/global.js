@@ -1413,21 +1413,23 @@ class CartPerformance {
 
     const label = wrapper.querySelector(".pantone-label");
 
-    const pickr = Pickr.create({
-      el: '#pantone-picker',
-      theme: 'nano',
-      default: pantoneMap[0].hex,
-      swatches: pantoneMap.map(p => p.hex),
-      components: {
-        preview: true,
-        opacity: false,
-        hue: false,
-        interaction: {
-          input: false,
-          save: true
-        }
-      }
-    });
+const pickr = Pickr.create({
+  el: '#pantone-picker',
+  theme: 'nano',
+  default: pantoneMap[0].hex,
+  swatches: pantoneMap.map(p => p.hex),
+  components: {
+    preview: true,
+    opacity: false,
+    hue: false,
+
+    palette: false,   // ini yang penting
+    interaction: {
+      input: false,
+      save: true
+    }
+  }
+});
 
     pickr.on('change', (color) => {
       const hex = color.toHEXA().toString();
