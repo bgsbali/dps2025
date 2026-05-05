@@ -1335,37 +1335,48 @@ class CartPerformance {
 
 (function () {
 
-  // SAMPLE Dulux dataset (expand sesuai kebutuhan)
-  const duluxColors = [
-    { name: "Natural White", hex: "#F4F1EA" },
-    { name: "Lexicon Quarter", hex: "#F7F7F2" },
-    { name: "Vivid White", hex: "#F6F6F3" },
-    { name: "Dieskau", hex: "#D9D2C1" },
-    { name: "Tranquil Retreat", hex: "#C7C2B8" },
-    { name: "Hog Bristle", hex: "#D8D2C4" },
-    { name: "Timeless Grey", hex: "#B8B5AE" },
-    { name: "Grey Pebble", hex: "#A9A39A" },
-    { name: "Domino", hex: "#4A4A4A" },
-    { name: "Monument", hex: "#2F2F2F" },
+  function rgbToHex(rgbString) {
+    const result = rgbString.match(/\d+/g);
+    if (!result) return null;
 
-    { name: "Blue Metal", hex: "#5B6E7F" },
-    { name: "Diesel Blue", hex: "#3E5A72" },
-    { name: "Deep Ocean", hex: "#2C4A63" },
+    const r = parseInt(result[0]);
+    const g = parseInt(result[1]);
+    const b = parseInt(result[2]);
 
-    { name: "Olive Grove", hex: "#6B6F4E" },
-    { name: "Eucalyptus Leaf", hex: "#7E8C6F" },
-    { name: "Soft Fern", hex: "#A5B49C" },
+    return "#" + [r, g, b]
+      .map(x => x.toString(16).padStart(2, '0'))
+      .join('');
+  }
 
-    { name: "Burnt Clay", hex: "#A65E3B" },
-    { name: "Terracotta", hex: "#C46A4A" },
+  function extractDuluxColors() {
+    const items = document.querySelectorAll('.colour-atlas-tile__item');
 
-    { name: "Sunset Glow", hex: "#E79A5C" },
-    { name: "Golden Field", hex: "#E6C16A" },
+    const colors = [];
 
-    { name: "Charcoal", hex: "#3B3B3B" },
-    { name: "Dark Ash", hex: "#555555" },
-    { name: "Steel Grey", hex: "#6E6E6E" }
-  ];
+    items.forEach(item => {
+      const nameEl = item.querySelector('span');
+      const codeEl = item.querySelector('small');
+      const btn = item.querySelector('button');
+
+      if (!nameEl || !codeEl || !btn) return;
+
+      const name = nameEl.innerText.trim();
+      const code = codeEl.innerText.trim();
+      const rgb = btn.style.backgroundColor;
+
+      const hex = rgbToHex(rgb);
+
+      if (hex) {
+        colors.push({
+          name: name,
+          code: code,
+          hex: hex
+        });
+      }
+    });
+
+    return colors;
+  }
 
   function init() {
     const globoField = document.querySelector(
@@ -1374,6 +1385,9 @@ class CartPerformance {
 
     if (!globoField) return;
     if (globoField.dataset.colorReady === "true") return;
+
+    const duluxColors = extractDuluxColors();
+    if (!duluxColors.length) return;
 
     const container = globoField.closest('.gpo-element');
     if (!container) return;
@@ -1425,19 +1439,20 @@ class CartPerformance {
     pickr.on('change', (color) => {
       const hex = color.toHEXA().toString();
 
-      const dulux = duluxColors.find(
+      const selected = duluxColors.find(
         c => c.hex.toLowerCase() === hex.toLowerCase()
       );
 
-      if (!dulux) return;
+      if (!selected) return;
 
-      globoField.value = dulux.name;
+      // simpan format yang meaningful
+      globoField.value = `${selected.name} (${selected.code})`;
 
       globoField.dispatchEvent(new Event("input", { bubbles: true }));
       globoField.dispatchEvent(new Event("change", { bubbles: true }));
 
       if (label) {
-        label.textContent = `Dulux: ${dulux.name}`;
+        label.textContent = `${selected.name} – ${selected.code}`;
       }
     });
 
