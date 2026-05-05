@@ -1335,26 +1335,63 @@ class CartPerformance {
 
 (function () {
 
-  function initColorPicker() {
+  const pantoneMap = [
+    { name: "4003C", hex: "#C1A7B4" },
+    { name: "7542C", hex: "#A7A8AA" },
+    { name: "7642C", hex: "#7E3A3E" },
+    { name: "5763C", hex: "#5C6F2E" },
+    { name: "Cool Gray 6C", hex: "#A7A8AA" },
+    { name: "124C", hex: "#EAAA00" }
+  ];
+
+  function hexToRgb(hex) {
+    const bigint = parseInt(hex.replace("#", ""), 16);
+    return {
+      r: (bigint >> 16) & 255,
+      g: (bigint >> 8) & 255,
+      b: bigint & 255
+    };
+  }
+
+  function colorDistance(c1, c2) {
+    return Math.sqrt(
+      Math.pow(c1.r - c2.r, 2) +
+      Math.pow(c1.g - c2.g, 2) +
+      Math.pow(c1.b - c2.b, 2)
+    );
+  }
+
+  function getClosestPantone(hex) {
+    const inputColor = hexToRgb(hex);
+
+    let closest = null;
+    let minDistance = Infinity;
+
+    pantoneMap.forEach(p => {
+      const dist = colorDistance(inputColor, hexToRgb(p.hex));
+      if (dist < minDistance) {
+        minDistance = dist;
+        closest = p;
+      }
+    });
+
+    return closest;
+  }
+
+  function init() {
     const globoField = document.querySelector(
       'input[data-field-name="custom-spray-color-new"]'
     );
 
     if (!globoField) return;
-
-    // cegah inject dobel
     if (globoField.dataset.colorReady === "true") return;
 
     const container = globoField.closest('.gpo-element');
     if (!container) return;
 
-    // tandai sudah diproses
     globoField.dataset.colorReady = "true";
-
-    // sembunyikan input asli
     globoField.style.display = "none";
 
-    // inject UI
     const wrapper = document.createElement("div");
     wrapper.className = "custom-color-ui";
 
@@ -1362,27 +1399,33 @@ class CartPerformance {
       <label class="gpo-label">
         <span class="label-content">Custom Spray Color</span>
       </label>
-      <input type="color" class="customColorPicker" value="#ff0000">
+      <input type="color" class="customColorPicker" value="#C1A7B4">
+      <div class="pantone-label" style="margin-top:6px;font-size:12px;color:#666;"></div>
     `;
 
     container.appendChild(wrapper);
 
     const picker = wrapper.querySelector(".customColorPicker");
+    const label = wrapper.querySelector(".pantone-label");
 
     picker.addEventListener("input", function (e) {
-      const color = e.target.value;
+      const selectedHex = e.target.value;
+      const closestPantone = getClosestPantone(selectedHex);
 
-      globoField.value = color;
-      globoField.setAttribute("value", color);
+      globoField.value = closestPantone.hex;
+      globoField.setAttribute("value", closestPantone.hex);
 
       globoField.dispatchEvent(new Event("input", { bubbles: true }));
       globoField.dispatchEvent(new Event("change", { bubbles: true }));
+
+      if (label) {
+        label.textContent = `Mapped to ${closestPantone.name}`;
+      }
     });
   }
 
-  // observer untuk nunggu Globo render
   const observer = new MutationObserver(function () {
-    initColorPicker();
+    init();
   });
 
   observer.observe(document.body, {
@@ -1391,3 +1434,4 @@ class CartPerformance {
   });
 
 })();
+
