@@ -1335,48 +1335,32 @@ class CartPerformance {
 
 (function () {
 
-  function rgbToHex(rgbString) {
-    const result = rgbString.match(/\d+/g);
-    if (!result) return null;
+  const duluxColors = [
+    { name: "Blissful White", code: "SW1H1", hex: "#E7E5E2" },
+    { name: "Vivid White", code: "SW1G1", hex: "#F7F8F4" },
+    { name: "Fair Bianca Half", code: "SW1F1", hex: "#F7F5EB" },
+    { name: "Lexicon Quarter", code: "SW1E1", hex: "#F1F2F1" },
+    { name: "White Verdict Quarter", code: "SW1D1", hex: "#F2F0E6" },
+    { name: "White Polar Half", code: "SW1C1", hex: "#EEEAE0" },
+    { name: "White Cloak Quarter", code: "SW1B1", hex: "#EEEAE0" },
+    { name: "Ice Queen", code: "SW1A1", hex: "#E6E2D7" },
 
-    const r = parseInt(result[0]);
-    const g = parseInt(result[1]);
-    const b = parseInt(result[2]);
+    { name: "Lexicon Half", code: "SW1G2", hex: "#EDEFEF" },
+    { name: "White on White", code: "SW1E2", hex: "#ECEFF0" },
+    { name: "Whisper White", code: "SW1C2", hex: "#EBE9E0" },
+    { name: "White Century", code: "SW1A2", hex: "#E4E1D9" },
 
-    return "#" + [r, g, b]
-      .map(x => x.toString(16).padStart(2, '0'))
-      .join('');
-  }
+    { name: "Snowy Mountains", code: "SW1E6", hex: "#E6E6DF" },
+    { name: "White Dune", code: "SW1D6", hex: "#E8E3D3" },
+    { name: "Rottnest Island", code: "SW1B6", hex: "#DEDDD5" },
 
-  function extractDuluxColors() {
-    const items = document.querySelectorAll('.colour-atlas-tile__item');
+    { name: "Antique White", code: "SW1H7", hex: "#EFEAE0" },
+    { name: "Off White", code: "SW1E7", hex: "#F9F1E1" },
+    { name: "Magnolia", code: "SW1A7", hex: "#F9EBD0" },
 
-    const colors = [];
-
-    items.forEach(item => {
-      const nameEl = item.querySelector('span');
-      const codeEl = item.querySelector('small');
-      const btn = item.querySelector('button');
-
-      if (!nameEl || !codeEl || !btn) return;
-
-      const name = nameEl.innerText.trim();
-      const code = codeEl.innerText.trim();
-      const rgb = btn.style.backgroundColor;
-
-      const hex = rgbToHex(rgb);
-
-      if (hex) {
-        colors.push({
-          name: name,
-          code: code,
-          hex: hex
-        });
-      }
-    });
-
-    return colors;
-  }
+    { name: "Berkshire White", code: "SW1E8", hex: "#F3EEDF" },
+    { name: "Bone White", code: "SW1B9", hex: "#E4DAC4" }
+  ];
 
   function init() {
     const globoField = document.querySelector(
@@ -1385,9 +1369,6 @@ class CartPerformance {
 
     if (!globoField) return;
     if (globoField.dataset.colorReady === "true") return;
-
-    const duluxColors = extractDuluxColors();
-    if (!duluxColors.length) return;
 
     const container = globoField.closest('.gpo-element');
     if (!container) return;
@@ -1445,7 +1426,6 @@ class CartPerformance {
 
       if (!selected) return;
 
-      // simpan format yang meaningful
       globoField.value = `${selected.name} (${selected.code})`;
 
       globoField.dispatchEvent(new Event("input", { bubbles: true }));
