@@ -1336,12 +1336,34 @@ class CartPerformance {
 (function () {
 
   const pantoneMap = [
-    { name: "4003C", hex: "#C1A7B4" },
-    { name: "7542C", hex: "#A7A8AA" },
-    { name: "7642C", hex: "#7E3A3E" },
-    { name: "5763C", hex: "#5C6F2E" },
+    { name: "100C", hex: "#F6EB61" }, { name: "101C", hex: "#F7EA48" },
+    { name: "102C", hex: "#FCE300" }, { name: "103C", hex: "#C5A900" },
+    { name: "104C", hex: "#AF9800" }, { name: "105C", hex: "#897A27" },
+    { name: "106C", hex: "#F9E547" }, { name: "107C", hex: "#F9E814" },
+    { name: "108C", hex: "#FFD100" }, { name: "109C", hex: "#FFD100" },
+    { name: "110C", hex: "#DAAA00" }, { name: "111C", hex: "#AA8A00" },
+
+    { name: "200C", hex: "#BA0C2F" }, { name: "201C", hex: "#9E0B2C" },
+    { name: "202C", hex: "#862633" }, { name: "203C", hex: "#9E1B32" },
+    { name: "204C", hex: "#D50032" }, { name: "205C", hex: "#E03C31" },
+
+    { name: "300C", hex: "#005EB8" }, { name: "301C", hex: "#003A8F" },
+    { name: "302C", hex: "#003A5D" }, { name: "303C", hex: "#002F6C" },
+    { name: "304C", hex: "#00A3E0" }, { name: "305C", hex: "#00B5E2" },
+
+    { name: "4003C", hex: "#C1A7B4" }, { name: "7542C", hex: "#A7A8AA" },
+    { name: "7642C", hex: "#7E3A3E" }, { name: "5763C", hex: "#5C6F2E" },
+    { name: "Cool Gray 1C", hex: "#D9D9D6" },
+    { name: "Cool Gray 2C", hex: "#D0D0CE" },
+    { name: "Cool Gray 3C", hex: "#C8C9C7" },
+    { name: "Cool Gray 4C", hex: "#BBBCBC" },
+    { name: "Cool Gray 5C", hex: "#B1B3B3" },
     { name: "Cool Gray 6C", hex: "#A7A8AA" },
-    { name: "124C", hex: "#EAAA00" }
+    { name: "Cool Gray 7C", hex: "#97999B" },
+    { name: "Cool Gray 8C", hex: "#888B8D" },
+    { name: "Cool Gray 9C", hex: "#75787B" },
+    { name: "Cool Gray 10C", hex: "#63666A" },
+    { name: "Cool Gray 11C", hex: "#53565A" }
   ];
 
   function init() {
@@ -1359,8 +1381,6 @@ class CartPerformance {
     globoField.style.display = "none";
 
     const wrapper = document.createElement("div");
-    wrapper.className = "custom-color-ui";
-
     wrapper.innerHTML = `
       <label class="gpo-label">
         <span class="label-content">Custom Spray Color</span>
@@ -1389,10 +1409,21 @@ class CartPerformance {
       }
     });
 
+    // buat swatch scrollable
+    setTimeout(() => {
+      const swatch = document.querySelector('.pcr-swatches');
+      if (swatch) {
+        swatch.style.maxHeight = '200px';
+        swatch.style.overflowY = 'auto';
+      }
+    }, 300);
+
     pickr.on('save', (color) => {
       const hex = color.toHEXA().toString();
 
-      const pantone = pantoneMap.find(p => p.hex.toLowerCase() === hex.toLowerCase());
+      const pantone = pantoneMap.find(
+        p => p.hex.toLowerCase() === hex.toLowerCase()
+      );
 
       if (!pantone) return;
 
@@ -1407,16 +1438,9 @@ class CartPerformance {
 
       pickr.hide();
     });
-
   }
 
-  const observer = new MutationObserver(function () {
-    init();
-  });
-
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
+  const observer = new MutationObserver(init);
+  observer.observe(document.body, { childList: true, subtree: true });
 
 })();
