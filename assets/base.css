@@ -3666,6 +3666,7 @@ a#HeaderMenu-sale {
   margin-bottom: 100px;
 }
 
-.gpo-selected-values break-word has-value {
+
+.gpo-label+.gpo-selected-values.has-value, .gpo-dimension-label+.gpo-selected-values.has-value {
   display: none !important;
 }
