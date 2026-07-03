@@ -129,6 +129,26 @@ console.log("BGS Custom Board Loaded");
 
     }
 
+    volumeInput.addEventListener("input", function () {
+
+    let cursor = this.selectionStart;
+
+    let value = this.value
+        .replace(/l/gi, "")
+        .trim();
+
+    if (value === "") {
+        this.value = "";
+        return;
+    }
+
+    this.value = value + "L";
+
+    // Cursor tetap sebelum huruf L
+    this.setSelectionRange(cursor, cursor);
+
+});
+
     document.addEventListener("change", function (e) {
 
         if (!e.target.matches('input[data-field-name$="-size"]')) {
@@ -142,26 +162,4 @@ console.log("BGS Custom Board Loaded");
     });
     const volumeInput = document.querySelector("#text-4");
 
-    function normalizeVolume() {
-
-        let value = volumeInput.value.trim();
-
-        // Hapus semua L di mana pun
-        value = value.replace(/l/gi, "").trim();
-
-        // Kalau kosong, biarkan kosong
-        if (value === "") {
-            volumeInput.value = "";
-            return;
-        }
-
-        // Tambahkan L di belakang
-        volumeInput.value = value + "L";
-    }
-
-    // Saat user selesai mengetik
-    volumeInput.addEventListener("blur", normalizeVolume);
-
-    // Saat tekan Enter
-    volumeInput.addEventListener("change", normalizeVolume);
 });
