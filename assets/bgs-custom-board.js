@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-console.log("BGS Custom Board Loaded");
+
+    console.log("BGS Custom Board Loaded");
 
     const selectors = {
         length: "#text-1",
@@ -26,11 +27,38 @@ console.log("BGS Custom Board Loaded");
 
     }
 
+    function normalizeVolume() {
+
+        const volumeInput = document.querySelector(selectors.volume);
+
+        if (!volumeInput) return;
+
+        let value = volumeInput.value.trim();
+
+        // Hapus semua huruf L
+        value = value.replace(/l/gi, "").trim();
+
+        // Kalau kosong, biarkan kosong
+        if (value === "") {
+            volumeInput.value = "";
+            return;
+        }
+
+        // Tambahkan satu L di belakang
+        volumeInput.value = value + "L";
+
+    }
+
     function updateInput(selector, value) {
 
         const input = document.querySelector(selector);
 
         if (!input) return;
+
+        // Khusus Volume, pastikan selalu berakhiran L
+        if (selector === selectors.volume) {
+            value = value.replace(/l/gi, "").trim() + "L";
+        }
 
         if (input.value === value) return;
 
@@ -82,8 +110,7 @@ console.log("BGS Custom Board Loaded");
 
             console.log("Auto Filled:", measurement);
 
-        }
-        finally {
+        } finally {
 
             isUpdating = false;
 
@@ -91,76 +118,49 @@ console.log("BGS Custom Board Loaded");
 
     }
 
-    function observeDropdown(dropdown) {
-
-        const valueNode =
-            dropdown.querySelector(".dropdown-button__value");
-
-        if (!valueNode) return;
-
-        let lastValue =
-            valueNode.textContent.trim();
-
-        const observer =
-            new MutationObserver(() => {
-
-                const current =
-                    valueNode.textContent.trim();
-
-                if (
-                    current === lastValue ||
-                    current === "" ||
-                    current === "-- Please select --"
-                ) {
-                    return;
-                }
-
-                lastValue = current;
-                console.log("Dropdown berubah:", current);
-                parseMeasurement(current);
-
-            });
-
-        observer.observe(valueNode, {
-            subtree: true,
-            childList: true,
-            characterData: true
-        });
-
-    }
-
-    
+    // Autofill saat Recommended Size berubah
     document.addEventListener("change", function (e) {
 
-        if (!e.target.matches('input[data-field-name$="-size"]')) {
+        if (e.target.matches('input[data-field-name$="-size"]')) {
+
+            console.log("Recommended:", e.target.value);
+
+            parseMeasurement(e.target.value);
+
             return;
         }
 
-        console.log("Recommended:", e.target.value);
-
-        parseMeasurement(e.target.value);
+        // Kalau user mengubah Volume secara manual
+        if (
+            e.target.matches(selectors.volume) &&
+            !isUpdating
+        ) {
+            normalizeVolume();
+        }
 
     });
-    const volumeInput = document.querySelector("#text-4");
 
-    volumeInput.addEventListener("input", function () {
+    // Saat user keluar dari field Volume
+    const volumeInput = document.querySelector(selectors.volume);
 
-    let cursor = this.selectionStart;
+    if (volumeInput) {
 
-    let value = this.value
-        .replace(/l/gi, "")
-        .trim();
+        volumeInput.addEventListener("blur", normalizeVolume);
 
-    if (value === "") {
-        this.value = "";
-        return;
+        volumeInput.addEventListener("focus", function () {
+
+            normalizeVolume();
+
+            // Letakkan cursor sebelum huruf L
+            const pos = this.value.length - 1;
+
+            this.setSelectionRange(pos, pos);
+
+        });
+
+        // Kalau autofill sudah mengisi value sebelum listener aktif
+        normalizeVolume();
+
     }
-
-    this.value = value + "L";
-
-    // Cursor tetap sebelum huruf L
-    this.setSelectionRange(cursor, cursor);
-
-});
 
 });
