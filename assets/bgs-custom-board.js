@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document
     .querySelectorAll('input[name="cp-baseprice"]')
     .forEach(x => console.log("OPTION =", x.value));
-
+    
         const option = document.querySelector(
             `input[name="cp-baseprice"][value="${targetValue}"]`
         );
@@ -190,22 +190,9 @@ document
 
         }
 
-        document
-    .querySelectorAll('input[name="cp-baseprice"]')
-    .forEach(r => r.checked = false);
+        if (option.checked) return;
 
-option.checked = true;
-
-console.log(
-    "NOW =",
-    document.querySelector(
-        'input[name="cp-baseprice"]:checked'
-    )?.value
-);
-
-        // if (option.checked) return;
-
-        // option.click();
+        option.click();
 
         // option.checked = true;
 
