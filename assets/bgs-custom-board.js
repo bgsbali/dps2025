@@ -13,7 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function convertLength(length) {
 
-        length = length.trim();
+        if (!length) return "";
+
+        length = length
+            .replace(/[’′]/g, "'")
+            .replace(/[“”]/g, '"')
+            .trim();
 
         if (length.includes("'")) return length;
 
@@ -27,25 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    function normalizeVolume() {
+    function normalizeVolume(value) {
 
-        const volumeInput = document.querySelector(selectors.volume);
-
-        if (!volumeInput) return;
-
-        let value = volumeInput.value.trim();
-
-        // Hapus semua huruf L
-        value = value.replace(/l/gi, "").trim();
-
-        // Kalau kosong, biarkan kosong
-        if (value === "") {
-            volumeInput.value = "";
-            return;
-        }
-
-        // Tambahkan satu L di belakang
-        volumeInput.value = value + "L";
+        return value
+            .replace(/l/gi, "")
+            .trim() + "L";
 
     }
 
@@ -55,9 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!input) return;
 
-        // Khusus Volume, pastikan selalu berakhiran L
         if (selector === selectors.volume) {
-            value = value.replace(/l/gi, "").trim() + "L";
+            value = normalizeVolume(value);
         }
 
         if (input.value === value) return;
@@ -74,41 +64,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    function parseMeasurement(measurement) {
+    function parseMeasurement(text) {
 
         if (isUpdating) return;
+
+        if (!text || text === "Custom") return;
 
         isUpdating = true;
 
         try {
 
-            const parts = measurement
-                .split(/\s*x\s*/i)
-                .map(p => p.trim());
+            text = text
+                .replace(/[’′]/g, "'")
+                .replace(/[“”]/g, '"')
+                .trim();
 
-            if (parts.length !== 4) return;
+            let length = "";
+            let width = "";
+            let thickness = "";
+            let volume = "";
 
-            updateInput(
-                selectors.length,
-                convertLength(parts[0])
-            );
+            // Format:
+            // 5.10 x 19 x 2 1/2 x 29L
 
-            updateInput(
-                selectors.width,
-                parts[1]
-            );
+            let match = text.match(/^(.+?)\s*x\s*(.+?)\s*x\s*(.+?)\s*x\s*(.+)$/i);
 
-            updateInput(
-                selectors.thickness,
-                parts[2]
-            );
+            // Format:
+            // 5.10 x 19 3/4 x 2 3/4 - 38.30L
 
-            updateInput(
-                selectors.volume,
-                parts[3]
-            );
+            if (!match) {
+                match = text.match(/^(.+?)\s*x\s*(.+?)\s*x\s*(.+?)\s*-\s*(.+)$/i);
+            }
 
-            console.log("Auto Filled:", measurement);
+            // Format:
+            // 5'8 - 18 1/2 x 2 1/4 / 25L
+
+            if (!match) {
+                match = text.match(/^(.+?)\s*-\s*(.+?)\s*x\s*(.+?)\s*\/\s*(.+)$/i);
+            }
+
+            if (!match) {
+                console.log("Unknown Dimension:", text);
+                return;
+            }
+
+            length = convertLength(match[1]);
+            width = match[2].trim();
+            thickness = match[3].trim();
+            volume = match[4].trim();
+
+            updateInput(selectors.length, length);
+            updateInput(selectors.width, width);
+            updateInput(selectors.thickness, thickness);
+            updateInput(selectors.volume, volume);
+
+            console.log("Auto Filled:", {
+                length,
+                width,
+                thickness,
+                volume
+            });
 
         } finally {
 
@@ -118,49 +133,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    // Autofill saat Recommended Size berubah
-    document.addEventListener("change", function (e) {
+    document.addEventListener("change", function(e) {
 
-        if (e.target.matches('input[data-field-name$="-size"]')) {
+        const target = e.target;
 
-            console.log("Recommended:", e.target.value);
+        if (
+            target.matches("select") &&
+            /recommended dimension/i.test(
+                target.closest(".gpo-element")
+                    ?.querySelector("label .label-content")
+                    ?.textContent || ""
+            )
+        ) {
 
-            parseMeasurement(e.target.value);
+            parseMeasurement(target.value);
 
             return;
+
         }
 
-        // Kalau user mengubah Volume secara manual
         if (
-            e.target.matches(selectors.volume) &&
+            target.matches(selectors.volume) &&
             !isUpdating
         ) {
-            normalizeVolume();
+
+            target.value = normalizeVolume(target.value);
+
         }
 
     });
 
-    // Saat user keluar dari field Volume
-    const volumeInput = document.querySelector(selectors.volume);
+    const observer = new MutationObserver(() => {
 
-    if (volumeInput) {
+        document.querySelectorAll("select").forEach(select => {
 
-        volumeInput.addEventListener("blur", normalizeVolume);
+            if (select.dataset.bgsBound) return;
 
-        volumeInput.addEventListener("focus", function () {
+            const label = select
+                .closest(".gpo-element")
+                ?.querySelector("label .label-content")
+                ?.textContent || "";
 
-            normalizeVolume();
+            if (!/recommended dimension/i.test(label)) return;
 
-            // Letakkan cursor sebelum huruf L
-            const pos = this.value.length - 1;
+            select.dataset.bgsBound = "1";
 
-            this.setSelectionRange(pos, pos);
+            select.addEventListener("change", function() {
+
+                parseMeasurement(this.value);
+
+            });
 
         });
 
-        // Kalau autofill sudah mengisi value sebelum listener aktif
-        normalizeVolume();
+    });
 
-    }
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
 
 });
