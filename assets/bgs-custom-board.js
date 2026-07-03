@@ -129,15 +129,39 @@ console.log("BGS Custom Board Loaded");
 
     }
 
-document.addEventListener("change", function (e) {
+    document.addEventListener("change", function (e) {
 
-    if (!e.target.matches('input[data-field-name$="-size"]')) {
-        return;
+        if (!e.target.matches('input[data-field-name$="-size"]')) {
+            return;
+        }
+
+        console.log("Recommended:", e.target.value);
+
+        parseMeasurement(e.target.value);
+
+    });
+    const volumeInput = document.querySelector("#text-4");
+
+    function normalizeVolume() {
+
+        let value = volumeInput.value.trim();
+
+        // Hapus semua L di mana pun
+        value = value.replace(/l/gi, "").trim();
+
+        // Kalau kosong, biarkan kosong
+        if (value === "") {
+            volumeInput.value = "";
+            return;
+        }
+
+        // Tambahkan L di belakang
+        volumeInput.value = value + "L";
     }
 
-    console.log("Recommended:", e.target.value);
+    // Saat user selesai mengetik
+    volumeInput.addEventListener("blur", normalizeVolume);
 
-    parseMeasurement(e.target.value);
-
-});
+    // Saat tekan Enter
+    volumeInput.addEventListener("change", normalizeVolume);
 });
