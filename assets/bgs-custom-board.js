@@ -172,6 +172,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log("Target Base Price:", targetValue);
 
+        console.log("TARGET =", targetValue);
+
+document
+    .querySelectorAll('input[name="cp-baseprice"]')
+    .forEach(x => console.log("OPTION =", x.value));
+    
         const option = document.querySelector(
             `input[name="cp-baseprice"][value="${targetValue}"]`
         );
@@ -187,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (option.checked) return;
 
         option.click();
-        
+
         // option.checked = true;
 
         // option.dispatchEvent(new Event("change", {
