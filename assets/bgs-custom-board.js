@@ -267,6 +267,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const volumeInput = document.querySelector(selectors.volume);
 
+    if (volumeInput) {
+
+        volumeInput.addEventListener("blur", normalizeVolume);
+
+        volumeInput.addEventListener("focus", function () {
+
+            normalizeVolume();
+
+            const pos = this.value.length - 1;
+
+            this.setSelectionRange(pos, pos);
+
+        });
+
+        normalizeVolume();
+
+    }
+
     const lengthInput = document.querySelector(selectors.length);
 
 if (lengthInput) {
@@ -290,24 +308,5 @@ if (lengthInput) {
     });
 
 }
-
-
-    if (volumeInput) {
-
-        volumeInput.addEventListener("blur", normalizeVolume);
-
-        volumeInput.addEventListener("focus", function () {
-
-            normalizeVolume();
-
-            const pos = this.value.length - 1;
-
-            this.setSelectionRange(pos, pos);
-
-        });
-
-        normalizeVolume();
-
-    }
 
 });
