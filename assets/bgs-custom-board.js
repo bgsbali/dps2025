@@ -125,6 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateBasePrice() {
 
+        console.log("updateBasePrice()");
+        
         const length =
             document.querySelector(selectors.length)?.value.trim();
 
