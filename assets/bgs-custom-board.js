@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateBasePrice() {
 
         console.log("updateBasePrice()");
-        
+
         const length =
             document.querySelector(selectors.length)?.value.trim();
 
@@ -186,15 +186,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (option.checked) return;
 
-        option.checked = true;
+        option.click();
+        
+        // option.checked = true;
 
-        option.dispatchEvent(new Event("change", {
-            bubbles: true
-        }));
+        // option.dispatchEvent(new Event("change", {
+        //     bubbles: true
+        // }));
 
-        option.dispatchEvent(new Event("input", {
-            bubbles: true
-        }));
+        // option.dispatchEvent(new Event("input", {
+        //     bubbles: true
+        // }));
 
         console.log("Base Price Updated");
 
