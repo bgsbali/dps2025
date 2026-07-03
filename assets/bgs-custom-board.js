@@ -129,6 +129,20 @@ console.log("BGS Custom Board Loaded");
 
     }
 
+    
+    document.addEventListener("change", function (e) {
+
+        if (!e.target.matches('input[data-field-name$="-size"]')) {
+            return;
+        }
+
+        console.log("Recommended:", e.target.value);
+
+        parseMeasurement(e.target.value);
+
+    });
+    const volumeInput = document.querySelector("#text-4");
+
     volumeInput.addEventListener("input", function () {
 
     let cursor = this.selectionStart;
@@ -148,18 +162,5 @@ console.log("BGS Custom Board Loaded");
     this.setSelectionRange(cursor, cursor);
 
 });
-
-    document.addEventListener("change", function (e) {
-
-        if (!e.target.matches('input[data-field-name$="-size"]')) {
-            return;
-        }
-
-        console.log("Recommended:", e.target.value);
-
-        parseMeasurement(e.target.value);
-
-    });
-    const volumeInput = document.querySelector("#text-4");
 
 });
