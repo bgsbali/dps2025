@@ -1,8 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    function convertLength(length) {
+    const selectors = {
+        length: "#text-1",
+        width: "#text-2",
+        thickness: "#text-3",
+        volume: "#text-4"
+    };
 
+    function convertLength(length) {
         length = length.trim();
+
+        if (length.includes("'")) return length;
 
         const parts = length.split(".");
 
@@ -13,39 +21,74 @@ document.addEventListener("DOMContentLoaded", () => {
         return length;
     }
 
-    function fillMeasurement(value) {
+    function setInput(selector, value) {
 
-        if (!value) return;
+        const input = document.querySelector(selector);
 
-        const parts = value.split(/\s*x\s*/i);
+        if (!input) return;
 
-        if (parts.length < 4) return;
+        input.value = value;
 
-        const length = convertLength(parts[0]);
-        const width = parts[1].trim();
-        const thickness = parts[2].trim();
-        const volume = parts[3].trim();
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+        input.dispatchEvent(new Event("change", { bubbles: true }));
 
-        document.querySelector("#text-1").value = length;
-        document.querySelector("#text-2").value = width;
-        document.querySelector("#text-3").value = thickness;
-        document.querySelector("#text-4").value = volume;
+    }
 
-        ["#text-1","#text-2","#text-3","#text-4"].forEach(selector => {
-            document.querySelector(selector)
-                .dispatchEvent(new Event("input",{bubbles:true}));
+    function parseMeasurement(measurement) {
+
+        if (!measurement) return;
+
+        const parts = measurement
+            .split(/\s*x\s*/i)
+            .map(v => v.trim());
+
+        if (parts.length !== 4) return;
+
+        setInput(selectors.length, convertLength(parts[0]));
+        setInput(selectors.width, parts[1]);
+        setInput(selectors.thickness, parts[2]);
+        setInput(selectors.volume, parts[3]);
+
+        console.log("Measurement synced:", measurement);
+
+    }
+
+    function watchDropdown(dropdown) {
+
+        const valueElement = dropdown.querySelector(".dropdown-button__value");
+
+        if (!valueElement) return;
+
+        let previous = valueElement.textContent.trim();
+
+        const observer = new MutationObserver(() => {
+
+            const current = valueElement.textContent.trim();
+
+            if (
+                current !== previous &&
+                current !== "-- Please select --" &&
+                current !== ""
+            ) {
+
+                previous = current;
+
+                parseMeasurement(current);
+
+            }
+
+        });
+
+        observer.observe(valueElement, {
+            childList: true,
+            subtree: true,
+            characterData: true
         });
 
     }
 
-    document.addEventListener("change", function(e){
-
-        if(e.target.matches("input[data-field-name$='-size']")){
-
-            fillMeasurement(e.target.value);
-
-        }
-
-    });
+    document
+        .querySelectorAll(".gpo-dropdown")
+        .forEach(watchDropdown);
 
 });
