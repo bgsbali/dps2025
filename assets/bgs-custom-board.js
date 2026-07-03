@@ -31,16 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!volumeInput) return;
 
-        let value = volumeInput.value.trim();
+        let value = volumeInput.value
+            .trim()
+            .replace(/l/gi, "")
+            .trim();
 
-        value = value.replace(/l/gi, "").trim();
-
-        if (value === "") {
-            volumeInput.value = "";
-            return;
-        }
-
-        volumeInput.value = value + "L";
+        volumeInput.value = value ? value + "L" : "";
 
     }
 
@@ -112,96 +108,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    /**
-     * ==========================================
-     * AUTO BASE PRICE
-     * ==========================================
-     */
-
     function updateBasePrice() {
 
-        const length =
-            document.querySelector(selectors.length)?.value.trim();
+        const length = document
+            .querySelector(selectors.length)
+            ?.value
+            .trim();
 
         if (!length) return;
 
-        const construction =
-            document.querySelector(
-                'input[name="cp-construction"]:checked'
-            )?.value;
+        const construction = document.querySelector(
+            'input[name="cp-construction"]:checked'
+        )?.value;
 
         if (!construction) return;
 
-        const fin =
-            document.querySelector(
-                'input[name="cp-finlayout"]:checked'
-            )?.value;
+        const fin = document.querySelector(
+            'input[name="cp-finlayout"]:checked'
+        )?.value;
 
         if (!fin) return;
 
-        // const feet = parseInt(length);
+        const feet = parseFloat(
+            length
+                .replace("'", ".")
+                .replace('"', "")
+                .trim()
+        );
 
-        const normalizedLength = length
-            .replace("'", ".")
-            .replace('"', "")
-            .trim();
+        const size = feet < 7
+            ? "Under 7"
+            : "7-8";
 
-        const feet = parseFloat(normalizedLength);
-
-        // const size = feet < 7
-        //     ? "Under 7"
-        //     : "7-8";
-
-        let size = "";
-
-        if (feet < 7) {
-
-            size = "Under 7";
-
-        } else if (feet < 9) {
-
-            size = "7-8";
-
-        } else {
-
-            size = "7-8";
-
-        }
-
-        let targetValue;
-
-        if (
-            construction === "EPS Full Carbon Vacuum" ||
-            construction === "EPS Full Carbon Resin Inject"
-        ) {
-
-            targetValue =
-                `${construction} - ${fin.replace(" Fins", "-Fin")}`;
-
-        } else {
-
-            targetValue =
-                `${construction} - ${size} - ${fin.replace(" Fins", "-Fin")}`;
-
-        }
+        const targetValue =
+            (
+                construction === "EPS Full Carbon Vacuum" ||
+                construction === "EPS Full Carbon Resin Inject"
+            )
+                ? `${construction} - ${fin.replace(" Fins", "-Fin")}`
+                : `${construction} - ${size} - ${fin.replace(" Fins", "-Fin")}`;
 
         const option = document.querySelector(
             `input[name="cp-baseprice"][value="${targetValue}"]`
         );
 
-        if (!option) return;
-
-        if (option.checked) return;
+        if (!option || option.checked) return;
 
         option.click();
 
     }
-
-    /**
-     * ==========================================
-     * GLOBAL CHANGE LISTENER
-     * ==========================================
-     */
 
     document.addEventListener("change", function (e) {
 
@@ -212,31 +167,16 @@ document.addEventListener("DOMContentLoaded", () => {
         ) {
 
             parseMeasurement(e.target.value);
-
             return;
 
         }
 
         if (
-            e.target.matches(
-                'input[name="cp-construction"]'
-            )
+            e.target.matches('input[name="cp-construction"]') ||
+            e.target.matches('input[name="cp-finlayout"]')
         ) {
 
             updateBasePrice();
-
-            return;
-
-        }
-
-        if (
-            e.target.matches(
-                'input[name="cp-finlayout"]'
-            )
-        ) {
-
-            updateBasePrice();
-
             return;
 
         }
@@ -251,12 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     });
-
-    /**
-     * ==========================================
-     * VOLUME
-     * ==========================================
-     */
 
     const volumeInput = document.querySelector(selectors.volume);
 
@@ -282,18 +216,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (lengthInput) {
 
-    lengthInput.addEventListener("input", function () {
+        lengthInput.addEventListener("input", updateBasePrice);
+        lengthInput.addEventListener("blur", updateBasePrice);
 
-        updateBasePrice();
-
-    });
-
-    lengthInput.addEventListener("blur", function () {
-
-        updateBasePrice();
-
-    });
-
-}
+    }
 
 });
