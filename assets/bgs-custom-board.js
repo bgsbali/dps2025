@@ -129,8 +129,15 @@ console.log("BGS Custom Board Loaded");
 
     }
 
-    document
-        .querySelectorAll(".gpo-dropdown")
-        .forEach(observeDropdown);
+document.addEventListener("change", function (e) {
 
+    if (!e.target.matches('input[data-field-name$="-size"]')) {
+        return;
+    }
+
+    console.log("Recommended:", e.target.value);
+
+    parseMeasurement(e.target.value);
+
+});
 });
