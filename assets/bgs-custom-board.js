@@ -7,7 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
         volume: "#text-4"
     };
 
+    let isUpdating = false;
+
     function convertLength(length) {
+
         length = length.trim();
 
         if (length.includes("'")) return length;
@@ -19,69 +22,107 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         return length;
+
     }
 
-    function setInput(selector, value) {
+    function updateInput(selector, value) {
 
         const input = document.querySelector(selector);
 
         if (!input) return;
 
+        if (input.value === value) return;
+
         input.value = value;
 
-        input.dispatchEvent(new Event("input", { bubbles: true }));
-        input.dispatchEvent(new Event("change", { bubbles: true }));
+        input.dispatchEvent(new Event("input", {
+            bubbles: true
+        }));
+
+        input.dispatchEvent(new Event("change", {
+            bubbles: true
+        }));
 
     }
 
     function parseMeasurement(measurement) {
 
-        if (!measurement) return;
+        if (isUpdating) return;
 
-        const parts = measurement
-            .split(/\s*x\s*/i)
-            .map(v => v.trim());
+        isUpdating = true;
 
-        if (parts.length !== 4) return;
+        try {
 
-        setInput(selectors.length, convertLength(parts[0]));
-        setInput(selectors.width, parts[1]);
-        setInput(selectors.thickness, parts[2]);
-        setInput(selectors.volume, parts[3]);
+            const parts = measurement
+                .split(/\s*x\s*/i)
+                .map(p => p.trim());
 
-        console.log("Measurement synced:", measurement);
+            if (parts.length !== 4) return;
+
+            updateInput(
+                selectors.length,
+                convertLength(parts[0])
+            );
+
+            updateInput(
+                selectors.width,
+                parts[1]
+            );
+
+            updateInput(
+                selectors.thickness,
+                parts[2]
+            );
+
+            updateInput(
+                selectors.volume,
+                parts[3]
+            );
+
+            console.log("Auto Filled:", measurement);
+
+        }
+        finally {
+
+            isUpdating = false;
+
+        }
 
     }
 
-    function watchDropdown(dropdown) {
+    function observeDropdown(dropdown) {
 
-        const valueElement = dropdown.querySelector(".dropdown-button__value");
+        const valueNode =
+            dropdown.querySelector(".dropdown-button__value");
 
-        if (!valueElement) return;
+        if (!valueNode) return;
 
-        let previous = valueElement.textContent.trim();
+        let lastValue =
+            valueNode.textContent.trim();
 
-        const observer = new MutationObserver(() => {
+        const observer =
+            new MutationObserver(() => {
 
-            const current = valueElement.textContent.trim();
+                const current =
+                    valueNode.textContent.trim();
 
-            if (
-                current !== previous &&
-                current !== "-- Please select --" &&
-                current !== ""
-            ) {
+                if (
+                    current === lastValue ||
+                    current === "" ||
+                    current === "-- Please select --"
+                ) {
+                    return;
+                }
 
-                previous = current;
+                lastValue = current;
 
                 parseMeasurement(current);
 
-            }
+            });
 
-        });
-
-        observer.observe(valueElement, {
-            childList: true,
+        observer.observe(valueNode, {
             subtree: true,
+            childList: true,
             characterData: true
         });
 
@@ -89,6 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document
         .querySelectorAll(".gpo-dropdown")
-        .forEach(watchDropdown);
+        .forEach(observeDropdown);
 
 });
