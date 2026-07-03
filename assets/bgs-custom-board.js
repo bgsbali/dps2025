@@ -116,7 +116,7 @@ console.log("BGS Custom Board Loaded");
                 }
 
                 lastValue = current;
-
+                console.log("Dropdown berubah:", current);
                 parseMeasurement(current);
 
             });
