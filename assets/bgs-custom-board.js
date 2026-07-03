@@ -35,16 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let value = volumeInput.value.trim();
 
-        // Hapus semua huruf L
         value = value.replace(/l/gi, "").trim();
 
-        // Kalau kosong, biarkan kosong
         if (value === "") {
             volumeInput.value = "";
             return;
         }
 
-        // Tambahkan satu L di belakang
         volumeInput.value = value + "L";
 
     }
@@ -55,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!input) return;
 
-        // Khusus Volume, pastikan selalu berakhiran L
         if (selector === selectors.volume) {
             value = value.replace(/l/gi, "").trim() + "L";
         }
@@ -110,6 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             console.log("Auto Filled:", measurement);
 
+            // Update harga setelah ukuran berubah
+            updateBasePrice();
+
         } finally {
 
             isUpdating = false;
@@ -118,29 +117,154 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    // Autofill saat Recommended Size berubah
+    /**
+     * ==========================================
+     * AUTO BASE PRICE
+     * ==========================================
+     */
+
+    function updateBasePrice() {
+
+        const length =
+            document.querySelector(selectors.length)?.value.trim();
+
+        if (!length) return;
+
+        const construction =
+            document.querySelector(
+                'input[name="cp-construction"]:checked'
+            )?.value;
+
+        if (!construction) return;
+
+        const fin =
+            document.querySelector(
+                'input[name="cp-finlayout"]:checked'
+            )?.value;
+
+        if (!fin) return;
+
+        const feet = parseInt(length);
+
+        const size = feet < 7
+            ? "Under 7"
+            : "7-8";
+
+        let targetValue;
+
+        // Carbon tidak memakai kategori size
+        if (
+            construction === "EPS Full Carbon Vacuum" ||
+            construction === "EPS Full Carbon Resin Inject"
+        ) {
+
+            targetValue =
+                `${construction} - ${fin.replace(" Fins", "-Fin")}`;
+
+        } else {
+
+            targetValue =
+                `${construction} - ${size} - ${fin.replace(" Fins", "-Fin")}`;
+
+        }
+
+        console.log("Target Base Price:", targetValue);
+
+        const option = document.querySelector(
+            `input[name="cp-baseprice"][value="${targetValue}"]`
+        );
+
+        if (!option) {
+
+            console.warn("Base Price not found:", targetValue);
+
+            return;
+
+        }
+
+        if (option.checked) return;
+
+        option.checked = true;
+
+        option.dispatchEvent(new Event("change", {
+            bubbles: true
+        }));
+
+        option.dispatchEvent(new Event("input", {
+            bubbles: true
+        }));
+
+        console.log("Base Price Updated");
+
+    }
+
+    /**
+     * ==========================================
+     * GLOBAL CHANGE LISTENER
+     * ==========================================
+     */
+
     document.addEventListener("change", function (e) {
 
-        if (e.target.matches('input[data-field-name$="-size"]')) {
+        // Recommended Size
+        if (
+            e.target.matches(
+                'input[data-type="dropdown"][data-field-name$="-size"]'
+            )
+        ) {
 
             console.log("Recommended:", e.target.value);
 
             parseMeasurement(e.target.value);
 
             return;
+
         }
 
-        // Kalau user mengubah Volume secara manual
+        // Construction
+        if (
+            e.target.matches(
+                'input[name="cp-construction"]'
+            )
+        ) {
+
+            updateBasePrice();
+
+            return;
+
+        }
+
+        // Fin Layout
+        if (
+            e.target.matches(
+                'input[name="cp-finlayout"]'
+            )
+        ) {
+
+            updateBasePrice();
+
+            return;
+
+        }
+
+        // Volume manual
         if (
             e.target.matches(selectors.volume) &&
             !isUpdating
         ) {
+
             normalizeVolume();
+
         }
 
     });
 
-    // Saat user keluar dari field Volume
+    /**
+     * ==========================================
+     * VOLUME
+     * ==========================================
+     */
+
     const volumeInput = document.querySelector(selectors.volume);
 
     if (volumeInput) {
@@ -151,14 +275,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             normalizeVolume();
 
-            // Letakkan cursor sebelum huruf L
             const pos = this.value.length - 1;
 
             this.setSelectionRange(pos, pos);
 
         });
 
-        // Kalau autofill sudah mengisi value sebelum listener aktif
         normalizeVolume();
 
     }
