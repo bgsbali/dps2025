@@ -190,6 +190,15 @@ document
 
         }
 
+        console.log("CURRENT",
+    document.querySelector(
+        'input[name="cp-baseprice"]:checked'
+    )?.value
+);
+
+console.log("NEW", option.value);
+
+
         if (option.checked) return;
 
         option.click();
