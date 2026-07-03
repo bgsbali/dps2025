@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("BGS Custom Board Loaded");
-
     const selectors = {
         length: "#text-1",
         width: "#text-2",
@@ -104,9 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 parts[3]
             );
 
-            console.log("Auto Filled:", measurement);
-
-            // Update harga setelah ukuran berubah
             updateBasePrice();
 
         } finally {
@@ -124,8 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
      */
 
     function updateBasePrice() {
-
-        console.log("updateBasePrice()");
 
         const length =
             document.querySelector(selectors.length)?.value.trim();
@@ -154,7 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let targetValue;
 
-        // Carbon tidak memakai kategori size
         if (
             construction === "EPS Full Carbon Vacuum" ||
             construction === "EPS Full Carbon Resin Inject"
@@ -170,50 +162,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-        console.log("Target Base Price:", targetValue);
-
-        console.log("TARGET =", targetValue);
-
-document
-    .querySelectorAll('input[name="cp-baseprice"]')
-    .forEach(x => console.log("OPTION =", x.value));
-    
         const option = document.querySelector(
             `input[name="cp-baseprice"][value="${targetValue}"]`
         );
 
-        if (!option) {
-
-            console.warn("Base Price not found:", targetValue);
-
-            return;
-
-        }
-
-        console.log("CURRENT",
-    document.querySelector(
-        'input[name="cp-baseprice"]:checked'
-    )?.value
-);
-
-console.log("NEW", option.value);
-
+        if (!option) return;
 
         if (option.checked) return;
 
         option.click();
-
-        // option.checked = true;
-
-        // option.dispatchEvent(new Event("change", {
-        //     bubbles: true
-        // }));
-
-        // option.dispatchEvent(new Event("input", {
-        //     bubbles: true
-        // }));
-
-        console.log("Base Price Updated");
 
     }
 
@@ -225,14 +182,11 @@ console.log("NEW", option.value);
 
     document.addEventListener("change", function (e) {
 
-        // Recommended Size
         if (
             e.target.matches(
                 'input[data-type="dropdown"][data-field-name$="-size"]'
             )
         ) {
-
-            console.log("Recommended:", e.target.value);
 
             parseMeasurement(e.target.value);
 
@@ -240,7 +194,6 @@ console.log("NEW", option.value);
 
         }
 
-        // Construction
         if (
             e.target.matches(
                 'input[name="cp-construction"]'
@@ -253,7 +206,6 @@ console.log("NEW", option.value);
 
         }
 
-        // Fin Layout
         if (
             e.target.matches(
                 'input[name="cp-finlayout"]'
@@ -266,7 +218,6 @@ console.log("NEW", option.value);
 
         }
 
-        // Volume manual
         if (
             e.target.matches(selectors.volume) &&
             !isUpdating
@@ -303,7 +254,5 @@ console.log("NEW", option.value);
         normalizeVolume();
 
     }
-
-    
 
 });
