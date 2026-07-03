@@ -285,28 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    const lengthInput = document.querySelector(selectors.length);
-
-if (lengthInput) {
-
-    lengthInput.addEventListener("input", function () {
-
-        updateBasePrice();
-
-    });
-
-    lengthInput.addEventListener("change", function () {
-
-        updateBasePrice();
-
-    });
-
-    lengthInput.addEventListener("blur", function () {
-
-        updateBasePrice();
-
-    });
-
-}
+    
 
 });
