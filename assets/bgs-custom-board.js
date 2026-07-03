@@ -139,11 +139,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!fin) return;
 
-        const feet = parseInt(length);
+        // const feet = parseInt(length);
 
-        const size = feet < 7
-            ? "Under 7"
-            : "7-8";
+        const normalizedLength = length
+            .replace("'", ".")
+            .replace('"', "")
+            .trim();
+
+        const feet = parseFloat(normalizedLength);
+
+        // const size = feet < 7
+        //     ? "Under 7"
+        //     : "7-8";
+
+        let size = "";
+
+        if (feet < 7) {
+
+            size = "Under 7";
+
+        } else if (feet < 9) {
+
+            size = "7-8";
+
+        } else {
+
+            size = "7-8";
+
+        }
 
         let targetValue;
 
@@ -254,5 +277,23 @@ document.addEventListener("DOMContentLoaded", () => {
         normalizeVolume();
 
     }
+
+    const lengthInput = document.querySelector(selectors.length);
+
+    if (lengthInput) {
+
+    lengthInput.addEventListener("input", function () {
+
+        updateBasePrice();
+
+    });
+
+    lengthInput.addEventListener("blur", function () {
+
+        updateBasePrice();
+
+    });
+
+}
 
 });
