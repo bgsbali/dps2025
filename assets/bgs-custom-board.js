@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+console.log("BGS Custom Board Loaded");
 
     const selectors = {
         length: "#text-1",
