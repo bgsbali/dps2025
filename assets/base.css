@@ -3670,3 +3670,7 @@ a#HeaderMenu-sale {
 .gpo-label+.gpo-selected-values.has-value, .gpo-dimension-label+.gpo-selected-values.has-value {
   display: none !important;
 }
+
+.cp-hidden {
+  display:none;
+}
