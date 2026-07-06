@@ -108,6 +108,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    function getFinPriceGroup(fin) {
+
+        const map = {
+            "Single Fin": "3-Fin",
+            "Twin Fins": "3-Fin",
+            "Thruster (3 Fins)": "3-Fin",
+            "Quad (4 Fins)": "5-Fin",
+            "2 + 1 Single Fin": "5-Fin"
+        };
+
+        return map[fin] || null;
+
+    }
+
     function updateBasePrice() {
 
         const length = document
