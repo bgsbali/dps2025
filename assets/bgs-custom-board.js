@@ -139,6 +139,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!length) return;
 
+        const model = document.querySelector(
+            'input[name="model"]:checked'
+        )?.value;
+
+        if (!model) return;        
+
         const construction = document.querySelector(
             'input[name="cp-construction"]:checked'
         )?.value;
@@ -152,6 +158,27 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!selectedFin) return;
 
         const fin = getPricingFinLayout(selectedFin);
+
+        if (model === "Gromlin") {
+            let price = "";
+            if (construction === "Poly") {
+                price =
+                    fin === "3 Fins"
+                        ? "9650000"
+                        : "9950000";
+            } else {
+                price =
+                    fin === "3 Fins"
+                        ? "11300000"
+                        : "11650000";
+            }
+            const option = document.querySelector(
+                `input[name="cp-baseprice"][data-addon-price="${price}"]`
+            );
+            if (!option || option.checked) return;
+            option.click();
+            return;
+        }        
 
         // const fin = document.querySelector(
         //     'input[name="cp-finlayout"]:checked'
@@ -220,7 +247,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+        // if (
+        //     e.target.matches('input[name="cp-construction"]') ||
+        //     e.target.matches('input[name="cp-finlayout"]')
+        // ) {
+
+        //     updateBasePrice();
+        //     return;
+
+        // }
+
         if (
+            e.target.matches('input[name="model"]') ||
             e.target.matches('input[name="cp-construction"]') ||
             e.target.matches('input[name="cp-finlayout"]')
         ) {
@@ -228,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
             updateBasePrice();
             return;
 
-        }
+        }        
 
         if (
             e.target.matches(selectors.volume) &&
