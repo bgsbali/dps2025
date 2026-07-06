@@ -108,6 +108,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+
+    function getPricingFinLayout(fin) {
+
+        switch (fin) {
+
+            case "Single Fin":
+            case "Twin Fins":
+            case "Thruster (3 Fins)":
+                return "3 Fins";
+
+            case "Quad (4 Fins)":
+            case "2 + 1 Single Fin":
+            case "5 Fins":
+                return "5 Fins";
+
+            default:
+                return fin;
+
+        }
+
+    }
+
     function updateBasePrice() {
 
         const length = document
