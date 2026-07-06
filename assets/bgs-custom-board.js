@@ -166,9 +166,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 .trim()
         );
 
-        const size = feet < 7
-            ? "Under 7"
-            : "7-8";
+        // const size = feet < 7
+        //     ? "Under 7"
+        //     : "7-8";
+
+        let size = "";
+
+        if (feet < 7) {
+            size = "Under 7";
+        } else if (feet < 9) {
+            size = "7-8";
+        } else {
+            size = "Over 9";
+        }
+
+        if (size === "Over 9") {
+            const option = document.querySelector(
+                'input[name="cp-baseprice"][value="Over 9"]'
+            );
+            if (!option || option.checked) return;
+            option.click();
+            return;
+        }        
 
         const targetValue =
             (
