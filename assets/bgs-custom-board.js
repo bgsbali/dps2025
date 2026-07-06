@@ -180,6 +180,28 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }        
 
+        if (
+            model === "Mid-Length Crisis" &&
+            construction === "Poly"
+        ) {
+
+            const targetValue =
+                feet < 7
+                    ? "Mid-Length Crisis Under 7"
+                    : "Mid-Length Crisis 7-8";
+
+            const option = document.querySelector(
+                `input[name="cp-baseprice"][value="${targetValue}"]`
+            );
+
+            if (!option || option.checked) return;
+
+            option.click();
+
+            return;
+
+        }        
+
         // const fin = document.querySelector(
         //     'input[name="cp-finlayout"]:checked'
         // )?.value;
