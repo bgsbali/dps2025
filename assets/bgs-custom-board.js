@@ -276,6 +276,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }                
 
+        if (model === "Padillac") {
+
+            let targetValue = "";
+
+            if (feet < 8) {
+
+                targetValue = "Padillac Gun Blank 7-7.11";
+
+            } else if (feet < 9) {
+
+                targetValue = "Padillac Gun Blank 8-8.11";
+
+            } else {
+
+                targetValue = "Padillac Gun Blank 9+";
+
+            }
+
+            const option = document.querySelector(
+                `input[name="cp-baseprice"][value="${targetValue}"]`
+            );
+
+            if (!option || option.checked) return;
+
+            option.click();
+
+            return;
+
+        }        
+
         const targetValue =
             (
                 construction === "EPS Full Carbon Vacuum" ||
