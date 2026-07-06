@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!input) return;
 
         if (selector === selectors.volume) {
-            value = value.replace(/l/gi, "").trim() + "L";
+            value = value.replace(/l/gi, "").trim() + " L";
         }
 
         if (input.value === value) return;
