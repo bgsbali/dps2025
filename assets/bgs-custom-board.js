@@ -276,21 +276,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }                
 
-        if (model === "Padillac") {
+        if (
+            model === "Padillac" &&
+            construction === "Poly"
+        ) {
 
             let targetValue = "";
 
             if (feet < 8) {
 
-                targetValue = "Padillac Gun Blank 7-7.11";
+                targetValue = "Padillac Poly 7-7.11";
 
             } else if (feet < 9) {
 
-                targetValue = "Padillac Gun Blank 8-8.11";
+                targetValue = "Padillac Poly 8-8.11";
 
             } else {
 
-                targetValue = "Padillac Gun Blank 9+";
+                targetValue = "Padillac Poly 9+";
 
             }
 
@@ -304,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             return;
 
-        }        
+        }
 
         const targetValue =
             (
