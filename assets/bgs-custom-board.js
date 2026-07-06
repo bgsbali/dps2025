@@ -168,8 +168,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 construction === "EPS Full Carbon Vacuum" ||
                 construction === "EPS Full Carbon Resin Inject"
             )
-                ? `${construction} - ${fin.replace(" Fins", "-Fin")}`
-                : `${construction} - ${size} - ${fin.replace(" Fins", "-Fin")}`;
+                ? `${construction} - ${finPriceGroup}`
+                : `${construction} - ${size} - ${finPriceGroup}`;
+                            
+        // const targetValue =
+        //     (
+        //         construction === "EPS Full Carbon Vacuum" ||
+        //         construction === "EPS Full Carbon Resin Inject"
+        //     )
+        //         ? `${construction} - ${fin.replace(" Fins", "-Fin")}`
+        //         : `${construction} - ${size} - ${fin.replace(" Fins", "-Fin")}`;
 
         const option = document.querySelector(
             `input[name="cp-baseprice"][value="${targetValue}"]`
