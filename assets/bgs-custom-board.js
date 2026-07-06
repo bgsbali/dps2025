@@ -137,11 +137,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!construction) return;
 
-        const fin = document.querySelector(
-            'input[name="cp-finlayout"]:checked'
-        )?.value;
+        const fin =
+            document.querySelector(
+                'input[name="cp-finlayout"]:checked'
+            )?.value;
 
-        if (!fin) return;
+        const finPriceGroup = getFinPriceGroup(fin);
+
+        if (!finPriceGroup) return;
+
+        // const fin = document.querySelector(
+        //     'input[name="cp-finlayout"]:checked'
+        // )?.value;
+
+        // if (!fin) return;
 
         const feet = parseFloat(
             length
