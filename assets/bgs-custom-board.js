@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "Thruster (3 Fins)": "3-Fin",
             "Quad (4 Fins)": "5-Fin",
             "2 + 1 Single Fin": "5-Fin"
+            "5 Fins": "5-Fin"
         };
 
         return map[fin] || null;
