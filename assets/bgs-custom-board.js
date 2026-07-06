@@ -276,38 +276,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }                
 
-        if (
-            model === "Padillac" &&
-            construction === "Poly"
-        ) {
+if (
+    model === "Padillac" &&
+    construction === "Poly"
+) {
 
-            let targetValue = "";
+    let targetValue = "";
 
-            if (feet < 8) {
+    if (feet < 8) {
 
-                targetValue = "Padillac Poly 7-7.11";
+        // Under 7 & 7'0"-7'11"
+        targetValue = "Padillac Poly 7-7.11";
 
-            } else if (feet < 9) {
+    } else if (feet < 9) {
 
-                targetValue = "Padillac Poly 8-8.11";
+        targetValue = "Padillac Poly 8-8.11";
 
-            } else {
+    } else {
 
-                targetValue = "Padillac Poly 9+";
+        targetValue = "Padillac Poly 9+";
 
-            }
+    }
 
-            const option = document.querySelector(
-                `input[name="cp-baseprice"][value="${targetValue}"]`
-            );
+    const option = document.querySelector(
+        `input[name="cp-baseprice"][value="${targetValue}"]`
+    );
 
-            if (!option || option.checked) return;
+    if (!option || option.checked) return;
 
-            option.click();
+    option.click();
 
-            return;
+    return;
 
-        }
+}
 
         const targetValue =
             (
