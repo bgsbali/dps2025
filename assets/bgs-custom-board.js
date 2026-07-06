@@ -180,39 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }        
 
-        if (model === "Wildcat Twin") {
-
-            if (feet >= 7) return;
-
-            let targetValue = "";
-
-            switch (construction) {
-
-                case "Poly":
-                    targetValue = "Wildcat Twin Poly";
-                    break;
-
-                case "EPS":
-                    targetValue = "Wildcat Twin EPS";
-                    break;
-
-                default:
-                    return;
-
-            }
-
-            const option = document.querySelector(
-                `input[name="cp-baseprice"][value="${targetValue}"]`
-            );
-
-            if (!option || option.checked) return;
-
-            option.click();
-
-            return;
-
-        }
-
         // const fin = document.querySelector(
         //     'input[name="cp-finlayout"]:checked'
         // )?.value;
@@ -249,6 +216,40 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }        
 
+
+        if (model === "Wildcat Twin") {
+
+            if (feet >= 7) return;
+
+            let targetValue = "";
+
+            switch (construction) {
+
+                case "Poly":
+                    targetValue = "Wildcat Twin Poly";
+                    break;
+
+                case "EPS":
+                    targetValue = "Wildcat Twin EPS";
+                    break;
+
+                default:
+                    return;
+
+            }
+
+            const option = document.querySelector(
+                `input[name="cp-baseprice"][value="${targetValue}"]`
+            );
+
+            if (!option || option.checked) return;
+
+            option.click();
+
+            return;
+
+        }
+                
         const targetValue =
             (
                 construction === "EPS Full Carbon Vacuum" ||
