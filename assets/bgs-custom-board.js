@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     targetValue = "Wildcat Twin EPS";
                     break;
 
-                case "Full Carbon Resin Inject":
+                case "EPS Full Carbon Resin Inject":
                     targetValue = "Wildcat Twin EPS Full Carbon Resin Inject";
                     break;                    
 
