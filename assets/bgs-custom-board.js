@@ -193,29 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 .trim()
         );
 
-        // const size = feet < 7
-        //     ? "Under 7"
-        //     : "7-8";
-
-        let size = "";
-
-        if (feet < 7) {
-            size = "Under 7";
-        } else if (feet < 9) {
-            size = "7-8";
-        } else {
-            size = "Over 9";
-        }
-
-        if (size === "Over 9") {
-            const option = document.querySelector(
-                'input[name="cp-baseprice"][value="Over 9"]'
-            );
-            if (!option || option.checked) return;
-            option.click();
-            return;
-        }        
-
 
         if (model === "Wildcat Twin") {
 
@@ -276,40 +253,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }                
 
-if (
-    model === "Padillac" &&
-    construction === "Poly"
-) {
+        if (
+            model === "Padillac" &&
+            construction === "Poly"
+        ) {
 
-    let targetValue = "";
+            let targetValue = "";
 
-    if (feet < 8) {
+            if (feet < 8) {
 
-        // Under 7 & 7'0"-7'11"
-        targetValue = "Padillac Poly 7-7.11";
+                // Under 7 & 7'0"-7'11"
+                targetValue = "Padillac Poly 7-7.11";
 
-    } else if (feet < 9) {
+            } else if (feet < 9) {
 
-        targetValue = "Padillac Poly 8-8.11";
+                targetValue = "Padillac Poly 8-8.11";
 
-    } else {
+            } else {
 
-        targetValue = "Padillac Poly 9+";
+                targetValue = "Padillac Poly 9+";
 
-    }
+            }
 
-    const option = document.querySelector(
-        `input[name="cp-baseprice"][value="${targetValue}"]`
-    );
+            const option = document.querySelector(
+                `input[name="cp-baseprice"][value="${targetValue}"]`
+            );
 
-    if (!option || option.checked) return;
+            if (!option || option.checked) return;
 
-    option.click();
+            option.click();
 
-    return;
+            return;
 
-}
+        }
 
+        let size = "";
+
+        if (feet < 7) {
+            size = "Under 7";
+        } else if (feet < 9) {
+            size = "7-8";
+        } else {
+            size = "Over 9";
+        }
+
+        if (size === "Over 9") {
+            const option = document.querySelector(
+                'input[name="cp-baseprice"][value="Over 9"]'
+            );
+            if (!option || option.checked) return;
+            option.click();
+            return;
+        }        
+
+
+        
         const targetValue =
             (
                 construction === "EPS Full Carbon Vacuum" ||
