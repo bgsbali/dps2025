@@ -108,21 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    function getFinPriceGroup(fin) {
-
-        const map = {
-            "Single Fin": "3-Fin",
-            "Twin Fins": "3-Fin",
-            "Thruster (3 Fins)": "3-Fin",
-            "Quad (4 Fins)": "5-Fin",
-            "2 + 1 Single Fin": "5-Fin"
-            "5 Fins": "5-Fin"
-        };
-
-        return map[fin] || null;
-
-    }
-
     function updateBasePrice() {
 
         const length = document
@@ -138,20 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!construction) return;
 
-        const fin =
-            document.querySelector(
-                'input[name="cp-finlayout"]:checked'
-            )?.value;
+        const fin = document.querySelector(
+            'input[name="cp-finlayout"]:checked'
+        )?.value;
 
-        const finPriceGroup = getFinPriceGroup(fin);
-
-        if (!finPriceGroup) return;
-
-        // const fin = document.querySelector(
-        //     'input[name="cp-finlayout"]:checked'
-        // )?.value;
-
-        // if (!fin) return;
+        if (!fin) return;
 
         const feet = parseFloat(
             length
@@ -169,16 +145,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 construction === "EPS Full Carbon Vacuum" ||
                 construction === "EPS Full Carbon Resin Inject"
             )
-                ? `${construction} - ${finPriceGroup}`
-                : `${construction} - ${size} - ${finPriceGroup}`;
-                            
-        // const targetValue =
-        //     (
-        //         construction === "EPS Full Carbon Vacuum" ||
-        //         construction === "EPS Full Carbon Resin Inject"
-        //     )
-        //         ? `${construction} - ${fin.replace(" Fins", "-Fin")}`
-        //         : `${construction} - ${size} - ${fin.replace(" Fins", "-Fin")}`;
+                ? `${construction} - ${fin.replace(" Fins", "-Fin")}`
+                : `${construction} - ${size} - ${fin.replace(" Fins", "-Fin")}`;
 
         const option = document.querySelector(
             `input[name="cp-baseprice"][value="${targetValue}"]`
