@@ -158,26 +158,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("change", (e) => {
 
-        if (e.target.name === "dhd-model") {
-
-            setTimeout(() => {
-
-                populateBoardDimensions();
-                updateBasePrice();
-
-            }, 100);
-
-            return;
-
-        }
-
-        const model = getSelectedModel();
-
-        if (!model) return;
-
-        const sizeField = sizeFieldMap[model];
-
-        if (e.target.name === sizeField) {
+        // Recommended Size berubah
+        if (
+            e.target.matches(
+                'input[data-type="dropdown"][data-field-name$="-size"]'
+            )
+        ) {
 
             populateBoardDimensions();
             updateBasePrice();
@@ -186,9 +172,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-        if (e.target.name === "cdhd-construction") {
+        // Construction berubah
+        if (e.target.matches('input[name="cdhd-construction"]')) {
 
             updateBasePrice();
+
+            return;
 
         }
 
