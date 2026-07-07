@@ -192,26 +192,6 @@ function updateBasePrice() {
 }
 
 
-
-    // const dimensionInputs = [
-    //     selectors.length,
-    //     selectors.width,
-    //     selectors.thickness,
-    //     selectors.volume
-    // ];
-
-    // dimensionInputs.forEach(selector => {
-
-    //     const input = document.querySelector(selector);
-
-    //     if (!input) return;
-
-    //     input.addEventListener("input", updateBasePrice);
-    //     input.addEventListener("change", updateBasePrice);
-    //     input.addEventListener("blur", updateBasePrice);
-
-    // });
-
     
 
     document.addEventListener("change", (e) => {
@@ -253,25 +233,16 @@ function updateBasePrice() {
 
     });
 
-const lengthInput = document.querySelector(selectors.length);
+    const lengthInput = document.querySelector(selectors.length);
 
 if (lengthInput) {
 
-    lengthInput.addEventListener("input", () => {
-        console.log("INPUT:", lengthInput.value);
-    });
+    lengthInput.oninput = function () {
 
-    lengthInput.addEventListener("keyup", () => {
-        console.log("KEYUP:", lengthInput.value);
-    });
+        console.log("ONINPUT");
+        updateBasePrice();
 
-    lengthInput.addEventListener("change", () => {
-        console.log("CHANGE:", lengthInput.value);
-    });
-
-    lengthInput.addEventListener("blur", () => {
-        console.log("BLUR:", lengthInput.value);
-    });
+    };
 
 }
 
