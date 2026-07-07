@@ -221,9 +221,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!input) return;
 
-        input.addEventListener("input", refreshPricing);
-        input.addEventListener("change", refreshPricing);
-        input.addEventListener("blur", refreshPricing);
+        input.addEventListener("input", updateBasePrice);
+        input.addEventListener("change", updateBasePrice);
+        input.addEventListener("blur", updateBasePrice);
 
     });
 
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => {
 
                 populateBoardDimensions();
-                refreshPricing();
+                updateBasePrice();
 
             }, 100);
 
@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target.name === sizeField) {
 
             populateBoardDimensions();
-            refreshPricing();
+            updateBasePrice();
 
             return;
         }
@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Construction berubah
         if (e.target.name === "cdhd-construction") {
 
-            refreshPricing();
+            updateBasePrice();
 
         }
 
