@@ -180,36 +180,16 @@ document.addEventListener("DOMContentLoaded", () => {
         return null;
     }
 
-    function updateBasePrice() {
+function updateBasePrice() {
 
-        console.log("=== updateBasePrice ===");
-        console.trace();
+    console.log("=== updateBasePrice ===");
+    console.trace();
 
-        console.log(getBoardLength());
-        console.log(getBasePriceOption());
+    const length = getBoardLength();
 
-        const value = getBasePriceOption();
+    console.log("RESULT:", length);
 
-        if (!value) return;
-
-        const option = document.querySelector(
-            `input[name="cdhd-baseprice"][value="${value}"]`
-        );
-
-        if (!option) {
-            console.warn("Base Price not found:", value);
-            return;
-        }
-
-        if (!option.checked) {
-            option.checked = true;
-            option.click();
-            option.dispatchEvent(new Event("change", { bubbles: true }));
-        }
-
-        console.log("Base Price Selected:", value);
-
-    }    
+}
 
 
 
