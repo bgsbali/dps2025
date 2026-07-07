@@ -169,7 +169,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-        // Construction berubah
         if (e.target.matches('input[name="cdhd-construction"]')) {
 
             updateBasePrice();
