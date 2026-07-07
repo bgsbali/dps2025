@@ -115,18 +115,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-        const parts = value.split(".");
-
-        return {
-            feet: parseInt(parts[0], 10),
-            inches: parseInt(parts[1], 10) || 0,
-            isUpTo66() {
-                return this.feet < 6 || (this.feet === 6 && this.inches <= 6);
-            }
-        };
-
-    }
-
     function getBasePriceOption() {
 
         const model = getSelectedModel();
