@@ -12,11 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     function getSelectedModel() {
-        return document.querySelector(`${selectors.model}:checked`)?.value ?? null;
+        return document.querySelector('input[name="dhd-model"]:checked')?.value ?? null;
     }
 
     function getSelectedConstruction() {
-        return document.querySelector(`${selectors.construction}:checked`)?.value ?? null;
+        return document.querySelector('input[name="cdhd-construction"]:checked')?.value ?? null;
     }
 
 
@@ -26,10 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!input) return;
 
+        if (input.value === value) return;
+
         input.value = value;
 
-        input.dispatchEvent(new Event("input", { bubbles: true }));
-        input.dispatchEvent(new Event("change", { bubbles: true }));
+        input.dispatchEvent(new Event("input", {
+            bubbles: true
+        }));
+
+        input.dispatchEvent(new Event("change", {
+            bubbles: true
+        }));
 
     }
 
