@@ -86,17 +86,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const value = input.value.trim();
 
-        if (!value.includes(".")) {
+        let feet = 0;
+        let inches = 0;
 
-            return {
-                feet: parseInt(value, 10),
-                inches: 0,
-                isUpTo66() {
-                    return this.feet < 6 || (this.feet === 6 && this.inches <= 6);
-                }
-            };
+        if (value.includes(".")) {
+
+            const parts = value.split(".");
+
+            feet = parseInt(parts[0], 10);
+            inches = parseInt(parts[1], 10) || 0;
+
+        } else {
+
+            feet = parseInt(value, 10);
 
         }
+
+        return {
+
+            feet,
+            inches,
+
+            isUpTo66() {
+                return feet < 6 || (feet === 6 && inches <= 6);
+            }
+
+        };
+
+    }
 
         const parts = value.split(".");
 
