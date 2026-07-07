@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return null;
     }
 
-    function selectBasePrice() {
+    function updateBasePrice() {
 
         console.log(getBoardLength());
         console.log(getBasePriceOption());
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setTimeout(() => {
 
-            selectBasePrice();
+            updateBasePrice();
 
         }, 50);
 
