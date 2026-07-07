@@ -182,6 +182,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateBasePrice() {
 
+        console.log("=== updateBasePrice ===");
+        console.trace();
+
         console.log(getBoardLength());
         console.log(getBasePriceOption());
 
