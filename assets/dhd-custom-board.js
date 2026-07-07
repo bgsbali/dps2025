@@ -115,6 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function getBoardLength() {
 
         const input = document.querySelector(selectors.length);
+        console.log("RAW VALUE:", input.value);
+
 
         if (!input) return null;
 
