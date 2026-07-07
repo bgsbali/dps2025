@@ -206,17 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }    
 
-    function refreshPricing() {
 
-        console.log("refreshPricing");
-
-        setTimeout(() => {
-
-            updateBasePrice();
-
-        }, 50);
-
-    }
 
     const dimensionInputs = [
         selectors.length,
@@ -277,5 +267,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     });
+
+    const lengthInput = document.querySelector(selectors.length);
+
+if (lengthInput) {
+
+    lengthInput.addEventListener("input", updateBasePrice);
+    lengthInput.addEventListener("blur", updateBasePrice);
+
+}
 
 });
