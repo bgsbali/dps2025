@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return document.querySelector(
             `input[name="${fieldName}"]:checked`
         )?.value ?? null;
+
     }
 
     function updateInput(selector, value) {
@@ -70,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         input.dispatchEvent(new Event("input", { bubbles: true }));
         input.dispatchEvent(new Event("change", { bubbles: true }));
+
     }
 
     function parseRecommendedSize(size) {
@@ -92,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
             thickness: dimensions[2],
             volume: parts[1].replace("L", "").trim()
         };
+
     }
 
     function populateBoardDimensions() {
@@ -109,24 +112,15 @@ document.addEventListener("DOMContentLoaded", () => {
         updateInput(selectors.thickness, data.thickness);
         updateInput(selectors.volume, data.volume);
 
-        console.log("Board Dimensions", data);
     }
 
     function getBoardLength() {
 
         const input = document.querySelector(selectors.length);
-        console.log("RAW VALUE:", input.value);
-
 
         if (!input) return null;
 
         const value = input.value.trim();
-
-        // Support:
-        // 6
-        // 6.0
-        // 6.6
-        // 6.10
 
         if (!value.includes(".")) {
 
@@ -160,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!construction || !length) return null;
 
-        // Junior
         if (model && model.includes("JNR")) {
             return "Junior";
         }
@@ -178,25 +171,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         return null;
+
     }
 
-function updateBasePrice() {
+    function updateBasePrice() {
 
-    console.log("=== updateBasePrice ===");
-    console.trace();
+        const value = getBasePriceOption();
 
-    const length = getBoardLength();
+        if (!value) return;
 
-    console.log("RESULT:", length);
+        const option = document.querySelector(
+            `input[name="cdhd-baseprice"][value="${value}"]`
+        );
 
-}
+        if (!option || option.checked) return;
 
+        option.click();
 
-    
+    }
 
     document.addEventListener("change", (e) => {
 
-        // Model berubah
         if (e.target.name === "dhd-model") {
 
             setTimeout(() => {
@@ -207,6 +202,7 @@ function updateBasePrice() {
             }, 100);
 
             return;
+
         }
 
         const model = getSelectedModel();
@@ -215,16 +211,15 @@ function updateBasePrice() {
 
         const sizeField = sizeFieldMap[model];
 
-        // Recommended Size berubah
         if (e.target.name === sizeField) {
 
             populateBoardDimensions();
             updateBasePrice();
 
             return;
+
         }
 
-        // Construction berubah
         if (e.target.name === "cdhd-construction") {
 
             updateBasePrice();
@@ -232,8 +227,5 @@ function updateBasePrice() {
         }
 
     });
-
-    const lengthInput = document.querySelector(selectors.length);
-
 
 });
