@@ -55,15 +55,71 @@ document.addEventListener("DOMContentLoaded", () => {
         )?.value ?? null;
     }
 
+
+    function updateInput(selector, value) {
+
+        const input = document.querySelector(selector);
+
+        if (!input) return;
+
+        input.value = value;
+
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
+    function parseRecommendedSize(size) {
+
+        if (!size) return null;
+
+        // Contoh:
+        // 5.10 × 20 × 2 9/16 – 32L
+
+        const parts = size.split("–");
+
+        if (parts.length !== 2) return null;
+
+        const dimensions = parts[0]
+            .split("×")
+            .map(item => item.trim());
+
+        if (dimensions.length !== 3) return null;
+
+        return {
+            length: dimensions[0],
+            width: dimensions[1],
+            thickness: dimensions[2],
+            volume: parts[1].replace("L", "").trim()
+        };
+    }
+
+    function populateBoardDimensions() {
+
+        const size = getSelectedRecommendedSize();
+
+        if (!size) return;
+
+        const data = parseRecommendedSize(size);
+
+        if (!data) return;
+
+        updateInput(selectors.length, data.length);
+        updateInput(selectors.width, data.width);
+        updateInput(selectors.thickness, data.thickness);
+        updateInput(selectors.volume, data.volume);
+
+        console.log("Board Dimensions", data);
+    }
+
     document.addEventListener("change", (e) => {
 
-        // Ketika model berubah
         if (e.target.name === "dhd-model") {
-            console.log("Model:", getSelectedModel());
-            console.log("Recommended Size:", getSelectedRecommendedSize());
+
+            // beri waktu Globo menampilkan Recommended Size default
+            setTimeout(populateBoardDimensions, 100);
+
         }
 
-        // Ketika Recommended Size berubah
         const model = getSelectedModel();
 
         if (!model) return;
@@ -71,7 +127,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const sizeField = sizeFieldMap[model];
 
         if (e.target.name === sizeField) {
-            console.log("Recommended Size:", getSelectedRecommendedSize());
+
+            populateBoardDimensions();
+
         }
 
     });
