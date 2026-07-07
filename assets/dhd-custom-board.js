@@ -210,24 +210,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    const dimensionInputs = [
-        selectors.length,
-        selectors.width,
-        selectors.thickness,
-        selectors.volume
-    ];
+    // const dimensionInputs = [
+    //     selectors.length,
+    //     selectors.width,
+    //     selectors.thickness,
+    //     selectors.volume
+    // ];
 
-    dimensionInputs.forEach(selector => {
+    // dimensionInputs.forEach(selector => {
 
-        const input = document.querySelector(selector);
+    //     const input = document.querySelector(selector);
 
-        if (!input) return;
+    //     if (!input) return;
 
-        input.addEventListener("input", updateBasePrice);
-        input.addEventListener("change", updateBasePrice);
-        input.addEventListener("blur", updateBasePrice);
+    //     input.addEventListener("input", updateBasePrice);
+    //     input.addEventListener("change", updateBasePrice);
+    //     input.addEventListener("blur", updateBasePrice);
 
-    });
+    // });
 
     
 
