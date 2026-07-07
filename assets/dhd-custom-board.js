@@ -235,15 +235,5 @@ function updateBasePrice() {
 
     const lengthInput = document.querySelector(selectors.length);
 
-if (lengthInput) {
-
-    lengthInput.oninput = function () {
-
-        console.log("ONINPUT");
-        updateBasePrice();
-
-    };
-
-}
 
 });
