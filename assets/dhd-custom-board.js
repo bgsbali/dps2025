@@ -63,9 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    function populateBoardDimensions() {
-
-        const size = getSelectedRecommendedSize();
+    function populateBoardDimensions(size) {
 
         if (!size) return;
 
@@ -158,14 +156,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("change", (e) => {
 
-        // Recommended Size berubah
         if (
             e.target.matches(
                 'input[data-type="dropdown"][data-field-name$="-size"]'
             )
         ) {
 
-            populateBoardDimensions();
+            populateBoardDimensions(e.target.value);
             updateBasePrice();
 
             return;
