@@ -11,32 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
         volume: "#text-4"
     };
 
-    const sizeFieldMap = {
-        "Black Diamond": "blackdiamond-size",
-        "Black Diamond Soft Top": "blackdiamondsofttop-size",
-        "EE Juliette": "eejuliette-size",
-        "EE Juliette JNR": "eejuliettejnr-size",
-        "EE Juliette RT": "eejuliettert-size",
-        "EE Juliette RT JNR": "eejuliettertjnr-size",
-        "Interceptor": "interceptor-size",
-        "MF Bolt": "mfbolt-size",
-        "MF DNA": "mfdna-size",
-        "MF DNA JNR": "mfdnajnr-size",
-        "MF Lightning": "mflightning-size",
-        "MF Twin": "mftwin-size",
-        "Mini Twin": "minitwin-size",
-        "Mini Twin II": "minitwinii-size",
-        "Nexus": "nexus-size",
-        "Phoenix": "phoenix-size",
-        "Phoenix Swallow Tail": "phoenixswallowtail-size",
-        "Phoenix Flight": "phoenixflight-size",
-        "Sandman": "sandman-size",
-        "SG No.8": "sgno8-size",
-        "Sweet Spot 4.0": "sweetspot40-size",
-        "The Twin": "thetwin-size",
-        "Utopia": "utopia-size"
-    };
-
     function getSelectedModel() {
         return document.querySelector(`${selectors.model}:checked`)?.value ?? null;
     }
@@ -47,16 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function getSelectedRecommendedSize() {
 
-        const model = getSelectedModel();
-
-        if (!model) return null;
-
-        const fieldName = sizeFieldMap[model];
-
-        if (!fieldName) return null;
-
         return document.querySelector(
-            `input[name="${fieldName}"]:checked`
+            'input[data-type="dropdown"][data-field-name$="-size"]:checked'
         )?.value ?? null;
 
     }
