@@ -270,12 +270,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    const lengthInput = document.querySelector(selectors.length);
+const lengthInput = document.querySelector(selectors.length);
 
 if (lengthInput) {
 
-    lengthInput.addEventListener("input", updateBasePrice);
-    lengthInput.addEventListener("blur", updateBasePrice);
+    lengthInput.addEventListener("input", () => {
+        console.log("INPUT:", lengthInput.value);
+    });
+
+    lengthInput.addEventListener("keyup", () => {
+        console.log("KEYUP:", lengthInput.value);
+    });
+
+    lengthInput.addEventListener("change", () => {
+        console.log("CHANGE:", lengthInput.value);
+    });
+
+    lengthInput.addEventListener("blur", () => {
+        console.log("BLUR:", lengthInput.value);
+    });
 
 }
 
