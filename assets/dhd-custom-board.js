@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const selectors = {
         model: 'input[name="dhd-model"]',
+        construction: 'input[name="cdhd-construction"]',
         length: "#text-1",
         width: "#text-2",
         thickness: "#text-3",
@@ -40,6 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return document.querySelector(`${selectors.model}:checked`)?.value ?? null;
     }
 
+    function getSelectedConstruction() {
+        return document.querySelector(`${selectors.construction}:checked`)?.value ?? null;
+    }
+
     function getSelectedRecommendedSize() {
 
         const model = getSelectedModel();
@@ -54,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
             `input[name="${fieldName}"]:checked`
         )?.value ?? null;
     }
-
 
     function updateInput(selector, value) {
 
@@ -71,9 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function parseRecommendedSize(size) {
 
         if (!size) return null;
-
-        // Contoh:
-        // 5.10 × 20 × 2 9/16 – 32L
 
         const parts = size.split("–");
 
@@ -111,12 +112,52 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Board Dimensions", data);
     }
 
+    function getBoardLength() {
+
+        const input = document.querySelector(selectors.length);
+
+        if (!input) return 0;
+
+        return parseFloat(input.value);
+    }
+
+    function getBasePriceOption() {
+
+        const model = getSelectedModel();
+        const construction = getSelectedConstruction();
+        const length = getBoardLength();
+
+        if (!construction || !length) return null;
+
+        // Junior models
+        if (model && model.includes("JNR")) {
+            return "Junior";
+        }
+
+        if (construction === "PU") {
+            return length <= 6.6
+                ? "PU - Up to 6'6.5"
+                : "PU - 6'7-7'2";
+        }
+
+        if (construction === "EPS Stringered") {
+            return length <= 6.6
+                ? "EPS Stringered - Up to 6'6.5"
+                : "EPS Stringered - 6'7-7'0";
+        }
+
+        return null;
+    }
+
     document.addEventListener("change", (e) => {
 
         if (e.target.name === "dhd-model") {
 
             // beri waktu Globo menampilkan Recommended Size default
-            setTimeout(populateBoardDimensions, 100);
+            setTimeout(() => {
+                populateBoardDimensions();
+                console.log("Base Price:", getBasePriceOption());
+            }, 100);
 
         }
 
@@ -129,6 +170,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target.name === sizeField) {
 
             populateBoardDimensions();
+            console.log("Base Price:", getBasePriceOption());
+
+        }
+
+        if (e.target.name === "cdhd-construction") {
+
+            console.log("Base Price:", getBasePriceOption());
 
         }
 
