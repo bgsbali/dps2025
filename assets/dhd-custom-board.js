@@ -129,34 +129,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!construction || !length) return null;
 
-        // Junior models
         if (model && model.includes("JNR")) {
             return "Junior";
         }
 
         if (construction === "PU") {
             return length <= 6.6
-                ? "PU - Up to 6'6.5"
-                : "PU - 6'7-7'2";
+                ? "PU - Up to 6.6.5"
+                : "PU - 6.7-7.2";
         }
 
         if (construction === "EPS Stringered") {
             return length <= 6.6
-                ? "EPS Stringered - Up to 6'6.5"
-                : "EPS Stringered - 6'7-7'0";
+                ? "EPS Stringered - Up to 6.6.5"
+                : "EPS Stringered - 6.7-7.0";
         }
 
         return null;
     }
 
+    function selectBasePrice() {
+
+        const value = getBasePriceOption();
+
+        if (!value) return;
+
+        const option = document.querySelector(
+            `input[name="cdhd-baseprice"][value="${value}"]`
+        );
+
+        if (!option) {
+            console.warn("Base Price not found:", value);
+            return;
+        }
+
+        if (!option.checked) {
+            option.checked = true;
+            option.click();
+            option.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+
+        console.log("Base Price Selected:", value);
+
+    }    
+
     document.addEventListener("change", (e) => {
 
         if (e.target.name === "dhd-model") {
 
-            // beri waktu Globo menampilkan Recommended Size default
             setTimeout(() => {
                 populateBoardDimensions();
-                console.log("Base Price:", getBasePriceOption());
+                selectBasePrice();
             }, 100);
 
         }
@@ -170,13 +193,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target.name === sizeField) {
 
             populateBoardDimensions();
-            console.log("Base Price:", getBasePriceOption());
+            selectBasePrice();
 
         }
 
         if (e.target.name === "cdhd-construction") {
 
-            console.log("Base Price:", getBasePriceOption());
+            selectBasePrice();
 
         }
 
