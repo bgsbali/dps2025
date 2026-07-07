@@ -116,9 +116,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const input = document.querySelector(selectors.length);
 
-        if (!input) return 0;
+        if (!input) return null;
 
-        return parseFloat(input.value);
+        const value = input.value.trim();
+
+        // Contoh:
+        // 5.10
+        // 6.6
+        // 7.0
+
+        const parts = value.split(".");
+
+        if (parts.length !== 2) return null;
+
+        const feet = parseInt(parts[0], 10);
+        const inches = parseInt(parts[1], 10);
+
+        return {
+            feet,
+            inches,
+            isUpTo66() {
+                return feet < 6 || (feet === 6 && inches <= 6);
+            }
+        };
     }
 
     function getBasePriceOption() {
@@ -129,18 +149,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!construction || !length) return null;
 
+        // Junior
         if (model && model.includes("JNR")) {
             return "Junior";
         }
 
         if (construction === "PU") {
-            return length <= 6.6
+            return length.isUpTo66()
                 ? "PU - Up to 6.6.5"
                 : "PU - 6.7-7.2";
         }
 
         if (construction === "EPS Stringered") {
-            return length <= 6.6
+            return length.isUpTo66()
                 ? "EPS Stringered - Up to 6.6.5"
                 : "EPS Stringered - 6.7-7.0";
         }
