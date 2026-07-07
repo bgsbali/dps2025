@@ -194,15 +194,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }    
 
+    function refreshPricing() {
+
+        setTimeout(() => {
+
+            selectBasePrice();
+
+        }, 50);
+
+    }    
+
+    const dimensionInputs = [
+        selectors.length,
+        selectors.width,
+        selectors.thickness,
+        selectors.volume
+    ];
+
+    dimensionInputs.forEach(selector => {
+
+        const input = document.querySelector(selector);
+
+        if (!input) return;
+
+        input.addEventListener("input", refreshPricing);
+        input.addEventListener("change", refreshPricing);
+        input.addEventListener("blur", refreshPricing);
+
+    });
+
+    
+
     document.addEventListener("change", (e) => {
 
+        // Model berubah
         if (e.target.name === "dhd-model") {
 
             setTimeout(() => {
+
                 populateBoardDimensions();
-                selectBasePrice();
+                refreshPricing();
+
             }, 100);
 
+            return;
         }
 
         const model = getSelectedModel();
@@ -211,16 +246,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const sizeField = sizeFieldMap[model];
 
+        // Recommended Size berubah
         if (e.target.name === sizeField) {
 
             populateBoardDimensions();
-            selectBasePrice();
+            refreshPricing();
 
+            return;
         }
 
+        // Construction berubah
         if (e.target.name === "cdhd-construction") {
 
-            selectBasePrice();
+            refreshPricing();
 
         }
 
