@@ -161,6 +161,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("change", (e) => {
 
+    const lengthInput = document.querySelector(selectors.length);
+
+    if (lengthInput) {
+
+        lengthInput.addEventListener("input", updateBasePrice);
+        lengthInput.addEventListener("change", updateBasePrice);
+        lengthInput.addEventListener("blur", updateBasePrice);
+
+    }
+
         if (
             e.target.matches(
                 'input[data-type="dropdown"][data-field-name$="-size"]'
