@@ -223,7 +223,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!input) return;
 
-        input.addEventListener("input", updateBasePrice);
+        lengthInput.addEventListener("input", () => {
+
+            setTimeout(updateBasePrice, 0);
+
+        });
+
+        lengthInput.addEventListener("blur", updateBasePrice);
         input.addEventListener("change", updateBasePrice);
         input.addEventListener("blur", updateBasePrice);
 
