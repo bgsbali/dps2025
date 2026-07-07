@@ -19,13 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return document.querySelector(`${selectors.construction}:checked`)?.value ?? null;
     }
 
-    function getSelectedRecommendedSize() {
-
-        return document.querySelector(
-            'input[data-type="dropdown"][data-field-name$="-size"]:checked'
-        )?.value ?? null;
-
-    }
 
     function updateInput(selector, value) {
 
