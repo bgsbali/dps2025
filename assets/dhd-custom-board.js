@@ -120,25 +120,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const value = input.value.trim();
 
-        // Contoh:
-        // 5.10
+        // Support:
+        // 6
+        // 6.0
         // 6.6
-        // 7.0
+        // 6.10
+
+        if (!value.includes(".")) {
+
+            return {
+                feet: parseInt(value, 10),
+                inches: 0,
+                isUpTo66() {
+                    return this.feet < 6 || (this.feet === 6 && this.inches <= 6);
+                }
+            };
+
+        }
 
         const parts = value.split(".");
 
-        if (parts.length !== 2) return null;
-
-        const feet = parseInt(parts[0], 10);
-        const inches = parseInt(parts[1], 10);
-
         return {
-            feet,
-            inches,
+            feet: parseInt(parts[0], 10),
+            inches: parseInt(parts[1], 10) || 0,
             isUpTo66() {
-                return feet < 6 || (feet === 6 && inches <= 6);
+                return this.feet < 6 || (this.feet === 6 && this.inches <= 6);
             }
         };
+
     }
 
     function getBasePriceOption() {
@@ -171,6 +180,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function selectBasePrice() {
 
+        console.log(getBoardLength());
+        console.log(getBasePriceOption());
+
         const value = getBasePriceOption();
 
         if (!value) return;
@@ -196,13 +208,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function refreshPricing() {
 
+        console.log("refreshPricing");
+
         setTimeout(() => {
 
             selectBasePrice();
 
         }, 50);
 
-    }    
+    }
 
     const dimensionInputs = [
         selectors.length,
