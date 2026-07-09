@@ -3674,3 +3674,7 @@ a#HeaderMenu-sale {
 .cp-hidden {
   display:none;
 }
+
+.gpo-swatches input:checked+label {
+    border: 2px solid #eb1256 !important;
+}
