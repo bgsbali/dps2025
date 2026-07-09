@@ -1,6 +1,10 @@
 {{ 'volume-calculator.css' | asset_url | stylesheet_tag }}
 
-{% render 'volume-calculator' %}
+{% render 'volume-calculator',
+    heading: section.settings.heading,
+    placeholder: section.settings.placeholder,
+    button_label: section.settings.button_label,
+    collection: section.settings.collection %}
 
 <script src="{{ 'volume-calculator.js' | asset_url }}" defer></script>
 
