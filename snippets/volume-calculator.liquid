@@ -1,0 +1,90 @@
+<div class="bgs-volume-calculator">
+
+  <h2>{{ heading }}</h2>
+
+  <div class="bgs-form">
+
+    <div class="bgs-field">
+
+      <label>
+        Weight:
+        <strong><span class="bgs-weight-value">80</span> kg</strong>
+      </label>
+
+      <input
+        class="bgs-weight"
+        type="range"
+        min="35"
+        max="110"
+        value="80"
+        step="1">
+
+    </div>
+
+    <div class="bgs-field">
+
+      <label>Skill Level</label>
+
+      <select class="bgs-skill">
+
+        <option value="0.72">Beginner</option>
+        <option value="0.54">Intermediate Beginner</option>
+        <option value="0.45" selected>Intermediate</option>
+        <option value="0.38">Advanced Intermediate</option>
+        <option value="0.36">Advanced</option>
+
+      </select>
+
+    </div>
+
+    <button
+      type="button"
+      class="bgs-btn bgs-calculate">
+
+      Calculate Volume
+
+    </button>
+
+  </div>
+
+  <div class="bgs-result">
+
+    <h3>Recommended Volume</h3>
+
+    <div class="bgs-volume-number">
+
+      <span class="bgs-volume-litres">00.0</span>L
+
+    </div>
+
+    <p>
+
+      Recommended Range:
+
+      <strong>
+
+        <span class="bgs-volume-min">00.0</span>L -
+
+        <span class="bgs-volume-max">00.0</span>L
+
+      </strong>
+
+    </p>
+
+    <p class="bgs-placeholder">
+
+      {{ placeholder }}
+
+    </p>
+
+    <a
+      class="bgs-shop-btn disabled"
+      href="{% if collection %}{{ collection.url }}{% else %}/collections/surfboards{% endif %}">
+
+      {{ button_label }}
+
+    </a>
+
+  </div>
+
+</div>
