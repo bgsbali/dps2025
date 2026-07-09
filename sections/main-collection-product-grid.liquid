@@ -189,6 +189,10 @@
   {%- endfor -%}
 </ul>
 
+{% if collection.handle == 'surfboards' %}
+  {% section 'volume-calculator' %}
+{% endif %}
+
 <script>
 function normalizeSize(s) {
   if (!s && s !== 0) return '';
