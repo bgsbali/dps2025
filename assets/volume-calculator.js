@@ -1,24 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const calculators = document.querySelectorAll(".bgs-volume-calculator");
+    document.querySelectorAll(".bgs-volume-calculator").forEach((calculator) => {
 
-    if (!calculators.length) return;
+        const weightSlider = calculator.querySelector(".bgs-weight");
+        const weightValue = calculator.querySelector(".bgs-weight-value");
+        const skill = calculator.querySelector(".bgs-skill");
+        const calculateBtn = calculator.querySelector(".bgs-calculate");
 
-    calculators.forEach((calculator) => {
+        const resultBox = calculator.querySelector(".bgs-result");
+        const volumeLitres = calculator.querySelector(".bgs-volume-litres");
+        const volumeMin = calculator.querySelector(".bgs-volume-min");
+        const volumeMax = calculator.querySelector(".bgs-volume-max");
+        const placeholder = calculator.querySelector(".bgs-placeholder");
+        const shopBtn = calculator.querySelector(".bgs-shop-btn");
 
-        const weightSlider = calculator.querySelector(".weight");
-        const weightValue = calculator.querySelector("#weightValue");
-        const skill = calculator.querySelector("#skill");
-        const calculateBtn = calculator.querySelector("#calculateVolume");
-
-        const resultBox = calculator.querySelector("#volumeResult");
-        const volumeLitres = calculator.querySelector("#volumeLitres");
-        const volumeMin = calculator.querySelector("#volumeMin");
-        const volumeMax = calculator.querySelector("#volumeMax");
-        const placeholder = calculator.querySelector("#volumePlaceholder");
-        const shopBtn = calculator.querySelector("#shopBoardsBtn");
-
-        if (!weightSlider || !calculateBtn) return;
+        if (!weightSlider) return;
 
         weightSlider.addEventListener("input", () => {
             weightValue.textContent = weightSlider.value;
@@ -38,27 +34,14 @@ document.addEventListener("DOMContentLoaded", () => {
             volumeMax.textContent = maxVolume.toFixed(1);
 
             placeholder.style.display = "none";
-
             shopBtn.classList.remove("disabled");
 
-            const volumeFilter = Math.floor(volume);
+            const filter = Math.floor(volume);
 
-            shopBtn.textContent = `Shop ${volumeFilter}L Surfboards`;
-
-            const baseUrl =
-                shopBtn.getAttribute("href") ||
-                "/collections/surfboards";
+            shopBtn.textContent = `Shop ${filter}L Surfboards`;
 
             shopBtn.href =
-                baseUrl +
-                "?filter.p.m.custom.available_volumes=" +
-                volumeFilter;
-
-            resultBox.classList.remove("animate");
-
-            void resultBox.offsetWidth;
-
-            resultBox.classList.add("animate");
+                `/collections/surfboards?filter.p.m.custom.available_volumes=${filter}`;
 
         });
 
