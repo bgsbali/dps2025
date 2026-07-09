@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     calculators.forEach((calculator) => {
 
-        const weightSlider = calculator.querySelector("#weight");
+        const weightSlider = calculator.querySelector(".weight");
         const weightValue = calculator.querySelector("#weightValue");
         const skill = calculator.querySelector("#skill");
         const calculateBtn = calculator.querySelector("#calculateVolume");
