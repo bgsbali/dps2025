@@ -2,6 +2,46 @@
 
   <h2>{{ heading }}</h2>
 
+    <div class="bgs-result">
+
+    <h3>Recommended Volume</h3>
+
+    <div class="bgs-volume-number">
+
+      <span class="bgs-volume-litres">00.0</span>L
+
+    </div>
+
+    <p>
+
+      Recommended Range:
+
+      <strong>
+
+        <span class="bgs-volume-min">00.0</span>L -
+
+        <span class="bgs-volume-max">00.0</span>L
+
+      </strong>
+
+    </p>
+
+    <p class="bgs-placeholder">
+
+      {{ placeholder }}
+
+    </p>
+
+    <a
+      class="bgs-shop-btn disabled"
+      href="{% if collection %}{{ collection.url }}{% else %}/collections/surfboards{% endif %}">
+
+      {{ button_label }}
+
+    </a>
+
+  </div>
+  
   <div class="bgs-form">
 
     <div class="bgs-field">
@@ -44,46 +84,6 @@
       Calculate Volume
 
     </button>
-
-  </div>
-
-  <div class="bgs-result">
-
-    <h3>Recommended Volume</h3>
-
-    <div class="bgs-volume-number">
-
-      <span class="bgs-volume-litres">00.0</span>L
-
-    </div>
-
-    <p>
-
-      Recommended Range:
-
-      <strong>
-
-        <span class="bgs-volume-min">00.0</span>L -
-
-        <span class="bgs-volume-max">00.0</span>L
-
-      </strong>
-
-    </p>
-
-    <p class="bgs-placeholder">
-
-      {{ placeholder }}
-
-    </p>
-
-    <a
-      class="bgs-shop-btn disabled"
-      href="{% if collection %}{{ collection.url }}{% else %}/collections/surfboards{% endif %}">
-
-      {{ button_label }}
-
-    </a>
 
   </div>
 
