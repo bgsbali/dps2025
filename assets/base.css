@@ -3678,3 +3678,8 @@ a#HeaderMenu-sale {
 .gpo-swatches input:checked+label {
     border: 2px solid #eb1256 !important;
 }
+
+.gpo-total.gpo-form__group.gpo-col-12 {
+    margin-top: 20px;
+    padding-left: 5px;
+}
