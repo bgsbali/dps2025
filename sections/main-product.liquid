@@ -759,10 +759,15 @@
   </div>
 </product-info>
 
-{% if product.type == 'Surfboard' %}
-  {% render 'volume-calculator' %}
-{% endif %}
+{{ 'volume-calculator.css' | asset_url | stylesheet_tag }}
 
+{% render 'volume-calculator',
+    heading: 'Find Your Perfect Volume',
+    placeholder: 'Adjust your weight and select your skill level, then click "Calculate Volume".',
+    button_label: 'Shop Surfboards',
+    collection: collections['surfboards'] %}
+
+<script src="{{ 'volume-calculator.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
