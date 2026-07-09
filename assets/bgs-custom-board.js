@@ -17,9 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const parts = length.split(".");
 
-        return parts.length === 2
-            ? `${parts[0]}'${parts[1]}"`
-            : length;
+        if (parts.length === 2) {
+            return `${parts[0]}'${parts[1]}"`;
+        }
+
+        return length;
 
     }
 
@@ -29,12 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!volumeInput) return;
 
-        const value = volumeInput.value
+        let value = volumeInput.value
             .trim()
             .replace(/l/gi, "")
             .trim();
 
-        volumeInput.value = value ? `${value}L` : "";
+        volumeInput.value = value ? value + "L" : "";
 
     }
 
@@ -45,18 +47,20 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!input) return;
 
         if (selector === selectors.volume) {
-            value = `${value.replace(/l/gi, "").trim()} L`;
+            value = value.replace(/l/gi, "").trim() + " L";
         }
 
         if (input.value === value) return;
 
         input.value = value;
 
-        ["input", "change"].forEach(event =>
-            input.dispatchEvent(
-                new Event(event, { bubbles: true })
-            )
-        );
+        input.dispatchEvent(new Event("input", {
+            bubbles: true
+        }));
+
+        input.dispatchEvent(new Event("change", {
+            bubbles: true
+        }));
 
     }
 
@@ -70,14 +74,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const parts = measurement
                 .split(/\s*x\s*/i)
-                .map(part => part.trim());
+                .map(p => p.trim());
 
             if (parts.length !== 4) return;
 
-            updateInput(selectors.length, convertLength(parts[0]));
-            updateInput(selectors.width, parts[1]);
-            updateInput(selectors.thickness, parts[2]);
-            updateInput(selectors.volume, parts[3]);
+            updateInput(
+                selectors.length,
+                convertLength(parts[0])
+            );
+
+            updateInput(
+                selectors.width,
+                parts[1]
+            );
+
+            updateInput(
+                selectors.thickness,
+                parts[2]
+            );
+
+            updateInput(
+                selectors.volume,
+                parts[3]
+            );
 
             updateBasePrice();
 
@@ -88,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     }
+
 
     function getPricingFinLayout(fin) {
 
@@ -110,33 +130,61 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    function clickBasePrice(selector) {
-
-        const option = document.querySelector(selector);
-
-        if (!option || option.checked) return false;
-
-        option.click();
-
-        return true;
-
-    }
-
     function updateBasePrice() {
 
-        const length = document.querySelector(selectors.length)?.value.trim();
+        const length = document
+            .querySelector(selectors.length)
+            ?.value
+            .trim();
+
         if (!length) return;
 
-        const model = document.querySelector('input[name="model"]:checked')?.value;
-        if (!model) return;
+        const model = document.querySelector(
+            'input[name="model"]:checked'
+        )?.value;
 
-        const construction = document.querySelector('input[name="cp-construction"]:checked')?.value;
+        if (!model) return;        
+
+        const construction = document.querySelector(
+            'input[name="cp-construction"]:checked'
+        )?.value;
+
         if (!construction) return;
 
-        const selectedFin = document.querySelector('input[name="cp-finlayout"]:checked')?.value;
+        const selectedFin = document.querySelector(
+            'input[name="cp-finlayout"]:checked'
+        )?.value;
+
         if (!selectedFin) return;
 
         const fin = getPricingFinLayout(selectedFin);
+
+        if (model === "Gromlin") {
+            let price = "";
+            if (construction === "Poly") {
+                price =
+                    fin === "3 Fins"
+                        ? "9650000"
+                        : "9950000";
+            } else {
+                price =
+                    fin === "3 Fins"
+                        ? "11300000"
+                        : "11650000";
+            }
+            const option = document.querySelector(
+                `input[name="cp-baseprice"][data-addon-price="${price}"]`
+            );
+            if (!option || option.checked) return;
+            option.click();
+            return;
+        }        
+
+        // const fin = document.querySelector(
+        //     'input[name="cp-finlayout"]:checked'
+        // )?.value;
+
+        // if (!fin) return;
 
         const feet = parseFloat(
             length
@@ -145,20 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 .trim()
         );
 
-        if (model === "Gromlin") {
-
-            const price =
-                construction === "Poly"
-                    ? (fin === "3 Fins" ? "9650000" : "9950000")
-                    : (fin === "3 Fins" ? "11300000" : "11650000");
-
-            clickBasePrice(
-                `input[name="cp-baseprice"][data-addon-price="${price}"]`
-            );
-
-            return;
-
-        }
 
         if (model === "Wildcat Twin") {
 
@@ -178,16 +212,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 case "EPS Full Carbon Resin Inject":
                     targetValue = "Wildcat Twin EPS Full Carbon Resin Inject";
-                    break;
+                    break;                    
 
                 default:
                     return;
 
             }
 
-            clickBasePrice(
+            const option = document.querySelector(
                 `input[name="cp-baseprice"][value="${targetValue}"]`
             );
+
+            if (!option || option.checked) return;
+
+            option.click();
 
             return;
 
@@ -203,13 +241,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     ? "Mid-Length Crisis Under 7"
                     : "Mid-Length Crisis 7-8";
 
-            clickBasePrice(
+            const option = document.querySelector(
                 `input[name="cp-baseprice"][value="${targetValue}"]`
             );
 
+            if (!option || option.checked) return;
+
+            option.click();
+
             return;
 
-        }
+        }                
 
         if (
             model === "Padillac" &&
@@ -220,6 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (feet < 8) {
 
+                // Under 7 & 7'0"-7'11"
                 targetValue = "Padillac Poly 7-7.11";
 
             } else if (feet < 9) {
@@ -232,9 +275,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
-            clickBasePrice(
+            const option = document.querySelector(
                 `input[name="cp-baseprice"][value="${targetValue}"]`
             );
+
+            if (!option || option.checked) return;
+
+            option.click();
 
             return;
 
@@ -251,15 +298,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (size === "Over 9") {
-
-            clickBasePrice(
+            const option = document.querySelector(
                 'input[name="cp-baseprice"][value="Over 9"]'
             );
-
+            if (!option || option.checked) return;
+            option.click();
             return;
+        }        
 
-        }
 
+        
         const targetValue =
             (
                 construction === "EPS Full Carbon Vacuum" ||
@@ -268,13 +316,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 ? `${construction} - ${fin.replace(" Fins", "-Fin")}`
                 : `${construction} - ${size} - ${fin.replace(" Fins", "-Fin")}`;
 
-        clickBasePrice(
+        const option = document.querySelector(
             `input[name="cp-baseprice"][value="${targetValue}"]`
         );
 
+        if (!option || option.checked) return;
+
+        option.click();
+
     }
 
-    document.addEventListener("change", e => {
+    document.addEventListener("change", function (e) {
 
         if (
             e.target.matches(
@@ -287,6 +339,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+        // if (
+        //     e.target.matches('input[name="cp-construction"]') ||
+        //     e.target.matches('input[name="cp-finlayout"]')
+        // ) {
+
+        //     updateBasePrice();
+        //     return;
+
+        // }
+
         if (
             e.target.matches('input[name="model"]') ||
             e.target.matches('input[name="cp-construction"]') ||
@@ -296,7 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
             updateBasePrice();
             return;
 
-        }
+        }        
 
         if (
             e.target.matches(selectors.volume) &&
@@ -333,9 +395,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (lengthInput) {
 
-        ["input", "blur"].forEach(event =>
-            lengthInput.addEventListener(event, updateBasePrice)
-        );
+        lengthInput.addEventListener("input", updateBasePrice);
+        lengthInput.addEventListener("blur", updateBasePrice);
 
     }
 
