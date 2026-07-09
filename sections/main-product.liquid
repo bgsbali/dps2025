@@ -472,14 +472,19 @@
                   show_pickup_availability: true
                 -%}
                 
-                {% if product.type == "Surfboard" %}
-  <div class="bgs_customsurfboardbutton">
-    <a href="https://store.bgsbali.com/collections/custom-surfboards/">or Custom Your Board</a>
-  </div>
+                {% if product.type == "Surfboard" 
+                and product.title != "Pyzel Custom Surfboard"
+                and product.title != "Sharpeye Custom Surfboard"
+                and product.title != "JS Custom Surfboard"
+                and product.title != "DHD Custom Surfboard"
+                and product.title != "DRAFT Custom Surfboard"
+                %}
+                  <div class="bgs_customsurfboardbutton">
+                    <a href="https://store.bgsbali.com/collections/custom-surfboards/">or Custom Your Board</a>
+                  </div>
+                {%  endif %}
 
-
-{%  endif %}
-  {% if product.type == 'Surfboard' %}
+                {% if product.type == 'Surfboard' %}
   <input type="hidden" name="attributes[has_surfboard]" value="yes">
 {% endif %}
 
