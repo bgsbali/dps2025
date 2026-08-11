@@ -3696,3 +3696,7 @@ section#shopify-section-template--18844620193988__1754285415e81a9abf {
     position: relative;
     top: 5px;
 }
+
+.dropdown.futureblink-currency-dropdown {
+    box-shadow: 0px 0px 0px !important;
+}
