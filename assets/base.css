@@ -3691,3 +3691,8 @@ section#shopify-section-template--18844620193988__1754285415e81a9abf {
 .currency-switcher img {
     border: 1px solid #ccc;
 }
+
+.currency-switcher {
+    position: relative;
+    top: 5px;
+}
