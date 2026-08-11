@@ -3702,3 +3702,7 @@ section#shopify-section-template--18844620193988__1754285415e81a9abf {
 .dropdown.futureblink-currency-dropdown {
     box-shadow: 0px 0px 0px !important;
 }
+
+.futureblink-currency-cart-notification {
+    margin-bottom: 50px;
+}
