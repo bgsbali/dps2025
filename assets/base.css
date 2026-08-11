@@ -3688,7 +3688,9 @@ section#shopify-section-template--18844620193988__1754285415e81a9abf {
     margin: 0;
 }
 
-.currency-switcher img {
+.currency-switcher img,
+.dropdown.futureblink-currency-dropdown img
+{
     border: 1px solid #ccc;
 }
 
