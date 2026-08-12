@@ -192,7 +192,7 @@
           "greeting_message": "Questions about boards, orders, or shipping? Send us a message.\n\nOnline daily 09:00 AM – 09:00 PM (GMT+8)",
           "show_featured_products": true,
           "featured_products": [],
-          "background_color": "#FFC03D",
+          "background_color": "#FFAC00",
           "font_color": "#1f1f21",
           "agent_invert_activator_colors": false,
           "button_color": "#ffc533",
