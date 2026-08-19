@@ -201,63 +201,55 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function getBasePriceOption() {
+function getBasePriceOption() {
 
-        const construction =
-            getSelectedConstruction();
+    const construction = getSelectedConstruction();
+    const length = getBoardLength();
 
-        const tier =
-            getLengthTier();
+    if (!construction || !length) return null;
 
-        if (!construction || !tier) {
-            return null;
-        }
+    const feet = length.feet;
+    const inches = length.inches;
 
+    let tier = null;
 
-        if (construction === "PU") {
-
-            switch (tier) {
-
-                case "up-to-5-6":
-                    return "PU - Up to 5'6";
-
-                case "5-8-to-6-5":
-                    return "PU - 5'8 to 6'5";
-
-                case "6-6-to-7-1":
-                    return "PU - 6'6 to 7'1";
-
-                case "7-2-to-8-0":
-                    return "PU - 7'2 to 8'0";
-
-            }
-
-        }
-
-
-        if (construction === "EPS Stringered") {
-
-            switch (tier) {
-
-                case "up-to-5-6":
-                    return "EPS Stringered - Up to 5'6";
-
-                case "5-8-to-6-5":
-                    return "EPS Stringered - 5'8 to 6'5";
-
-                case "6-6-to-7-1":
-                    return "EPS Stringered - 6'6 to 7'1";
-
-                case "7-2-to-8-0":
-                    return "EPS Stringered - 7'2 to 8'0";
-
-            }
-
-        }
-
-        return null;
-
+    // Up to 5'6"
+    if (
+        feet < 5 ||
+        (feet === 5 && inches <= 6)
+    ) {
+        tier = "Up to 5.6";
     }
+
+    // 5'8" - 6'5"
+    else if (
+        (feet === 5 && inches >= 8) ||
+        (feet === 6 && inches <= 5)
+    ) {
+        tier = "5.8 to 6.5";
+    }
+
+    // 6'6" - 7'1"
+    else if (
+        (feet === 6 && inches >= 6) ||
+        (feet === 7 && inches <= 1)
+    ) {
+        tier = "6.6 to 7.1";
+    }
+
+    // 7'2" - 8'0"
+    else if (
+        (feet === 7 && inches >= 2) ||
+        feet === 8
+    ) {
+        tier = "7.2 to 8.0";
+    }
+
+    if (!tier) return null;
+
+    return `${construction} - ${tier}`;
+
+}
 
 
     function updateBasePrice() {
