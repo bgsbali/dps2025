@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const selectors = {
         model: 'input[name="cara-model"]',
+        construction: 'input[name="cara-construction"]',
         length: "#text-1",
         width: "#text-2",
         thickness: "#text-3",
@@ -15,6 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return document.querySelector(
             `${selectors.model}:checked`
+        )?.value ?? null;
+
+    }
+
+
+    function getSelectedConstruction() {
+
+        return document.querySelector(
+            `${selectors.construction}:checked`
         )?.value ?? null;
 
     }
@@ -123,7 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!value) return null;
 
-
         let feet = 0;
         let inches = 0;
 
@@ -195,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function getBasePriceOption() {
+    function getBasePriceCategory() {
 
         const length = getBoardLength();
 
@@ -261,23 +270,54 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+    function getBasePriceOption() {
+
+        const category = getBasePriceCategory();
+        const construction = getSelectedConstruction();
+
+        if (!category || !construction) {
+
+            return null;
+
+        }
+
+
+        return `${category} - ${construction}`;
+
+    }
+
+
     function updateBasePrice() {
 
         console.log("=== ARAKAWA UPDATE BASE PRICE ===");
 
+
         const length = getBoardLength();
+        const construction = getSelectedConstruction();
+        const category = getBasePriceCategory();
+        const value = getBasePriceOption();
+
 
         console.log(
             "ARAKAWA LENGTH:",
             length
         );
 
-        const value = getBasePriceOption();
+        console.log(
+            "ARAKAWA CONSTRUCTION:",
+            construction
+        );
+
+        console.log(
+            "ARAKAWA CATEGORY:",
+            category
+        );
 
         console.log(
             "ARAKAWA BASE PRICE VALUE:",
             value
         );
+
 
         if (!value) return;
 
@@ -316,6 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         option.click();
 
+
         console.log(
             "ARAKAWA BASE PRICE CLICKED:",
             value
@@ -331,6 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener(
         "change",
         (e) => {
+
 
             if (
                 e.target.matches(
@@ -349,11 +391,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
 
 
+                setTimeout(() => {
+
+                    updateBasePrice();
+
+                }, 100);
+
+
+                return;
+
+            }
+
+
+            /*
+             * Construction
+             */
+
+            if (
+                e.target.matches(
+                    'input[name="cara-construction"]'
+                )
+            ) {
+
                 console.log(
-                    "ARAKAWA LENGTH AFTER SIZE:",
-                    document.querySelector(
-                        selectors.length
-                    )?.value
+                    "ARAKAWA CONSTRUCTION SELECTED:",
+                    e.target.value
                 );
 
 
@@ -374,60 +436,84 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /*
      * Manual Length
+     *
+     * Delegated event supaya tetap bekerja
+     * walaupun field dibuat/diperbarui oleh
+     * option app.
      */
 
-    const lengthInput = document.querySelector(
-        selectors.length
-    );
 
+    document.addEventListener(
+        "input",
+        (e) => {
 
-    if (lengthInput) {
-
-        lengthInput.addEventListener(
-            "input",
-            () => {
+            if (
+                e.target.matches(
+                    selectors.length
+                )
+            ) {
 
                 console.log(
                     "ARAKAWA MANUAL LENGTH INPUT:",
-                    lengthInput.value
+                    e.target.value
                 );
+
 
                 updateBasePrice();
 
             }
-        );
+
+        }
+    );
 
 
-        lengthInput.addEventListener(
-            "change",
-            () => {
+    document.addEventListener(
+        "change",
+        (e) => {
+
+            if (
+                e.target.matches(
+                    selectors.length
+                )
+            ) {
 
                 console.log(
                     "ARAKAWA MANUAL LENGTH CHANGE:",
-                    lengthInput.value
+                    e.target.value
                 );
+
 
                 updateBasePrice();
 
             }
-        );
+
+        }
+    );
 
 
-        lengthInput.addEventListener(
-            "blur",
-            () => {
+    document.addEventListener(
+        "blur",
+        (e) => {
+
+            if (
+                e.target.matches(
+                    selectors.length
+                )
+            ) {
 
                 console.log(
                     "ARAKAWA MANUAL LENGTH BLUR:",
-                    lengthInput.value
+                    e.target.value
                 );
+
 
                 updateBasePrice();
 
             }
-        );
 
-    }
+        },
+        true
+    );
 
 
 });
