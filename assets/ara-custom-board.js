@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /*
-         * ARakawa Price Categories
+         * Arakawa Price Categories
          *
          * Short Boards
          * Up to 6'5"
@@ -263,13 +263,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateBasePrice() {
 
+        console.log("=== ARAKAWA UPDATE BASE PRICE ===");
+
+        const length = getBoardLength();
+
+        console.log(
+            "ARAKAWA LENGTH:",
+            length
+        );
+
         const value = getBasePriceOption();
+
+        console.log(
+            "ARAKAWA BASE PRICE VALUE:",
+            value
+        );
 
         if (!value) return;
 
 
         const option = document.querySelector(
             `input[name="cara-baseprice"][value="${value}"]`
+        );
+
+
+        console.log(
+            "ARAKAWA BASE PRICE ELEMENT:",
+            option
         );
 
 
@@ -285,10 +305,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
+        console.log(
+            "ARAKAWA CURRENT CHECKED:",
+            option.checked
+        );
+
+
         if (option.checked) return;
 
 
         option.click();
+
+        console.log(
+            "ARAKAWA BASE PRICE CLICKED:",
+            value
+        );
 
     }
 
@@ -307,13 +338,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 )
             ) {
 
+                console.log(
+                    "ARAKAWA SIZE SELECTED:",
+                    e.target.value
+                );
+
+
                 populateBoardDimensions(
                     e.target.value
                 );
 
+
+                console.log(
+                    "ARAKAWA LENGTH AFTER SIZE:",
+                    document.querySelector(
+                        selectors.length
+                    )?.value
+                );
+
+
                 setTimeout(() => {
+
                     updateBasePrice();
+
                 }, 100);
+
 
                 return;
 
@@ -336,17 +385,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
         lengthInput.addEventListener(
             "input",
-            updateBasePrice
+            () => {
+
+                console.log(
+                    "ARAKAWA MANUAL LENGTH INPUT:",
+                    lengthInput.value
+                );
+
+                updateBasePrice();
+
+            }
         );
+
 
         lengthInput.addEventListener(
             "change",
-            updateBasePrice
+            () => {
+
+                console.log(
+                    "ARAKAWA MANUAL LENGTH CHANGE:",
+                    lengthInput.value
+                );
+
+                updateBasePrice();
+
+            }
         );
+
 
         lengthInput.addEventListener(
             "blur",
-            updateBasePrice
+            () => {
+
+                console.log(
+                    "ARAKAWA MANUAL LENGTH BLUR:",
+                    lengthInput.value
+                );
+
+                updateBasePrice();
+
+            }
         );
 
     }
