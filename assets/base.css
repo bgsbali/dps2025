@@ -1,3 +1,21 @@
+/* FONT 2026 */
+
+@font-face {
+  font-family: 'Anton';
+  src: url('{{ 'Anton-Regular.woff2' | asset_url }}') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Favorit Mono';
+  src: url('{{ 'FavoritMono-Regular.woff2' | asset_url }}') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --alpha-button-background: 1;
   --alpha-button-border: 1;
@@ -3706,3 +3724,4 @@ section#shopify-section-template--18844620193988__1754285415e81a9abf {
 .futureblink-currency-cart-notification {
     margin-bottom: 50px;
 }
+
