@@ -3713,3 +3713,7 @@ h2.banner__heading.inline-richtext.h1 {
   font-size: 53px;
 }
   
+.banner__text.rte p {
+  font-family: 'Favorit Mono', sans-serif;
+
+}
