@@ -3722,3 +3722,9 @@ section#shopify-section-template--18844620193988__1754285415e81a9abf {
   font-family: 'Favorit Mono', sans-serif;
   font-size: 53px;
 } */
+
+
+cart-drawer-items {
+    max-height: 56vh;
+    position: relative;
+}
