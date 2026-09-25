@@ -3708,12 +3708,6 @@ section#shopify-section-template--18844620193988__1754285415e81a9abf {
     margin-bottom: 50px;
 }
 
-h2.banner__heading.inline-richtext.h1 {
-  font-family: 'Favorit Mono', sans-serif;
-  font-size: 53px;
-}
-
-
 
 .collection-hero__description {
     font-family: 'Favorit Mono', sans-serif !important;
@@ -3723,3 +3717,8 @@ h2.banner__heading.inline-richtext.h1 {
   font-family: 'Favorit Mono', sans-serif;
   font-size: 22px;
 }
+
+/* h2.banner__heading.inline-richtext.h1 {
+  font-family: 'Favorit Mono', sans-serif;
+  font-size: 53px;
+} */
