@@ -191,7 +191,10 @@
         "settings": {
           "greeting_message": "Questions about boards, orders, or shipping? Send us a message.\n\nOnline daily 09:00 AM – 09:00 PM (GMT+8)",
           "show_featured_products": true,
-          "featured_products": [],
+          "featured_products": [
+            "pyzel-score-lord",
+            "sk8-hi-vr3-shoe-black-marshmallow"
+          ],
           "background_color": "#ffffff",
           "font_color": "#1f1f21",
           "agent_invert_activator_colors": false,
