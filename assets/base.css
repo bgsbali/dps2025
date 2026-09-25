@@ -3708,9 +3708,13 @@ section#shopify-section-template--18844620193988__1754285415e81a9abf {
     margin-bottom: 50px;
 }
 
+h2.banner__heading.inline-richtext.h1 {
+  font-family: 'Favorit Mono', sans-serif;
+  font-size: 53px;
+}
+  
 h2 {
   font-family: 'Favorit Mono', sans-serif !important;
-  font-size: 53px !important;
 }
   
 .banner__text.rte p {
