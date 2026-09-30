@@ -3728,3 +3728,7 @@ cart-drawer-items {
     max-height: 56vh;
     position: relative;
 }
+
+h2.banner__heading.inline-richtext.h1 {
+    font-family: 'Anton', sans-serif !important;
+}
