@@ -83,7 +83,30 @@
       {{ value -}}
       {{ label_unavailable }}
     </label>
-  {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
+    
+    {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
+  <option
+    id="{{ input_id }}"
+    value="{{ value | escape }}"
+    {% if value.selected %}
+      selected="selected"
+    {% endif %}
+    {% if swatch_value and picker_type == 'swatch_dropdown' %}
+      data-option-swatch-value="{{ swatch_value }}"
+      {% if swatch_focal_point %}
+        data-option-swatch-focal-point="{{ swatch_focal_point }}"
+      {% endif %}
+    {% endif %}
+    {{ input_dataset }}
+  >
+    {% if option_disabled -%}
+      {{- 'products.product.value_unavailable' | t: option_value: value -}}
+    {%- else -%}
+      {{- value -}}
+    {%- endif %}
+  </option>
+  
+  {% comment %} {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
     <option
       id="{{ input_id }}"
       value="{{ value | escape }}"
@@ -103,7 +126,7 @@
       {%- else -%}
         {{- value -}}
       {%- endif %}
-    </option>
+    </option> {% endcomment %}
   {%- endif -%}
 {%- endfor -%}
 {% comment %}
